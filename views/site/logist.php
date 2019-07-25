@@ -1,0 +1,55 @@
+<?php
+
+use app\widgets\Alert;
+use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
+use app\assets\AppAsset;
+
+AppAsset::register($this);
+
+$this->title = 'Панель логиста | Глобал Транс 33';
+$this->params['breadcrumbs'][] = $this->title;
+
+?>
+
+<!-- Page Content -->
+<div class="container">
+   <br>
+   <!-- Page Heading/Breadcrumbs -->
+   <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+         <a href="index.php">Главная</a>
+      </li>
+      <li class="breadcrumb-item active">Панель логиста</li>
+   </ol>
+   <h1 class="text-center mb-3">Панель логиста</h1>
+
+   <div class="list-group mb-4">
+      <a href="index.php?r=load-information/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-success">
+         <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Добавление, просмотр и редактирование грузов</h5>
+         </div>
+         <p class="mb-1">Здесь будет происходить работа с грузами.</p>
+      </a>
+      <a href="index.php?r=route/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-danger">
+         <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Просмотр и редактирование маршрутов</h5>
+         </div>
+         <p class="mb-1">Здесь будет происходить работа с маршрутами.</p>
+      </a>
+      <a href="index.php?r=region/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-warning">
+         <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Просмотр и редактирование областей</h5>
+         </div>
+         <p class="mb-1">Здесь будет происходить работа с областями.</p>
+      </a>
+      <a href="index.php?r=city/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-info">
+         <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Просмотр и редактирование насёленных пунктов</h5>
+         </div>
+         <p class="mb-1">Здесь будет происходить работа с н/п.</p>
+      </a>
+   </div>
+
+</div>
+<!-- /.container -->
