@@ -18,17 +18,17 @@ $this->params['breadcrumbs'][] = 'Update';
    
    <h1 class="text-center">Редактировать данные пользователя</h1>
 
-   <div class="row">
+   <!-- <div class="row">
       <div class="col-2">
       </div>
 
-      <div class="col-8">
+      <div class="col-8"> -->
          <?php
-            echo $this->render('_form', ['model' => $model,])
+            echo $this->render('_form', ['model' => $model, 'roles' => $roles])
          ?>
-      </div>
+      <!-- </div>
 
       <div class="col-2">
       </div>
-   </div>
+   </div> -->
 </div>

@@ -43,6 +43,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'phone',
             'email:email',
+            //'role',
+            ['attribute' => 'roleName', 'label' => 'Роль', 'value' => 'roleName.name'],
+            
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Действия',

@@ -31,6 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
          </div>
          <p class="mb-1">Здесь вы можете посмотреть, обновить, удалить или добавить нового пользователя.</p>
       </a>
+      <a href="index.php?r=role/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-warning">
+         <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Роли пользователей</h5>
+         </div>
+         <p class="mb-1">Здесь вы можете посмотреть, обновить, удалить или добавить роль пользователя.</p>
+      </a>
    </div>
 
 </div>

@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Users;
 use app\models\UsersSearch;
+use app\models\Role;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -101,13 +102,14 @@ class UsersController extends Controller
     {
         if (Yii::$app->user->getIdentity()->isAdmin() && !Yii::$app->user->isGuest) {
             $model = new Users();
+            $roles = Role::find()->all();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model, 'roles' => $roles,
             ]);
         } else {
             return $this->goHome();
@@ -124,6 +126,7 @@ class UsersController extends Controller
     {
         if (Yii::$app->user->getIdentity()->isAdmin() && !Yii::$app->user->isGuest) {
             $model = $this->findModel($id);
+            $roles = Role::find()->all();
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
                 $model->password = \Yii::$app->security->generatePasswordHash($model->password);
@@ -134,7 +137,7 @@ class UsersController extends Controller
             }
 
             return $this->render('update', [
-                'model' => $model,
+                'model' => $model, 'roles' => $roles,
             ]);
         } else {
             return $this->goHome();

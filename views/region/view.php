@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="container">
-
+    <br>
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'name',
             'federal_district',
             'id_kladr_region',

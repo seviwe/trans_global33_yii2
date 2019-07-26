@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Region;
 
 /**
  * This is the model class for table "city".
@@ -29,8 +30,8 @@ class City extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'id_region', 'id_kladr_city'], 'required'],
-            [['id_region', 'id_kladr_city'], 'integer'],
-            [['name'], 'string', 'max' => 255],
+            [['id_region'], 'integer'],
+            [['name', 'id_kladr_city'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,5 +46,10 @@ class City extends \yii\db\ActiveRecord
             'id_region' => 'Область',
             'id_kladr_city' => 'ID н/п в ФИАС',
         ];
+    }
+
+    public function getRegion()
+    {
+        return $this->hasOne(Region::className(), ['id' => 'id_region']);
     }
 }

@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Route;
 use app\models\RouteSearch;
+use app\models\City;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -88,13 +89,14 @@ class RouteController extends Controller
     public function actionCreate()
     {
         $model = new Route();
+        $cities = City::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model, 'cities' => $cities,
         ]);
     }
 
@@ -108,13 +110,14 @@ class RouteController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $cities = City::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model, 'cities' => $cities,
         ]);
     }
 
@@ -145,6 +148,6 @@ class RouteController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('Запрашиваемая страница не найдена.');
     }
 }

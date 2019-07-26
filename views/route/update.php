@@ -11,20 +11,20 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="container">
-<br>
+    <br>
     <h1 class="text-center"> <?= Html::encode($this->title) ?> </h1>
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-2">
         </div>
 
-        <div class="col-8">
-            <?php
-            echo $this->render('_form', ['model' => $model,])
-            ?>
-        </div>
+        <div class="col-8"> -->
+    <?php
+    echo $this->render('_form', ['model' => $model, 'cities' => $cities])
+    ?>
+    <!-- </div>
 
         <div class="col-2">
         </div>
-    </div>
+    </div> -->
 </div>

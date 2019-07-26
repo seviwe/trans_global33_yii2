@@ -38,8 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'name',
-            'id_city_departure',
-            'id_city_arrival',
+            //'id_city_departure',
+            //'id_city_arrival',
+            ['attribute' => 'cityDepartureName', 'label' => 'Н/п отбытия', 'value' => 'cityDeparture.name'],
+            ['attribute' => 'cityArrivalName', 'label' => 'Н/п прибытия', 'value' => 'cityArrival.name'],
 
             [
                 'class' => 'yii\grid\ActionColumn',

@@ -3,20 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\City;
-use app\models\CitySearch;
-use app\models\Region;
+use app\models\Role;
+use app\models\RoleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\User;
-use yii\filters\AccessControl;
-use yii\helpers\Url;
 
 /**
- * CityController implements the CRUD actions for City model.
+ * RoleController implements the CRUD actions for Role model.
  */
-class CityController extends Controller
+class RoleController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -24,28 +20,6 @@ class CityController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::class,
-                'rules' => [
-                    [
-                        'allow' => false,
-                        'roles' => ['?'],
-                        'denyCallback' => function ($rule, $action) {
-                            return $this->redirect(Url::toRoute(['/site/login']));
-                        }
-                    ],
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            /** @var User $user */
-                            $user = Yii::$app->user->getIdentity();
-                            return $user->isAdmin() || $user->isLogist();
-                        }
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -56,12 +30,12 @@ class CityController extends Controller
     }
 
     /**
-     * Lists all City models.
+     * Lists all Role models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CitySearch();
+        $searchModel = new RoleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -71,7 +45,7 @@ class CityController extends Controller
     }
 
     /**
-     * Displays a single City model.
+     * Displays a single Role model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -79,31 +53,30 @@ class CityController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id)
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new City model.
+     * Creates a new Role model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new City();
-        $regions = Region::find()->all();
+        $model = new Role();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model' => $model, 'regions' => $regions,
+            'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing City model.
+     * Updates an existing Role model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -112,19 +85,18 @@ class CityController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $regions = Region::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model, 'regions' => $regions,
+            'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing City model.
+     * Deletes an existing Role model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -138,15 +110,15 @@ class CityController extends Controller
     }
 
     /**
-     * Finds the City model based on its primary key value.
+     * Finds the Role model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return City the loaded model
+     * @return Role the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = City::findOne($id)) !== null) {
+        if (($model = Role::findOne($id)) !== null) {
             return $model;
         }
 

@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1 class="text-center">Создание пользователя</h1>
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'model' => $model, 'roles' => $roles,
     ]) ?>
 
 </div>

@@ -4,25 +4,21 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\City;
-use app\models\Region;
+use app\models\Role;
 
 /**
- * CitySearch represents the model behind the search form of `app\models\City`.
+ * RoleSearch represents the model behind the search form of `app\models\Role`.
  */
-class CitySearch extends City
+class RoleSearch extends Role
 {
-
-    public $regionName;
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'id_region', 'id_kladr_city'], 'integer'],
-            [['name', 'regionName'], 'safe'],
+            [['id'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -44,19 +40,14 @@ class CitySearch extends City
      */
     public function search($params)
     {
-        $query = City::find();
-
-        $query->joinWith(['region']);
+        $query = Role::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-        $dataProvider->sort->attributes['regionName'] = [
-            'asc' => [Region::tableName().'.name' => SORT_ASC],
-            'desc' => [Region::tableName().'.name' => SORT_DESC],
-        ];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -68,12 +59,9 @@ class CitySearch extends City
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            //'id_region' => $this->id_region,
-            'id_kladr_city' => $this->id_kladr_city,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
-        $query->andFilterWhere(['like', Region::tableName().'.name', $this->regionName]);
 
         return $dataProvider;
     }

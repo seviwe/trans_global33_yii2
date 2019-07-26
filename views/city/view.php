@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\City */
@@ -10,10 +11,12 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Cities', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
-?>
-<div class="container">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+?>
+
+<div class="container">
+    <br>
+    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Обновить н/п', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -29,9 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'name',
-            'id_region',
+            //'id_region',
+            'region.name',
             'id_kladr_city',
         ],
     ]) ?>

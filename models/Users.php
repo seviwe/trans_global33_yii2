@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use app\models\Role;
 
 use Yii;
 
@@ -31,7 +32,7 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['login', 'password', 'name', 'phone', 'email'], 'required'],
+            [['login', 'password', 'name', 'phone', 'email', 'role'], 'required'],
             [['role'], 'integer'],
             [['login', 'password', 'name', 'phone', 'email'], 'string', 'max' => 255],
             
@@ -50,6 +51,12 @@ class Users extends \yii\db\ActiveRecord
             'name' => 'ФИО',
             'phone' => 'Номер телефона',
             'email' => 'Email',
+            'role' => 'Роль',
         ];
+    }
+
+    public function getRoleName()
+    {
+        return $this->hasOne(Role::className(), ['id' => 'role']);
     }
 }

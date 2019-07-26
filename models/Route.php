@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\City;
 
 /**
  * This is the model class for table "route".
@@ -42,8 +43,18 @@ class Route extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Название маршрута',
-            'id_city_departure' => 'Город отбытия',
-            'id_city_arrival' => 'Город прибытия',
+            'id_city_departure' => 'Н/п отбытия',
+            'id_city_arrival' => 'Н/п прибытия',
         ];
+    }
+
+    public function getCityDeparture()
+    {
+        return $this->hasOne(City::className(), ['id' => 'id_city_departure']);
+    }
+
+    public function getCityArrival()
+    {
+        return $this->hasOne(City::className(), ['id' => 'id_city_arrival']);
     }
 }

@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+        <?= Html::a('Удалить маршрут', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Вы уверены что хотите удалить данный маршрут?',
@@ -29,10 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'name',
-            'id_city_departure',
-            'id_city_arrival',
+            //'id_city_departure',
+            'cityDeparture.name',
+            //'id_city_arrival',
+            'cityArrival.name',
         ],
     ]) ?>
 

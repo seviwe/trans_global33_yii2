@@ -34,7 +34,7 @@ $js = <<<JS
             hint: false,
             bounds: "region",
             onSelect: function(suggestion) {
-               console.log(suggestion.data);
+               //console.log(suggestion.data);
                federal_district = suggestion.data.federal_district; //ФО
                id_region = suggestion.data.region_kladr_id; //ID region
 
@@ -43,7 +43,7 @@ $js = <<<JS
          });
 
          $('#region').change(function() {
-            console.log(id_region);
+            //console.log(id_region);
             $('#federal_district').val(federal_district);
             $('#kladr_region').val(id_region);
          });
