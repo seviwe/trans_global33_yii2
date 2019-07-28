@@ -6,11 +6,11 @@ use yii\helpers\Html;
 /* @var $model app\models\Users */
 
 $this->title = 'Создание пользователя';
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Панель администратора', 'url' => ['/site/admin']];
+$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
-    <br>
 
     <h1 class="text-center">Создание пользователя</h1>
 

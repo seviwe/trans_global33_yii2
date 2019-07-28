@@ -8,23 +8,13 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Пользователи';
+$this->params['breadcrumbs'][] = ['label' => 'Панель администратора', 'url' => ['/site/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
 <!-- Page Content -->
 <div class="container">
-    <br>
-    <!-- Page Heading/Breadcrumbs -->
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="index.php">Главная</a>
-        </li>
-        <li class="breadcrumb-item">
-            <?= Html::a('Панель администратора', ['site/admin']) ?>
-        </li>
-        <li class="breadcrumb-item active">Пользователи</li>
-    </ol>
     <h1 class="text-center">Пользователи</h1>
 
     <p>

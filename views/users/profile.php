@@ -6,10 +6,8 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
 
-$this->title = 'Личный кабинет | Глобал Транс 33';
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+// $this->title = 'Личный кабинет';
+// $this->params['breadcrumbs'][] = 'Обновление данных пользователя';
 
 ?>
 <!-- Page Content -->
@@ -22,15 +20,6 @@ $this->params['breadcrumbs'][] = 'Update';
         </div>
     <?php endif; ?>
 
-    <br>
-
-    <!-- Page Heading/Breadcrumbs -->
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="index.php">Главная</a>
-        </li>
-        <li class="breadcrumb-item active">Личный кабинет</li>
-    </ol>
     <h1 class="text-center">Личный кабинет</h1>
 
     <p class="text-center">Здесь Вы можете посмотреть информацию о Вашей учетной записи, а также, при необходимости, изменить контактные данные.</p>

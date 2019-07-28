@@ -8,20 +8,10 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Информация о маршрутах';
+$this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
-    <br>
-    <!-- Page Heading/Breadcrumbs -->
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="index.php">Главная</a>
-        </li>
-        <li class="breadcrumb-item">
-            <?= Html::a('Панель логиста', ['site/logist']) ?>
-        </li>
-        <li class="breadcrumb-item active">Информация о маршрутах</li>
-    </ol>
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
     <p>

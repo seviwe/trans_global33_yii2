@@ -7,12 +7,12 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Region */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Regions', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
+$this->params['breadcrumbs'][] = ['label' => 'Области', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="container">
-    <br>
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
     <p>

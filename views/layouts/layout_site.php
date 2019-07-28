@@ -60,6 +60,12 @@ AppAsset::register($this);
    <noscript>
       <div><img src="https://mc.yandex.ru/watch/47237025" style="position:absolute; left:-9999px;" alt="" /></div>
    </noscript>
+   <style>
+      .breadcrumb>li+li:before {
+         padding: 0 5px;
+         content: "/";
+      }
+   </style>
    <!-- /Yandex.Metrika counter -->
    <?php $this->head() ?>
 </head>
@@ -150,8 +156,15 @@ AppAsset::register($this);
    </nav>
    <br>
 
+   <div class="container">
+      <br>
+      <?= Breadcrumbs::widget([
+         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+      ]) ?>
+   </div>
+
    <!-- Container Content -->
-   <?= $content ?>
+   <?= $content ?> 
 
    <?php $this->endBody() ?>
 </body>

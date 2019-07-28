@@ -6,12 +6,11 @@ use yii\helpers\Html;
 /* @var $model app\models\City */
 
 $this->title = 'Создать населённый пункт';
-$this->params['breadcrumbs'][] = ['label' => 'Cities', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
+$this->params['breadcrumbs'][] = ['label' => 'Населённые пункты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
-    <br>
-
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [

@@ -10,20 +10,13 @@ use yii\bootstrap\ActiveForm;
 
 AppAsset::register($this);
 
-$this->title = 'Регистрация | Глобал Транс 33';
-$this->params['breadcrumbs'][] = $this->title;
+// $this->title = 'Регистрация';
+// $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <!-- Page Content -->
 <div class="container">
-   <br>
-   <!-- Page Heading/Breadcrumbs -->
-   <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-         <a href="index.php">Главная</a>
-      </li>
-      <li class="breadcrumb-item active">Регистрация</li>
-   </ol>
+
    <h1 class="text-center">Регистрация</h1>
 
    <div class="row">

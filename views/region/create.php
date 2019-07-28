@@ -6,12 +6,11 @@ use yii\helpers\Html;
 /* @var $model app\models\Region */
 
 $this->title = 'Создать область';
-$this->params['breadcrumbs'][] = ['label' => 'Regions', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
+$this->params['breadcrumbs'][] = ['label' => 'Области', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
-    <br>
-
     <h1 class="text-center">Создание области</h1>
 
     <?= $this->render('_form', [

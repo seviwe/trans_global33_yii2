@@ -9,22 +9,12 @@ use yii\helpers\ArrayHelper;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Населённые пункты (н/п)';
+$this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
 <div class="container">
-    <br>
-    <!-- Page Heading/Breadcrumbs -->
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="index.php">Главная</a>
-        </li>
-        <li class="breadcrumb-item">
-            <?= Html::a('Панель логиста', ['site/logist']) ?>
-        </li>
-        <li class="breadcrumb-item active">Населённые пункты</li>
-    </ol>
     <h1 class="text-center">Населённые пункты</h1>
 
     <p>

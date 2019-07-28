@@ -6,12 +6,12 @@ use yii\helpers\Html;
 /* @var $model app\models\Region */
 
 $this->title = 'Обновить область: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Regions', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
+$this->params['breadcrumbs'][] = ['label' => 'Области', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновление области';
 ?>
 <div class="container">
-    <br>
     <h1 class="text-center"> <?= Html::encode($this->title) ?> </h1>
 
     <div class="row">

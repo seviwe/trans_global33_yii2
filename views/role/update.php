@@ -5,12 +5,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Role */
 
-$this->title = 'Update Role: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
+$this->title = 'Обновить роль: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Панель администратора', 'url' => ['/site/admin']];
+$this->params['breadcrumbs'][] = ['label' => 'Роли', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновить роль';
 ?>
-<div class="role-update">
+<div class="container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

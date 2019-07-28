@@ -6,15 +6,15 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
 
-$this->title = 'Редактировать данные пользователя | Глобал Транс 33';
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = 'Редактировать данные пользователя';
+$this->params['breadcrumbs'][] = ['label' => 'Панель администратора', 'url' => ['/site/admin']];
+$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновление данных пользователя';
 
 ?>
 <!-- Page Content -->
 <div class="container">
-   <br>
    
    <h1 class="text-center">Редактировать данные пользователя</h1>
 

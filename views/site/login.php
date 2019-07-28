@@ -10,20 +10,13 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 
-$this->title = 'Авторизация';
-$this->params['breadcrumbs'][] = $this->title;
+// $this->title = 'Авторизация';
+// $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <!-- Page Content -->
 <div class="container">
-    <br>
-    <!-- Page Heading/Breadcrumbs -->
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="index.php">Главная</a>
-        </li>
-        <li class="breadcrumb-item active">Авторизация</li>
-    </ol>
+
     <h1 class="text-center">Авторизация</h1>
 
     <div class="row">

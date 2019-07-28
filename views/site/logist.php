@@ -7,21 +7,14 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 
-$this->title = 'Панель логиста | Глобал Транс 33';
-$this->params['breadcrumbs'][] = $this->title;
+// $this->title = 'Панель логиста';
+// $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
 <!-- Page Content -->
 <div class="container">
-   <br>
-   <!-- Page Heading/Breadcrumbs -->
-   <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-         <a href="index.php">Главная</a>
-      </li>
-      <li class="breadcrumb-item active">Панель логиста</li>
-   </ol>
+
    <h1 class="text-center mb-3">Панель логиста</h1>
 
    <div class="list-group mb-4">

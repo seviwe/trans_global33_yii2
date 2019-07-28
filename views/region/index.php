@@ -8,22 +8,12 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Области';
+$this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
 <div class="container">
-    <br>
-    <!-- Page Heading/Breadcrumbs -->
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="index.php">Главная</a>
-        </li>
-        <li class="breadcrumb-item">
-            <?= Html::a('Панель логиста', ['site/logist']) ?>
-        </li>
-        <li class="breadcrumb-item active">Области</li>
-    </ol>
     <h1 class="text-center">Области</h1>
 
     <p>

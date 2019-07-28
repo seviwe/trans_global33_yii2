@@ -6,24 +6,17 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 
-$this->title = 'О Нас | Глобал Транс 33';
+$this->title = 'О Нас';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
 <!-- Page Content -->
 <div class="container">
-   <br>
-   <!-- Page Heading/Breadcrumbs -->
-   <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-         <a href="index.php">Главная</a>
-      </li>
-      <li class="breadcrumb-item active">О Нас</li>
-   </ol>
    <h1 class="text-center">О Нас</h1>
 
    <!-- Intro Content -->

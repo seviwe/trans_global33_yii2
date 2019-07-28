@@ -7,7 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Route */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Routes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
+$this->params['breadcrumbs'][] = ['label' => 'Маршруты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
