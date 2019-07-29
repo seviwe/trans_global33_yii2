@@ -5,10 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\LoadInformation;
 use app\models\LoadInformationSearch;
+use app\models\Route;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\User;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 
 /**
  * LoadInformationController implements the CRUD actions for LoadInformation model.
@@ -88,13 +91,19 @@ class LoadInformationController extends Controller
     public function actionCreate()
     {
         $model = new LoadInformation();
+        $routs = Route::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
+            
+            $model->date_create = date('d.m.Y H:i');
+
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model, 'routs' => $routs,
         ]);
     }
 
@@ -108,13 +117,19 @@ class LoadInformationController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $routs = Route::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
+
+            $model->date_create = date('d.m.Y H:i');
+
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model, 'routs' => $routs,
         ]);
     }
 

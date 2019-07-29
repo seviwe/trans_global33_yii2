@@ -29,6 +29,7 @@ class Region extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'federal_district', 'id_kladr_region'], 'required'],
+            [['name', 'federal_district', 'id_kladr_region'], 'trim'],
             [['name', 'federal_district', 'id_kladr_region'], 'string', 'max' => 255],
         ];
     }

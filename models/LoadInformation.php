@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Route;
 
 /**
  * This is the model class for table "load_information".
@@ -36,10 +37,13 @@ class LoadInformation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_route', 'weight_from', 'weight_to', 'volume_from', 'volume_to', 'transport', 'load_info', 'rate', 'date_create', 'date_departure', 'date_arrival'], 'required'],
+            [['id_route', 'weight_from', 'weight_to', 'volume_from', 'volume_to', 'transport', 'load_info', 'rate', 'date_departure', 'date_arrival'], 'required'],
+            [['id_route', 'weight_from', 'weight_to', 'volume_from', 'volume_to', 'transport', 'load_info', 'rate', 'date_departure', 'date_arrival'], 'trim'],
             [['id_route'], 'integer'],
             [['weight_from', 'weight_to', 'volume_from', 'volume_to'], 'number'],
             [['transport', 'load_info', 'rate', 'date_create', 'date_departure', 'date_arrival'], 'string', 'max' => 255],
+            ['date_departure', 'compare', 'compareValue' => date('d.m.Y H:i'), 'operator' => '>', 'message' => 'Дата отбытия должна быть больше, чем текущая дата'],
+            ['date_arrival', 'compare', 'compareValue' => date('d.m.Y H:i'), 'operator' => '>', 'message' => 'Дата прибытия должна быть больше, чем текущая дата'],
         ];
     }
 
@@ -56,11 +60,16 @@ class LoadInformation extends \yii\db\ActiveRecord
             'volume_from' => 'Объем, от',
             'volume_to' => 'Объем, до',
             'transport' => 'Транспорт',
-            'load_info' => 'Инф. о грузе',
+            'load_info' => 'Информация о грузе',
             'rate' => 'Ставка',
-            'date_create' => 'Дата создания',
-            'date_departure' => 'Дата отбытия',
-            'date_arrival' => 'Дата прибытия',
+            'date_create' => 'Дата и время создания',
+            'date_departure' => 'Дата и время отбытия',
+            'date_arrival' => 'Дата и время прибытия',
         ];
+    }
+
+    public function getRoute()
+    {
+        return $this->hasOne(Route::className(), ['id' => 'id_route']);
     }
 }

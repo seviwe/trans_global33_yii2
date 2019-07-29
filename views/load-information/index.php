@@ -8,22 +8,12 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Информация о грузах';
+$this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
 <div class="container">
-    <br>
-    <!-- Page Heading/Breadcrumbs -->
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="index.php">Главная</a>
-        </li>
-        <li class="breadcrumb-item">
-            <?= Html::a('Панель логиста', ['site/logist']) ?>
-        </li>
-        <li class="breadcrumb-item active">Информация о грузах</li>
-    </ol>
     <h1 class="text-center">Информация о грузах</h1>
 
     <p>
@@ -39,7 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_route',
+            //'id_route',
+            ['attribute' => 'routeName', 'label' => 'Маршрут', 'value' => 'route.name'],
             'weight_from',
             'weight_to',
             'volume_from',
@@ -47,13 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'transport',
             'load_info',
             'rate',
-            'date_create',
+            //'date_create',
             'date_departure',
             'date_arrival',
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'header' => '',
+                'header' => 'Действия',
                 'headerOptions' => ['width' => '50'],
                 'template' => '{view} {update} {delete}',
                 'urlCreator' => function ($action, $model, $key, $index) {
@@ -99,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 $js = <<<JS
-    $('th').css('font-size','13px');
+    $('th').css('font-size','14px');
 JS;
 $this->registerJs($js);
 ?>

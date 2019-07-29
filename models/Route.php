@@ -30,6 +30,7 @@ class Route extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'id_city_departure', 'id_city_arrival'], 'required'],
+            [['name', 'id_city_departure', 'id_city_arrival'], 'trim'],
             [['id_city_departure', 'id_city_arrival'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];

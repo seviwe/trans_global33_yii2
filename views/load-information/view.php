@@ -6,8 +6,9 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\LoadInformation */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Load Informations', 'url' => ['index']];
+$this->title = $model->route->name . ", вес: " . $model->weight_from . ", объем: " . $model->volume_from . ", " . $model->transport . ", " . $model->date_create;
+$this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
+$this->params['breadcrumbs'][] = ['label' => 'Информация о грузах', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -29,8 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'id_route',
+            //'id',
+            //'id_route',
+            'route.name',
             'weight_from',
             'weight_to',
             'volume_from',

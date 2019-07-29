@@ -20,6 +20,7 @@ class SignupForm extends Model
          [['first_name', 'email', 'password', 'login'], 'required', 'message' => 'Заполните поле'],
          ['login', 'unique', 'targetClass' => User::className(), 'message' => 'Логин уже занят'],
          ['email', 'email'],
+         [['first_name', 'email', 'password', 'login'], 'trim'],
          ['phone', 'string'],
          ['last_name', 'string'],
          ['middle_name', 'string'],

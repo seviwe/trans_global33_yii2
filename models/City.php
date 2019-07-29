@@ -30,6 +30,7 @@ class City extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'id_region', 'id_kladr_city'], 'required'],
+            [['name', 'id_region', 'id_kladr_city'], 'trim'],
             [['id_region'], 'integer'],
             [['name', 'id_kladr_city'], 'string', 'max' => 255],
         ];
