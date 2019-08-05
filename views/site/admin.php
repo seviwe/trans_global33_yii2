@@ -7,7 +7,7 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 
-// $this->title = 'Панель администратора';
+$this->title = 'Панель администратора | Глобал Транс 33';
 // $this->params['breadcrumbs'][] = $this->title;
 
 ?>

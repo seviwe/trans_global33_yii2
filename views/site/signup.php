@@ -10,7 +10,7 @@ use yii\bootstrap\ActiveForm;
 
 AppAsset::register($this);
 
-// $this->title = 'Регистрация';
+$this->title = 'Регистрация | Глобал Транс 33';
 // $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -38,7 +38,7 @@ AppAsset::register($this);
          <?= $form->field($model, 'password')->passwordInput() ?>
 
          <?= $form->field($model, 'phone')->input('tel') ?>
-         
+
          <?= $form->field($model, 'email')->input('email') ?>
 
          <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary mb-4']) ?>

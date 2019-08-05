@@ -7,7 +7,11 @@ use yii\widgets\DetailView;
 /* @var $model app\models\LoadInformation */
 
 $this->title = $model->route->name . ", вес: " . $model->weight_from . ", объем: " . $model->volume_from . ", " . $model->transport . ", " . $model->date_create;
-$this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
+
+//для логиста отображаем навигацию по разделам
+if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
+    $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
+}
 $this->params['breadcrumbs'][] = ['label' => 'Информация о грузах', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -32,11 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             //'id',
             //'id_route',
+            'user.name',
             'route.name',
             'weight_from',
-            'weight_to',
+            //'weight_to',
             'volume_from',
-            'volume_to',
+            //'volume_to',
             'transport',
             'load_info',
             'rate',

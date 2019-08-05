@@ -74,7 +74,7 @@ AppAsset::register($this);
    <?php $this->beginBody() ?>
 
    <!-- Navigation -->
-   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white fixed-top shadow p-1">
+   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white shadow p-1">
       <div class="container">
 
          <a class="navbar-brand" href="index.php">
@@ -104,12 +104,17 @@ AppAsset::register($this);
                <li class="nav-item">
                   <?php
                   if (Yii::$app->user->isGuest) {
-                     echo Html::a('Регистрация', ['site/signup'], ['class' => 'btn btn-primary', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  } ?>
+                     echo Html::a('Регистрация', ['site/change-user'], ['class' => 'btn btn-primary', 'style' => 'font-size: 15px', 'role' => 'button']);
+                  } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
+                     echo Html::a('Ваши грузы', ['load-information/index'], ['class' => 'btn btn-outline-warning mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
+                  }
+                  ?>
                </li>
                <li class="nav-item active">
                   <?php
-                  if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
+                  if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
+                     echo Html::a('Добавить груз', ['load-information/create'], ['class' => 'btn btn-outline-info mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
+                  } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
                      echo Html::a('Панель администратора', ['site/admin'], ['class' => 'btn btn-outline-dark mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
                   } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
                      echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-outline-info mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
@@ -154,6 +159,7 @@ AppAsset::register($this);
 
       </div>
    </nav>
+
    <br>
 
    <div class="container">
@@ -164,7 +170,7 @@ AppAsset::register($this);
    </div>
 
    <!-- Container Content -->
-   <?= $content ?> 
+   <?= $content ?>
 
    <?php $this->endBody() ?>
 </body>
@@ -197,7 +203,7 @@ AppAsset::register($this);
                   <?php
                   echo "<li>";
                   if (Yii::$app->user->isGuest) {
-                     echo Html::a('Регистрация', ['site/signup']);
+                     echo Html::a('Регистрация', ['site/change-user']);
                   } else {
                      echo Html::a('Личный кабинет', ['users/profile']);
                   }

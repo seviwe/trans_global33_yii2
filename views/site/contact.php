@@ -11,7 +11,7 @@ use yii\captcha\Captcha;
 
 AppAsset::register($this);
 
-$this->title = 'Контакты';
+$this->title = 'Контакты | Глобал Транс 33';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

@@ -22,7 +22,7 @@ class LoadInformationSearch extends LoadInformation
     {
         return [
             [['id', 'id_route'], 'integer'],
-            [['weight_from', 'weight_to', 'volume_from', 'volume_to'], 'number'],
+            [['weight_from', 'volume_from'], 'number'],
             [['transport', 'load_info', 'rate', 'date_create', 'date_departure', 'date_arrival', 'routeName'], 'safe'],
         ];
     }
@@ -71,9 +71,9 @@ class LoadInformationSearch extends LoadInformation
             'id' => $this->id,
             //'id_route' => $this->id_route,
             'weight_from' => $this->weight_from,
-            'weight_to' => $this->weight_to,
+            //'weight_to' => $this->weight_to,
             'volume_from' => $this->volume_from,
-            'volume_to' => $this->volume_to,
+            //'volume_to' => $this->volume_to,
         ]);
 
         $query->andFilterWhere(['like', 'transport', $this->transport])

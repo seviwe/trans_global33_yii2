@@ -10,7 +10,7 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 
-// $this->title = 'Авторизация';
+$this->title = 'Авторизация | Глобал Транс 33';
 // $this->params['breadcrumbs'][] = $this->title;
 
 ?>

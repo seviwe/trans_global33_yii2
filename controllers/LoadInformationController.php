@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use app\models\User;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
+use yii\data\ActiveDataProvider;
 
 /**
  * LoadInformationController implements the CRUD actions for LoadInformation model.
@@ -41,7 +42,7 @@ class LoadInformationController extends Controller
                         'matchCallback' => function ($rule, $action) {
                             /** @var User $user */
                             $user = Yii::$app->user->getIdentity();
-                            return $user->isAdmin() || $user->isLogist();
+                            return $user->isAdmin() || $user->isLogist() || $user->isUser();
                         }
                     ],
                 ],
@@ -62,7 +63,15 @@ class LoadInformationController extends Controller
     public function actionIndex()
     {
         $searchModel = new LoadInformationSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        //отображение всех записей под логистом
+        if (!Yii::$app->user->isGuest && !Yii::$app->user->getIdentity()->isUser()) {
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        } else { //отображение только записей пользователя
+            $dataProvider = new ActiveDataProvider([
+                'query' => LoadInformation::find()->where(['id_user' => Yii::$app->user->getId()]),
+            ]);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -94,10 +103,11 @@ class LoadInformationController extends Controller
         $routs = Route::find()->all();
 
         if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
-            
-            $model->date_create = date('d.m.Y H:i');
 
-            if($model->save()){
+            $model->date_create = date('d.m.Y H:i');
+            $model->id_user = Yii::$app->user->getId();
+
+            if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
@@ -123,7 +133,7 @@ class LoadInformationController extends Controller
 
             $model->date_create = date('d.m.Y H:i');
 
-            if($model->save()){
+            if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }

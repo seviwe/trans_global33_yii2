@@ -7,7 +7,7 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 
-// $this->title = 'Панель логиста';
+$this->title = 'Панель логиста | Глобал Транс 33';
 // $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -26,19 +26,19 @@ AppAsset::register($this);
       </a>
       <a href="index.php?r=route/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-danger">
          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Просмотр и редактирование маршрутов</h5>
+            <h5 class="mb-1">Добавление, просмотр и редактирование маршрутов</h5>
          </div>
          <p class="mb-1">Здесь будет происходить работа с маршрутами.</p>
       </a>
       <a href="index.php?r=city/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-info">
          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Просмотр и редактирование населённых пунктов (н/п)</h5>
+            <h5 class="mb-1">Добавление, просмотр и редактирование населённых пунктов (н/п)</h5>
          </div>
          <p class="mb-1">Здесь будет происходить работа с н/п.</p>
       </a>
       <a href="index.php?r=region/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-warning">
          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Просмотр и редактирование областей</h5>
+            <h5 class="mb-1">Добавление, просмотр и редактирование областей</h5>
          </div>
          <p class="mb-1">Здесь будет происходить работа с областями.</p>
       </a>

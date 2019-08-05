@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'weight_from') ?>
 
-    <?= $form->field($model, 'weight_to') ?>
+    <? //echo $form->field($model, 'weight_to') ?>
 
     <?= $form->field($model, 'volume_from') ?>
 

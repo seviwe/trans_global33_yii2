@@ -18,11 +18,11 @@ use kartik\datetime\DateTimePicker;
 
     <?= $form->field($model, 'weight_from')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'weight_to')->textInput(['maxlength' => true]) ?>
+    <? //echo $form->field($model, 'weight_to')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'volume_from')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'volume_to')->textInput(['maxlength' => true]) ?>
+    <? //echo $form->field($model, 'volume_to')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'transport')->textInput(['maxlength' => true]) ?>
 

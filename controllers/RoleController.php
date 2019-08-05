@@ -8,6 +8,8 @@ use app\models\RoleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\helpers\Url;
 
 /**
  * RoleController implements the CRUD actions for Role model.
@@ -20,6 +22,28 @@ class RoleController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => false,
+                        'roles' => ['?'],
+                        'denyCallback' => function ($rule, $action) {
+                            return $this->redirect(Url::toRoute(['/site/login']));
+                        }
+                    ],
+                    [
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['@'],  
+                        'matchCallback' => function ($rule, $action) {
+                            /** @var User $user */
+                            $user = Yii::$app->user->getIdentity();
+                            return $user->isAdmin();
+                        }
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

@@ -104,6 +104,78 @@ class SiteController extends Controller
     }
 
     /**
+     * Signup action and display.
+     *
+     * @return string
+     */
+    public function actionSignupCompany()
+    {
+        //если пользователь не гость, тогда редирект на главную страницу
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new SignupForm();
+
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            $user = new User();
+
+            $user_name = $model->last_name . " " . $model->first_name . " " . $model->middle_name;
+
+            $user->name = $user_name;
+            $user->login = $model->login;
+            $user->password = \Yii::$app->security->generatePasswordHash($model->password);
+            $user->email = $model->email;
+            $user->phone = $model->phone;
+            $user->role = 1;
+
+            if ($user->save()) {
+                Yii::$app->session->setFlash('success', 'Вы успешно зарегистрировались на веб-сайте.');
+
+                return $this->goHome();
+            }
+        }
+
+        return $this->render('signup', compact('model'));
+    }
+
+    /**
+     * Signup action and display.
+     *
+     * @return string
+     */
+    public function actionSignupPrivate()
+    {
+        //если пользователь не гость, тогда редирект на главную страницу
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new SignupForm();
+
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            $user = new User();
+
+            $user_name = $model->last_name . " " . $model->first_name . " " . $model->middle_name;
+
+            $user->name = $user_name;
+            $user->login = $model->login;
+            $user->password = \Yii::$app->security->generatePasswordHash($model->password);
+            $user->email = $model->email;
+            $user->phone = $model->phone;
+            $user->role = 1;
+
+            if ($user->save()) {
+                Yii::$app->session->setFlash('success', 'Вы успешно зарегистрировались на веб-сайте.');
+
+                return $this->goHome();
+            }
+        }
+
+        return $this->render('signup', compact('model'));
+    }
+
+    /**
      * Login action.
      *
      * @return Response|string
@@ -185,6 +257,11 @@ class SiteController extends Controller
     public function actionLogist()
     {
         return $this->render('logist');
+    }
+
+    public function actionChangeUser()
+    {
+        return $this->render('change_user');
     }
 
     public function actionCargoSearch()

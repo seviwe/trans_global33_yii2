@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
 AppAsset::register($this);
 
-$this->title = 'О Нас';
+$this->title = 'О Нас | Глобал Транс 33';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

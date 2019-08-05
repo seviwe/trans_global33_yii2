@@ -233,7 +233,7 @@ $this->title = 'Главная | Грузоперевозки по РФ';
    </form> -->
 
    <!-- Cooperation Section -->
-   <div class="card my-4">
+   <!-- <div class="card my-4">
       <div class="card-body">
          <div class="row">
             <div class="col-lg-6">
@@ -249,9 +249,8 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                <img class="img-fluid rounded" src="/web/img/slide-mini.jpg" alt="" />
             </div>
          </div>
-         <!-- /.row -->
       </div>
-   </div>
+   </div> -->
 
    <hr />
 
@@ -261,7 +260,7 @@ $this->title = 'Главная | Грузоперевозки по РФ';
          <p>Есть предложение? Напишите нам и мы ответим на все интересующие Вас вопросы.</p>
       </div>
       <div class="col-md-4">
-         <a class="btn btn-lg btn-outline-primary btn-block" href="index.php?r=site/contact">Написать нам</a>
+         <a class="btn btn-outline-primary btn-block" href="/site/contact">Написать нам</a>
       </div>
    </div>
 
