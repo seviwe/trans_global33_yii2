@@ -25,6 +25,14 @@ $this->title = 'Главная | Грузоперевозки по РФ';
       </div>
    <?php endif; ?>
 
+   <header>
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+         <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active img-fluid" style="background-image: url('img/slide-full.jpg')"></div>
+         </div>
+      </div>
+   </header>
+
    <!-- Section Features -->
    <h2 class="my-4 text-center">Выбирая Глобал Транс 33, Вы получаете</h2>
 
@@ -66,11 +74,12 @@ $this->title = 'Главная | Грузоперевозки по РФ';
    <!-- /.row -->
 
    <!--Section Search Goods-->
-   <h2 class="my-2 text-center">Поиск грузов</h2>
+   <!-- <h2 class="my-2 text-center">Поиск грузов</h2> -->
 
    <?php Pjax::begin(['enablePushState' => false]) ?>
    <div class="card">
       <div class="card-body">
+         <h2 class="card-title text-center mb-3">Поиск грузов</h2>
          <?= Html::beginForm(['site/cargo-search'], 'post', ['data-pjax' => ''/*, 'class' => 'form-inline'*/]); ?>
          <div class="row">
             <div class="col-12">
@@ -96,13 +105,13 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                         </div>
                         <div class="col-4">
                            <div class="input-group input-group-sm mb-3">
-                              <?= Html::input('text', 'string', Yii::$app->request->post('string'), ['class' => 'form-control', 'name' => 'from', 'placeholder' => 'От', 'aria-label' => 'from']) ?>
+                              <?= Html::input('text', 'weight_from', Yii::$app->request->post('weight_from'), ['id' => 'weight_from', 'class' => 'form-control', 'placeholder' => 'От', 'aria-label' => 'from']) ?>
                            </div>
                         </div>
                         —
                         <div class="col-4">
                            <div class="input-group input-group-sm mb-3">
-                              <?= Html::input('text', 'string', Yii::$app->request->post('string'), ['class' => 'form-control', 'name' => 'from', 'placeholder' => 'До', 'aria-label' => 'from']) ?>
+                              <?= Html::input('text', 'weight_to', Yii::$app->request->post('weight_to'), ['id' => 'weight_to', 'class' => 'form-control', 'placeholder' => 'До', 'aria-label' => 'to']) ?>
                            </div>
                         </div>
                      </div>
@@ -114,13 +123,13 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                         </div>
                         <div class="col-4">
                            <div class="input-group input-group-sm mb-3">
-                              <?= Html::input('text', 'string', Yii::$app->request->post('string'), ['class' => 'form-control', 'name' => 'from', 'placeholder' => 'От', 'aria-label' => 'from']) ?>
+                              <?= Html::input('text', 'volume_from', Yii::$app->request->post('volume_from'), ['id' => 'volume_from', 'class' => 'form-control', 'placeholder' => 'От', 'aria-label' => 'from']) ?>
                            </div>
                         </div>
                         —
                         <div class="col-4">
                            <div class="input-group input-group-sm mb-3">
-                              <?= Html::input('text', 'string', Yii::$app->request->post('string'), ['class' => 'form-control', 'name' => 'from', 'placeholder' => 'До', 'aria-label' => 'from']) ?>
+                              <?= Html::input('text', 'volume_to', Yii::$app->request->post('volume_to'), ['id' => 'volume_to', 'class' => 'form-control', 'placeholder' => 'До', 'aria-label' => 'to']) ?>
                            </div>
                         </div>
                      </div>
@@ -129,19 +138,22 @@ $this->title = 'Главная | Грузоперевозки по РФ';
             </div>
          </div>
 
-         <br>
+         <hr>
 
          <div class="row">
-            <div class="col-6 text-right">
-               <?= Html::submitButton('&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspНайти грузы&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp', ['class' => 'btn btn-success', 'name' => 'cargo_search', 'id' => 'cargo_search']) ?>
+            <div class="col-4 text-right">
+               <?= Html::a('Расширенный поиск', ['load-information/search'], ['class' => 'btn btn-info', 'role' => 'button']) ?>
             </div>
-            <div class="col-6 text-left">
+            <div class="col-4 text-center">
+               <?= Html::submitButton('Найти грузы', ['class' => 'btn btn-success', 'name' => 'cargo_search', 'id' => 'cargo_search']) ?>
+            </div>
+            <div class="col-4 text-left">
                <button type="button" id="clear_form" class="btn btn-outline-dark">Очистить форму</button>
             </div>
          </div>
          <?= Html::endForm() ?>
 
-         <div class="row mt-3">
+         <div class="row mt-2">
             <div class="col-12">
                <?= $result_cargo_search ?>
             </div>
@@ -287,7 +299,7 @@ $js = <<<JS
                }
             },
             onSelect: function(suggestion) {
-               console.log(suggestion.data);
+               //console.log(suggestion.data);
                city_derival = suggestion.data.city; //город
                $('#cityDerival').attr('data-kladr-id', suggestion.data.city_kladr_id.charAt(0) == 0 ? suggestion.data.city_kladr_id.substring(1) /*+ '000000000000'*/ : suggestion.data.city_kladr_id /*+ '000000000000'*/);
             }

@@ -15,38 +15,35 @@ $this->title = 'Регистрация | Глобал Транс 33';
 
 ?>
 <!-- Page Content -->
-<div class="container">
+<div class="container mb-4">
 
-   <h1 class="text-center">Регистрация</h1>
-
-   <div class="row">
-      <div class="col-2">
-      </div>
-
+   <div class="row justify-content-center">
       <!-- Forms -->
-      <div class="col-8">
-         <?php $form = ActiveForm::begin() ?>
+      <div class="col-6">
+         <div class="card">
+            <div class="card-body">
+               <h1 class="card-title text-center">Регистрация</h1>
+               <?php $form = ActiveForm::begin() ?>
 
-         <?= $form->field($model, 'first_name')->textInput() ?>
+               <?= $form->field($model, 'first_name')->textInput() ?>
 
-         <?= $form->field($model, 'last_name')->textInput() ?>
+               <?= $form->field($model, 'last_name')->textInput() ?>
 
-         <?= $form->field($model, 'middle_name')->textInput() ?>
+               <?= $form->field($model, 'middle_name')->textInput() ?>
 
-         <?= $form->field($model, 'login')->textInput() ?>
+               <?= $form->field($model, 'login')->textInput() ?>
 
-         <?= $form->field($model, 'password')->passwordInput() ?>
+               <?= $form->field($model, 'password')->passwordInput() ?>
 
-         <?= $form->field($model, 'phone')->input('tel') ?>
+               <?= $form->field($model, 'phone')->input('tel') ?>
 
-         <?= $form->field($model, 'email')->input('email') ?>
+               <?= $form->field($model, 'email')->input('email') ?>
 
-         <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary mb-4']) ?>
+               <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary mb-4']) ?>
 
-         <?php ActiveForm::end() ?>
-      </div>
-
-      <div class="col-2">
+               <?php ActiveForm::end() ?>
+            </div>
+         </div>
       </div>
    </div>
 </div>

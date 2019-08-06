@@ -22,39 +22,39 @@ class LoadInformationController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::class,
-                'rules' => [
-                    [
-                        'allow' => false,
-                        'roles' => ['?'],
-                        'denyCallback' => function ($rule, $action) {
-                            return $this->redirect(Url::toRoute(['/site/login']));
-                        }
-                    ],
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            /** @var User $user */
-                            $user = Yii::$app->user->getIdentity();
-                            return $user->isAdmin() || $user->isLogist() || $user->isUser();
-                        }
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+    // public function behaviors()
+    // {
+    //     return [
+    //         'access' => [
+    //             'class' => AccessControl::class,
+    //             // 'rules' => [
+    //             //     [
+    //             //         'allow' => false,
+    //             //         'roles' => ['?'],
+    //             //         'denyCallback' => function ($rule, $action) {
+    //             //             return $this->redirect(Url::toRoute(['/site/login']));
+    //             //         }
+    //             //     ],
+    //             //     [
+    //             //         'actions' => [],
+    //             //         'allow' => true,
+    //             //         'roles' => ['@'],
+    //             //         'matchCallback' => function ($rule, $action) {
+    //             //             /** @var User $user */
+    //             //             $user = Yii::$app->user->getIdentity();
+    //             //             return $user->isAdmin() || $user->isLogist() || $user->isUser();
+    //             //         }
+    //             //     ],
+    //             // ],
+    //         ],
+    //         'verbs' => [
+    //             'class' => VerbFilter::className(),
+    //             'actions' => [
+    //                 'delete' => ['POST'],
+    //             ],
+    //         ],
+    //     ];
+    // }
 
     /**
      * Lists all LoadInformation models.
@@ -62,18 +62,38 @@ class LoadInformationController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new LoadInformationSearch();
+        if (!Yii::$app->user->isGuest) {
 
-        //отображение всех записей под логистом
-        if (!Yii::$app->user->isGuest && !Yii::$app->user->getIdentity()->isUser()) {
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        } else { //отображение только записей пользователя
-            $dataProvider = new ActiveDataProvider([
-                'query' => LoadInformation::find()->where(['id_user' => Yii::$app->user->getId()]),
+            $searchModel = new LoadInformationSearch();
+
+            //отображение всех записей под логистом
+            if (!Yii::$app->user->isGuest && !Yii::$app->user->getIdentity()->isUser()) {
+                $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            } else { //отображение только записей пользователя
+                $dataProvider = new ActiveDataProvider([
+                    'query' => LoadInformation::find()->where(['id_user' => Yii::$app->user->getId()]),
+                ]);
+            }
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
             ]);
+        } else {
+            return $this->goHome();
         }
+    }
 
-        return $this->render('index', [
+    /**
+     * Lists all LoadInformation models.
+     * @return mixed
+     */
+    public function actionSearch()
+    {
+        $searchModel = new LoadInformationSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('search', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -99,22 +119,28 @@ class LoadInformationController extends Controller
      */
     public function actionCreate()
     {
-        $model = new LoadInformation();
-        $routs = Route::find()->all();
+        if (!Yii::$app->user->isGuest) {
 
-        if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
+            $model = new LoadInformation();
+            $routs = Route::find()->all();
 
-            $model->date_create = date('d.m.Y H:i');
-            $model->id_user = Yii::$app->user->getId();
+            if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
 
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                $model->date_create = date('d.m.Y H:i');
+                $model->id_user = Yii::$app->user->getId();
+                $model->id_route = 0;
+
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
-        }
 
-        return $this->render('create', [
-            'model' => $model, 'routs' => $routs,
-        ]);
+            return $this->render('create', [
+                'model' => $model, 'routs' => $routs,
+            ]);
+        } else {
+            return $this->goHome();
+        }
     }
 
     /**
@@ -126,21 +152,26 @@ class LoadInformationController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $routs = Route::find()->all();
+        if (!Yii::$app->user->isGuest) {
 
-        if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
+            $model = $this->findModel($id);
+            $routs = Route::find()->all();
 
-            $model->date_create = date('d.m.Y H:i');
+            if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
 
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                $model->date_create = date('d.m.Y H:i');
+
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
-        }
 
-        return $this->render('update', [
-            'model' => $model, 'routs' => $routs,
-        ]);
+            return $this->render('update', [
+                'model' => $model, 'routs' => $routs,
+            ]);
+        } else {
+            return $this->goHome();
+        }
     }
 
     /**
@@ -152,9 +183,14 @@ class LoadInformationController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if (!Yii::$app->user->isGuest) {
 
-        return $this->redirect(['index']);
+            $this->findModel($id)->delete();
+
+            return $this->redirect(['index']);
+        } else {
+            return $this->goHome();
+        }
     }
 
     /**

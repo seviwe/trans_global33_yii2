@@ -21,9 +21,9 @@ class LoadInformationSearch extends LoadInformation
     public function rules()
     {
         return [
-            [['id', 'id_route'], 'integer'],
+            [['id'], 'integer'],
             [['weight_from', 'volume_from'], 'number'],
-            [['transport', 'load_info', 'rate', 'date_create', 'date_departure', 'date_arrival', 'routeName'], 'safe'],
+            [['transport', 'load_info', 'rate', 'date_create', 'date_departure', 'date_arrival', 'name_city_departure', 'name_city_arrival'], 'safe'],
         ];
     }
 
@@ -47,17 +47,17 @@ class LoadInformationSearch extends LoadInformation
     {
         $query = LoadInformation::find();
 
-        $query->joinWith(['route']);
+        //$query->joinWith(['route']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-        $dataProvider->sort->attributes['routeName'] = [
-            'asc' => [Route::tableName() . '.name' => SORT_ASC],
-            'desc' => [Route::tableName() . '.name' => SORT_DESC],
-        ];
+        // $dataProvider->sort->attributes['routeName'] = [
+        //     'asc' => [Route::tableName() . '.name' => SORT_ASC],
+        //     'desc' => [Route::tableName() . '.name' => SORT_DESC],
+        // ];
         $this->load($params);
 
         if (!$this->validate()) {
@@ -79,10 +79,12 @@ class LoadInformationSearch extends LoadInformation
         $query->andFilterWhere(['like', 'transport', $this->transport])
             ->andFilterWhere(['like', 'load_info', $this->load_info])
             ->andFilterWhere(['like', 'rate', $this->rate])
+            ->andFilterWhere(['like', 'name_city_departure', $this->name_city_departure])
+            ->andFilterWhere(['like', 'name_city_arrival', $this->name_city_arrival])
             ->andFilterWhere(['like', 'date_create', $this->date_create])
             ->andFilterWhere(['like', 'date_departure', $this->date_departure])
-            ->andFilterWhere(['like', 'date_arrival', $this->date_arrival])
-            ->andFilterWhere(['like', Route::tableName().'.name', $this->routeName]);
+            ->andFilterWhere(['like', 'date_arrival', $this->date_arrival]);
+            //->andFilterWhere(['like', Route::tableName().'.name', $this->routeName]);
 
         return $dataProvider;
     }

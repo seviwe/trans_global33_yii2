@@ -14,7 +14,15 @@ use kartik\datetime\DateTimePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_route')->dropDownList(ArrayHelper::map($routs, 'id', 'name'), ['prompt' => 'Выберите маршрут', 'id' => 'route']) ?>
+    <?php //echo $form->field($model, 'id_route')->dropDownList(ArrayHelper::map($routs, 'id', 'name'), ['prompt' => 'Выберите маршрут', 'id' => 'route']) ?>
+
+    <?= $form->field($model, 'name_city_departure')->textInput(['maxlength' => true, 'id' => 'name_city_departure']) ?>
+
+    <?= $form->field($model, 'id_city_departure')->textInput(['maxlength' => true, 'type' => 'hidden', 'id' => 'id_city_departure'])->label(false) ?>
+
+    <?= $form->field($model, 'name_city_arrival')->textInput(['maxlength' => true, 'id' => 'name_city_arrival']) ?>
+
+    <?= $form->field($model, 'id_city_arrival')->textInput(['maxlength' => true, 'type' => 'hidden', 'id' => 'id_city_arrival'])->label(false) ?>
 
     <?= $form->field($model, 'weight_from')->textInput(['maxlength' => true]) ?>
 

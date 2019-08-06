@@ -11,36 +11,30 @@ use yii\widgets\ActiveForm;
 <div class="load-information-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
+        'action' => ['search'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'name_city_departure') ?>
 
-    <?= $form->field($model, 'id_route') ?>
+    <?= $form->field($model, 'name_city_arrival') ?>
 
     <?= $form->field($model, 'weight_from') ?>
 
-    <? //echo $form->field($model, 'weight_to') ?>
-
     <?= $form->field($model, 'volume_from') ?>
 
-    <?php // echo $form->field($model, 'volume_to') ?>
+    <?= $form->field($model, 'transport') ?>
 
-    <?php // echo $form->field($model, 'transport') ?>
+    <?= $form->field($model, 'load_info') ?>
 
-    <?php // echo $form->field($model, 'load_info') ?>
+    <?= $form->field($model, 'rate') ?>
 
-    <?php // echo $form->field($model, 'rate') ?>
+    <?= $form->field($model, 'date_departure') ?>
 
-    <?php // echo $form->field($model, 'date_create') ?>
-
-    <?php // echo $form->field($model, 'date_departure') ?>
-
-    <?php // echo $form->field($model, 'date_arrival') ?>
+    <?= $form->field($model, 'date_arrival') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Поиск груза', ['class' => 'btn btn-primary mr-3']) ?>
         <?= Html::resetButton('Очистить', ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 

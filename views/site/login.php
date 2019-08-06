@@ -15,33 +15,30 @@ $this->title = 'Авторизация | Глобал Транс 33';
 
 ?>
 <!-- Page Content -->
-<div class="container">
+<div class="container mb-4">
 
-    <h1 class="text-center">Авторизация</h1>
-
-    <div class="row">
-        <div class="col-3">
-        </div>
-
+    <div class="row justify-content-center">
         <div class="col-6">
-            <?php $form = ActiveForm::begin() ?>
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Авторизация</h1>
+                    <?php $form = ActiveForm::begin() ?>
 
-            <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
+                    <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
 
-            <?= $form->field($model, 'password')->passwordInput() ?>
+                    <?= $form->field($model, 'password')->passwordInput() ?>
 
-            <?= $form->field($model, 'rememberMe')->checkbox([
-                'template' => "<div class=\"col-lg-offset-1 col-lg-5\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            ]) ?>
+                    <?= $form->field($model, 'rememberMe')->checkbox([
+                        'template' => "<div class=\"col-lg-offset-1 col-lg-5\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+                    ]) ?>
 
-            <div class="form-group">
-                    <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <div class="form-group">
+                        <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    </div>
+
+                    <?php ActiveForm::end(); ?>
+                </div>
             </div>
-
-            <?php ActiveForm::end(); ?>
-        </div>
-
-        <div class="col-3">
         </div>
     </div>
 </div>

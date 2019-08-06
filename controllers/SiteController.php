@@ -10,8 +10,10 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignupForm;
+use app\models\LoadInformation;
 use app\models\User;
 use yii\web\Request;
+use yii\db\Query;
 
 class SiteController extends Controller
 {
@@ -268,32 +270,56 @@ class SiteController extends Controller
     {
         //echo "<pre>"; print_r(Yii::$app->request->post());
 
-        $result_cargo_search = "<hr>
-        <h4 class='mb-3 text-left'>Найдено <b>4</b> груза</h4>
-        <table class='table table-striped table-bordered'>
-           <thead>
-              <tr>
-                 <th>Направление</th>
-                 <th>Транспорт</th>
-                 <th>Вес,т / Объем,м3</th>
-                 <th>Груз</th>
-                 <th>Загрузка</th>
-                 <th>Разгрузка</th>
-                 <th>Ставка</th>
-              </tr>
-           </thead>
-           <tbody>
-              <tr>
-                 <td>" . Yii::$app->request->post('cityDerival') . " -> " . Yii::$app->request->post('cityArrival') . "</td>
-                 <td>test</td>
-                 <td>test</td>
-                 <td>test</td>
-                 <td>test</td>
-                 <td>test</td>
-                 <td>test</td>
-              </tr>
-           </tbody>
-        </table>";
+        // $rows = (new Query())
+        //     ->select('load_information.*, route.id as route_id, route.name as route_name, city.name as city_name, region.name as region_name')
+        //     ->from('load_information')
+        //     ->join('INNER JOIN', 'route', 'route.id = id_route')
+        //     ->join('INNER JOIN', 'city', 'city.id = id_city_departure')
+        //     ->join('INNER JOIN', 'region', 'region.id = id_region')
+        //     ->where(['city.id_kladr_city' => Yii::$app->request->post('cityDerival_id')])
+        //     ->all();
+
+        $rows = (new Query())
+            ->from('load_information')
+            ->where([
+                'id_city_departure' => Yii::$app->request->post('cityDerival_id'),
+            ])
+            ->all();
+
+        //echo "<pre>"; print_r($rows);
+        if ($rows) {
+            $result_cargo_search = "<hr>
+            <h3 class='mb-3 text-left'>Найдено <b>" . count($rows) . "</b> груза</h4>
+            <table class='table table-striped table-bordered'>
+            <thead>
+                <tr>
+                    <th>Направление</th>
+                    <th>Транспорт</th>
+                    <th>Вес,т / Объем,м3</th>
+                    <th>Груз</th>
+                    <th>Загрузка</th>
+                    <th>Разгрузка</th>
+                    <th>Ставка</th>
+                </tr>
+            </thead>
+            <tbody>";
+            foreach ($rows as $row) {
+                //echo "<pre>"; print_r($row);
+                $result_cargo_search .= "<tr>
+                <td>" . $row['name_city_departure'] . " -> " . $row['name_city_arrival'] . "</td>
+                <td>" . $row['transport'] . "</td>
+                <td>" . $row['weight_from'] . "/" . $row['volume_from'] . "</td>
+                <td>" . $row['load_info'] . "</td>
+                <td>" . $row['name_city_departure'] . "</td>
+                <td>" . $row['name_city_arrival'] . "</td>
+                <td>" . $row['rate'] . "</td>
+            </tr>";
+            }
+            $result_cargo_search .= "</tbody>
+            </table>";
+        }else{
+            $result_cargo_search = "<hr><b>Ничего не найдено</b>";
+        }
 
         return $this->render('index', [
             'result_cargo_search' => $result_cargo_search,

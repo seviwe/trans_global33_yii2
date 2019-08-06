@@ -12,7 +12,11 @@ if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
     $this->title = 'Информация о грузах';
     $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
 } else {
-    $this->title = 'Информация о ваших грузах';
+    if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
+        $this->title = 'Информация о ваших грузах';
+    } else {
+        $this->title = 'Поиск груза';
+    }
 }
 
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,7 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    <?php
+    if (Yii::$app->user->isGuest){
+        echo $this->render('_search', ['model' => $searchModel]);
+    }
     ?>
 
     <?
@@ -43,7 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 //'id_route',
                 ['attribute' => 'userName', 'label' => 'Пользователь', 'value' => 'user.name'],
-                ['attribute' => 'routeName', 'label' => 'Маршрут', 'value' => 'route.name'],
+                //['attribute' => 'routeName', 'label' => 'Маршрут', 'value' => 'route.name'],
+                'name_city_departure',
+                'name_city_arrival',
                 'weight_from',
                 //'weight_to',
                 'volume_from',
@@ -106,7 +115,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 //'id_route',
-                ['attribute' => 'routeName', 'label' => 'Маршрут', 'value' => 'route.name'],
+                //['attribute' => 'routeName', 'label' => 'Маршрут', 'value' => 'route.name'],
+                'name_city_departure',
+                'name_city_arrival',
                 'weight_from',
                 //'weight_to',
                 'volume_from',

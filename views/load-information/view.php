@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\LoadInformation */
 
-$this->title = $model->route->name . ", вес: " . $model->weight_from . ", объем: " . $model->volume_from . ", " . $model->transport . ", " . $model->date_create;
+$this->title = $model->name_city_departure . " -> ". $model->name_city_arrival . ", вес: " . $model->weight_from . ", объем: " . $model->volume_from . ", " . $model->transport . ", " . $model->date_create;
 
 //для логиста отображаем навигацию по разделам
 if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
@@ -37,7 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             //'id_route',
             'user.name',
-            'route.name',
+            //'route.name',
+            'name_city_departure',
+            'name_city_arrival',
             'weight_from',
             //'weight_to',
             'volume_from',
