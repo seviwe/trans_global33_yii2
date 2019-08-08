@@ -16,15 +16,6 @@ $this->title = 'Главная | Грузоперевозки по РФ';
 
 <!-- Page Content -->
 <div class="container">
-
-   <?php if (Yii::$app->session->hasFlash('success')) : ?>
-      <br>
-      <div class="alert alert-success alert-dismissible" role="alert">
-         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-         <?php echo Yii::$app->session->getFlash('success'); ?>
-      </div>
-   <?php endif; ?>
-
    <header>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
          <div class="carousel-inner" role="listbox">
@@ -74,8 +65,6 @@ $this->title = 'Главная | Грузоперевозки по РФ';
    <!-- /.row -->
 
    <!--Section Search Goods-->
-   <!-- <h2 class="my-2 text-center">Поиск грузов</h2> -->
-
    <?php Pjax::begin(['enablePushState' => false]) ?>
    <div class="card">
       <div class="card-body">
@@ -334,33 +323,6 @@ $js = <<<JS
 
    initb();
    $(document).on("pjax:end", initb);
-
-
-	 //поиск грузов
-	// $('#search_loads').click(function() {
-	// 	$.ajax({
-	// 		type: "POST",
-	// 		url: "index.php?r=site/cargo-search",
-	// 		data: {
-	// 			city_derival: city_derival,
-	// 			city_arrival: city_arrival,
-	// 		},
-	// 		dataType: "JSON",
-	// 		success: function(data) {
-	// 			// $(document).ready(function() {
-	// 			// 	$('.set_loads').html(data.table);
-
-	// 			// 	$('html,body').animate({
-	// 			// 		scrollTop: $(".set_loads").offset().top
-	// 			// 	}, 1000);
-   //          // });
-   //          alert("yes");
-   //       },
-   //       error: function(){
-   //          alert("error");
-   //       }         
-	// 	});
-	// });
 
 	//очистка формы поиска
 	$('#clear_form').click(function() {

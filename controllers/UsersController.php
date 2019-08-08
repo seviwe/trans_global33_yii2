@@ -41,7 +41,7 @@ class UsersController extends Controller
                         'matchCallback' => function ($rule, $action) {
                             /** @var User $user */
                             $user = Yii::$app->user->getIdentity();
-                            return $user->isAdmin() || $user->isLogist() || $user->isUser();
+                            return $user->isAdmin() || $user->isLogist() || $user->isUser() || $user->isCarrierC() || $user->isCarrierP();
                         }
                     ],
                 ],

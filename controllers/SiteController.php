@@ -69,11 +69,8 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    /**
-     * Signup action and display.
-     *
-     * @return string
-     */
+
+    //регистрация грузовладельца
     public function actionSignup()
     {
         //если пользователь не гость, тогда редирект на главную страницу
@@ -105,47 +102,7 @@ class SiteController extends Controller
         return $this->render('signup', compact('model'));
     }
 
-    /**
-     * Signup action and display.
-     *
-     * @return string
-     */
-    public function actionSignupCompany()
-    {
-        //если пользователь не гость, тогда редирект на главную страницу
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new SignupForm();
-
-        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
-            $user = new User();
-
-            $user_name = $model->last_name . " " . $model->first_name . " " . $model->middle_name;
-
-            $user->name = $user_name;
-            $user->login = $model->login;
-            $user->password = \Yii::$app->security->generatePasswordHash($model->password);
-            $user->email = $model->email;
-            $user->phone = $model->phone;
-            $user->role = 1;
-
-            if ($user->save()) {
-                Yii::$app->session->setFlash('success', 'Вы успешно зарегистрировались на веб-сайте.');
-
-                return $this->goHome();
-            }
-        }
-
-        return $this->render('signup', compact('model'));
-    }
-
-    /**
-     * Signup action and display.
-     *
-     * @return string
-     */
+    //регистрация грузоперевозчика (частное лицо)
     public function actionSignupPrivate()
     {
         //если пользователь не гость, тогда редирект на главную страницу
@@ -165,7 +122,38 @@ class SiteController extends Controller
             $user->password = \Yii::$app->security->generatePasswordHash($model->password);
             $user->email = $model->email;
             $user->phone = $model->phone;
-            $user->role = 1;
+            $user->role = 2;
+
+            if ($user->save()) {
+                Yii::$app->session->setFlash('success', 'Вы успешно зарегистрировались на веб-сайте.');
+
+                return $this->goHome();
+            }
+        }
+
+        return $this->render('signup', compact('model'));
+    }
+    //регистрация грузоперевозчика (компания)
+    public function actionSignupCompany()
+    {
+        //если пользователь не гость, тогда редирект на главную страницу
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new SignupForm();
+
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            $user = new User();
+
+            $user_name = $model->last_name . " " . $model->first_name . " " . $model->middle_name;
+
+            $user->name = $user_name;
+            $user->login = $model->login;
+            $user->password = \Yii::$app->security->generatePasswordHash($model->password);
+            $user->email = $model->email;
+            $user->phone = $model->phone;
+            $user->role = 3;
 
             if ($user->save()) {
                 Yii::$app->session->setFlash('success', 'Вы успешно зарегистрировались на веб-сайте.');
@@ -182,7 +170,6 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
-
     public function actionLogin()
     {
         //если пользователь залогинен, то редикрект на главную страницу
@@ -317,7 +304,7 @@ class SiteController extends Controller
             }
             $result_cargo_search .= "</tbody>
             </table>";
-        }else{
+        } else {
             $result_cargo_search = "<hr><b>Ничего не найдено</b>";
         }
 

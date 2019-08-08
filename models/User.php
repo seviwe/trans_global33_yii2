@@ -4,18 +4,20 @@ namespace app\models;
 
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    const ROLE_USER     = 1;    //грузовладелец
-    const ROLE_CARRIER  = 2;    //грузоперевозчик
-    const ROLE_LOGIST   = 5;    //логист
-    const ROLE_ADMIN    = 10;   //админ
+    const ROLE_USER             = 1;  //грузовладелец
+    const ROLE_CARRIER_PRIVATE  = 2;  //грузоперевозчик (частное лицо)
+    const ROLE_CARRIER_COMPANY  = 3;  //грузоперевозчик (компания)
+    const ROLE_LOGIST           = 5;  //логист
+    const ROLE_ADMIN            = 10; //админ
 
     public static function roles()
     {
         return [
-            self::ROLE_USER     => Yii::t('app', 'User'),
-            self::ROLE_CARRIER  => Yii::t('app', 'Carrier'),
-            self::ROLE_LOGIST   => Yii::t('app', 'Logist'),
-            self::ROLE_ADMIN    => Yii::t('app', 'Admin'),
+            self::ROLE_USER             => Yii::t('app', 'User'),
+            self::ROLE_CARRIER_PRIVATE  => Yii::t('app', 'CarrierP'),
+            self::ROLE_CARRIER_COMPANY  => Yii::t('app', 'CarrierC'),
+            self::ROLE_LOGIST           => Yii::t('app', 'Logist'),
+            self::ROLE_ADMIN            => Yii::t('app', 'Admin'),
         ];
     }
 
@@ -46,9 +48,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return ($this->role == self::ROLE_LOGIST);
     }    
     
-    public function isCarrier()
+    public function isCarrierP()
     {
-        return ($this->role == self::ROLE_CARRIER);
+        return ($this->role == self::ROLE_CARRIER_PRIVATE);
+    }
+
+    public function isCarrierC()
+    {
+        return ($this->role == self::ROLE_CARRIER_COMPANY);
     }
 
     public function isUser()

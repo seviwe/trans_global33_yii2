@@ -1,6 +1,5 @@
 <?php
 
-use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -107,6 +106,8 @@ AppAsset::register($this);
                      echo Html::a('Регистрация', ['site/change-user'], ['class' => 'btn btn-primary', 'style' => 'font-size: 15px', 'role' => 'button']);
                   } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
                      echo Html::a('Ваши грузы', ['load-information/index'], ['class' => 'btn btn-outline-warning mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
+                  } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
+                     echo Html::a('Ваши машины', ['transport/index'], ['class' => 'btn btn-outline-danger mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
                   }
                   ?>
                </li>
@@ -118,6 +119,8 @@ AppAsset::register($this);
                      echo Html::a('Панель администратора', ['site/admin'], ['class' => 'btn btn-outline-dark mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
                   } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
                      echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-outline-info mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
+                  } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
+                     echo Html::a('Добавить машину', ['transport/create'], ['class' => 'btn btn-outline-info mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
                   }
                   ?>
                </li>
@@ -164,6 +167,29 @@ AppAsset::register($this);
 
    <div class="container">
       <br>
+
+      <?php
+      if (Yii::$app->session->hasFlash('success')) : ?>
+         <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?php echo Yii::$app->session->getFlash('success'); ?>
+         </div>
+      <?php endif; ?>
+      <?php
+      if (Yii::$app->session->hasFlash('warning')) : ?>
+         <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?php echo Yii::$app->session->getFlash('warning'); ?>
+         </div>
+      <?php endif; ?>
+      <?php
+      if (Yii::$app->session->hasFlash('error')) : ?>
+         <div class="alert alert-error alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?php echo Yii::$app->session->getFlash('error'); ?>
+         </div>
+      <?php endif; ?>
+
       <?= Breadcrumbs::widget([
          'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
       ]) ?>

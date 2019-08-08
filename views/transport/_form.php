@@ -2,46 +2,32 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
 use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\LoadInformation */
+/* @var $model app\models\Transport */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="load-information-form">
+<div class="transport-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php //echo $form->field($model, 'id_route')->dropDownList(ArrayHelper::map($routs, 'id', 'name'), ['prompt' => 'Выберите маршрут', 'id' => 'route']) ?>
+    <?php //echo $form->field($model, 'id_user')->textInput() ?>
 
-    <?= $form->field($model, 'name_city_departure')->textInput(['maxlength' => true, 'id' => 'name_city_departure']) ?>
+    <?= $form->field($model, 'volume')->textInput() ?>
+
+    <?= $form->field($model, 'body_dimensions')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'capacity')->textInput() ?>
 
     <?= $form->field($model, 'id_city_departure')->textInput(['maxlength' => true, 'type' => 'hidden', 'id' => 'id_city_departure'])->label(false) ?>
 
-    <?= $form->field($model, 'name_city_arrival')->textInput(['maxlength' => true, 'id' => 'name_city_arrival']) ?>
+    <?= $form->field($model, 'name_city_departure')->textInput(['maxlength' => true, 'id' => 'name_city_departure']) ?>
 
     <?= $form->field($model, 'id_city_arrival')->textInput(['maxlength' => true, 'type' => 'hidden', 'id' => 'id_city_arrival'])->label(false) ?>
 
-    <?= $form->field($model, 'weight_from')->textInput(['maxlength' => true]) ?>
-
-    <? //echo $form->field($model, 'weight_to')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'volume_from')->textInput(['maxlength' => true]) ?>
-
-    <? //echo $form->field($model, 'volume_to')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'transport')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'load_info')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'rate')->textInput(['maxlength' => true]) ?>
-
-    <?php //echo $form->field($model, 'date_create')->textInput(['maxlength' => true]); ?>
-
-    <?php //echo $form->field($model, 'date_departure')->textInput(['maxlength' => true]); 
-    ?>
+    <?= $form->field($model, 'name_city_arrival')->textInput(['maxlength' => true, 'id' => 'name_city_arrival']) ?>
 
     <?php
     echo $form->field($model, 'date_departure')->widget(
@@ -62,8 +48,6 @@ use kartik\datetime\DateTimePicker;
     );
     ?>
 
-    <? //echo $form->field($model, 'date_arrival')->textInput(['maxlength' => true]); ?>
-
     <?php
     echo $form->field($model, 'date_arrival')->widget(
         DateTimePicker::className(),
@@ -82,7 +66,11 @@ use kartik\datetime\DateTimePicker;
         ]
     );
     ?>
-    
+
+    <?= $form->field($model, 'rate')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'info')->textInput(['maxlength' => true]) ?>
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
