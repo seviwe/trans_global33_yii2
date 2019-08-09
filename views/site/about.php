@@ -25,13 +25,13 @@ $this->params['breadcrumbs'][] = 'О Нас';
          <div id="carouselSlides" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                <div class="carousel-item active">
-                  <img class="d-block w-100" src="img/slides/3.jpg" />
+                  <img class="d-block w-100" src="/web/img/slides/3.jpg" />
                </div>
                <div class="carousel-item">
-                  <img class="d-block w-100" src="img/slides/2.jpg" />
+                  <img class="d-block w-100" src="/web/img/slides/2.jpg" />
                </div>
                <div class="carousel-item">
-                  <img class="d-block w-100" src="img/slides/1.jpg" />
+                  <img class="d-block w-100" src="/web/img/slides/1.jpg" />
                </div>
             </div>
          </div>

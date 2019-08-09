@@ -41,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
     <?
+    //если логист или админ
     if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
         echo GridView::widget([
             'dataProvider' => $dataProvider,
@@ -67,8 +68,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'header' => 'Действия',
-                    'headerOptions' => ['width' => '50'],
-                    'template' => '{view} {update} {delete}',
+                    'headerOptions' => ['width' => '70'],
+                    'template' => '{view} {update} {delete} {view_user}',
                     'urlCreator' => function ($action, $model, $key, $index) {
                         if ($action === 'view') {
                             $url = 'index.php?r=load-information/view&id=' . $model->id;
@@ -80,6 +81,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                         if ($action === 'delete') {
                             $url = 'index.php?r=load-information/delete&id=' . $model->id;
+                            return $url;
+                        }
+                        if ($action === 'view_user') {
+                            $url = 'index.php?r=users/view&id=' . $model->id_user;
                             return $url;
                         }
                     },
@@ -101,6 +106,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'method' => 'post',
                                     'confirm' => 'Вы уверены что хотите удалить данный груз?',
                                 ]
+                            ]);
+                        },
+                        'view_user' => function ($url, $model) {
+                            return Html::a('<span class="fas fa-user-circle"></span>', $url, [
+                                'title' => 'Просмотр информации о пользователе',
                             ]);
                         },
                     ],

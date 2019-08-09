@@ -7,8 +7,13 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Users */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Панель администратора', 'url' => ['/site/admin']];
-$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
+if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) { 
+    $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
+    $this->params['breadcrumbs'][] = ['label' => 'Информация о грузах', 'url' => ['/load-information/index']];
+} else {
+    $this->params['breadcrumbs'][] = ['label' => 'Панель администратора', 'url' => ['/site/admin']];
+    $this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['/users/index']];
+}
 $this->params['breadcrumbs'][] = $this->title;
 
 \yii\web\YiiAsset::register($this);

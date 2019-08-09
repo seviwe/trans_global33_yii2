@@ -84,7 +84,7 @@ class UsersController extends Controller
      */
     public function actionView($id)
     {
-        if (Yii::$app->user->getIdentity()->isAdmin() && !Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isAdmin() || Yii::$app->user->getIdentity()->isLogist())) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);

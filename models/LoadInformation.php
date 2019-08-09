@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-use app\models\Route;
+//use app\models\Route;
 use app\models\Users;
 
 /**
@@ -77,10 +77,10 @@ class LoadInformation extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getRoute()
-    {
-        return $this->hasOne(Route::className(), ['id' => 'id_route']);
-    }
+    // public function getRoute()
+    // {
+    //     return $this->hasOne(Route::className(), ['id' => 'id_route']);
+    // }
     
     public function getUser()
     {

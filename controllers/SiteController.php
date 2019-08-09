@@ -235,7 +235,11 @@ class SiteController extends Controller
      */
     public function actionAdmin()
     {
-        return $this->render('admin');
+        if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
+            return $this->render('admin');
+        } else {
+            return $this->goHome();
+        }
     }
 
     /**
@@ -245,7 +249,11 @@ class SiteController extends Controller
      */
     public function actionLogist()
     {
-        return $this->render('logist');
+        if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
+            return $this->render('logist');
+        } else {
+            return $this->goHome();
+        }
     }
 
     public function actionChangeUser()
@@ -257,23 +265,42 @@ class SiteController extends Controller
     {
         //echo "<pre>"; print_r(Yii::$app->request->post());
 
-        // $rows = (new Query())
-        //     ->select('load_information.*, route.id as route_id, route.name as route_name, city.name as city_name, region.name as region_name')
-        //     ->from('load_information')
-        //     ->join('INNER JOIN', 'route', 'route.id = id_route')
-        //     ->join('INNER JOIN', 'city', 'city.id = id_city_departure')
-        //     ->join('INNER JOIN', 'region', 'region.id = id_region')
-        //     ->where(['city.id_kladr_city' => Yii::$app->request->post('cityDerival_id')])
-        //     ->all();
+        $query = "select * from load_information where id != 0";
+        //откуда->куда
+        if (!empty(Yii::$app->request->post('cityDerival_id'))) {
+            $query .= " and id_city_departure = " . Yii::$app->request->post('cityDerival_id');
+        }
+        if (!empty(Yii::$app->request->post('cityArrival_id'))) {
+            $query .= " and id_city_arrival = " . Yii::$app->request->post('cityArrival_id');
+        }
+        //вес
+        if (!empty(Yii::$app->request->post('weight_from'))) {
+            $query .= " and weight_from >= " . Yii::$app->request->post('weight_from');
+        }
+        if (!empty(Yii::$app->request->post('weight_to'))) {
+            $query .= " and weight_from <= " . Yii::$app->request->post('weight_to');
+        }
+        //объем
+        if (!empty(Yii::$app->request->post('volume_from'))) {
+            $query .= " and volume_from >= " . Yii::$app->request->post('volume_from');
+        }
+        if (!empty(Yii::$app->request->post('volume_to'))) {
+            $query .= " and volume_from <= " . Yii::$app->request->post('volume_to');
+        }
+        //дата
+        if (!empty(Yii::$app->request->post('date_departure'))) {
+            $query .= " and date_departure like '" . Yii::$app->request->post('date_departure') . "%'";
+        }
+        if (!empty(Yii::$app->request->post('date_arrival'))) {
+            $query .= " and date_arrival like '" . Yii::$app->request->post('date_arrival') . "%'";
+        }
 
-        $rows = (new Query())
-            ->from('load_information')
-            ->where([
-                'id_city_departure' => Yii::$app->request->post('cityDerival_id'),
-            ])
-            ->all();
+        $query .= " ORDER BY date_create";
+
+        $rows = Yii::$app->db->createCommand($query)->queryAll();
 
         //echo "<pre>"; print_r($rows);
+
         if ($rows) {
             $result_cargo_search = "<hr>
             <h3 class='mb-3 text-left'>Найдено <b>" . count($rows) . "</b> груза</h4>

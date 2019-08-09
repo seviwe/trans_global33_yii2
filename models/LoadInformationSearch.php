@@ -5,7 +5,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\LoadInformation;
-use app\models\Route;
+use app\models\Users;
 
 /**
  * LoadInformationSearch represents the model behind the search form of `app\models\LoadInformation`.
@@ -13,7 +13,7 @@ use app\models\Route;
 class LoadInformationSearch extends LoadInformation
 {
 
-    public $routeName;
+    public $userName;
 
     /**
      * {@inheritdoc}
@@ -47,17 +47,17 @@ class LoadInformationSearch extends LoadInformation
     {
         $query = LoadInformation::find();
 
-        //$query->joinWith(['route']);
+        $query->joinWith(['user']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-        // $dataProvider->sort->attributes['routeName'] = [
-        //     'asc' => [Route::tableName() . '.name' => SORT_ASC],
-        //     'desc' => [Route::tableName() . '.name' => SORT_DESC],
-        // ];
+        $dataProvider->sort->attributes['userName'] = [
+            'asc' => [Users::tableName() . '.name' => SORT_ASC],
+            'desc' => [Users::tableName() . '.name' => SORT_DESC],
+        ];
         $this->load($params);
 
         if (!$this->validate()) {
@@ -83,8 +83,8 @@ class LoadInformationSearch extends LoadInformation
             ->andFilterWhere(['like', 'name_city_arrival', $this->name_city_arrival])
             ->andFilterWhere(['like', 'date_create', $this->date_create])
             ->andFilterWhere(['like', 'date_departure', $this->date_departure])
-            ->andFilterWhere(['like', 'date_arrival', $this->date_arrival]);
-            //->andFilterWhere(['like', Route::tableName().'.name', $this->routeName]);
+            ->andFilterWhere(['like', 'date_arrival', $this->date_arrival])
+            ->andFilterWhere(['like', Users::tableName().'.name', $this->userName]);
 
         return $dataProvider;
     }

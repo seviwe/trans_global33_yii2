@@ -76,8 +76,8 @@ AppAsset::register($this);
    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white shadow p-1">
       <div class="container">
 
-         <a class="navbar-brand" href="index.php">
-            <img class="img-fluid" style="height: 60px;" src="img/logo-gt.png" />
+         <a class="navbar-brand" href="/web/site/index">
+            <img class="img-fluid" style="height: 60px;" src="/web/img/logo-gt.png" />
          </a>
 
          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

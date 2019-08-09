@@ -18,13 +18,13 @@ $this->title = 'Панель логиста | Глобал Транс 33';
    <h1 class="text-center mb-3">Панель логиста</h1>
 
    <div class="list-group mb-4">
-      <a href="index.php?r=load-information/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-success">
+      <a href="/web/load-information/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-success">
          <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">Добавление, просмотр и редактирование грузов</h5>
          </div>
          <p class="mb-1">Здесь будет происходить работа с грузами.</p>
       </a>
-      <a href="index.php?r=transport/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-warning">
+      <a href="/web/transport/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-warning">
          <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">Добавление, просмотр и редактирование транспорта</h5>
          </div>

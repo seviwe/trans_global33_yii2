@@ -7,6 +7,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\widgets\Pjax;
+use kartik\date\DatePicker;
 
 AppAsset::register($this);
 
@@ -19,7 +20,7 @@ $this->title = 'Главная | Грузоперевозки по РФ';
    <header>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
          <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active img-fluid" style="background-image: url('img/slide-full.jpg')"></div>
+            <div class="carousel-item active img-fluid" style="background-image: url('/web/img/slide-full.jpg')"></div>
          </div>
       </div>
    </header>
@@ -86,6 +87,7 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                      </div>
                   </div>
                </div>
+
                <div class="row">
                   <div class="col-6">
                      <div class="row">
@@ -124,6 +126,57 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                      </div>
                   </div>
                </div>
+
+               <div class="row">
+                  <div class="col-6">
+                     <div class="row">
+                        <div class="col-4">
+                           Дата погрузки
+                        </div>
+                        <div class="col-8">
+                           <?php
+                           echo DatePicker::widget([
+                              'name' => 'date_departure',
+                              'options' => ['placeholder' => 'Введите дату отгрузки...'],
+                              //'convertFormat' => true,
+                              'value' =>  Yii::$app->request->post('date_departure'),
+                              'pluginOptions' => [
+                                 'autoclose' => true,
+                                 'format' => 'dd.mm.yyyy',
+                                 'weekStart' => 1, //неделя начинается с понедельника
+                                 'startDate' => '01.07.2019', //самая ранняя возможная дата
+                                 'todayBtn' => true, //снизу кнопка "сегодня"
+                              ]
+                           ]);
+                           ?>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-6">
+                     <div class="row">
+                        <div class="col-4">
+                           Дата разгрузки
+                        </div>
+                        <div class="col-8">
+                           <?php
+                           echo DatePicker::widget([
+                              'name' => 'date_arrival',
+                              'options' => ['placeholder' => 'Введите дату погрузки...'],
+                              //'convertFormat' => true,
+                              'value' =>  Yii::$app->request->post('date_arrival'),
+                              'pluginOptions' => [
+                                 'autoclose' => true,
+                                 'format' => 'dd.mm.yyyy',
+                                 'weekStart' => 1, //неделя начинается с понедельника
+                                 'startDate' => '01.07.2019', //самая ранняя возможная дата
+                                 'todayBtn' => true, //снизу кнопка "сегодня"
+                              ]
+                           ]);
+                           ?>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
 
@@ -152,107 +205,22 @@ $this->title = 'Главная | Грузоперевозки по РФ';
    </div>
    <?php Pjax::end(); ?>
    <!-- /.row -->
-
-   <!-- <form action="" method="post">
-      <div class="card">
-         <div class="card-body">
-            <div class="row">
-               <div class="col-12">
-                  <div class="row">
-                     <div class="col-6">
-                        <div class="input-group mb-3">
-                           <input type="text" class="form-control" name="cityDerival" id="cityDerival" placeholder="Откуда" />
-                           <input type="hidden" name="cityDerival_id" id="cityDerival_id" />
-                        </div>
-                     </div>
-                     <div class="col-6">
-                        <div class="input-group mb-3">
-                           <input type="text" class="form-control" name="cityArrival" id="cityArrival" placeholder="Куда" />
-                           <input type="hidden" name="cityArrival_id" id="cityArrival_id" />
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-6">
-                        <div class="row">
-                           <div class="col-3">
-                              <p class="text-left">Вес, т</p>
-                           </div>
-                           <div class="col-4">
-                              <div class="input-group input-group-sm mb-3">
-                                 <input type="text" aria-label="from" class="form-control" name="from" placeholder="От">
-                              </div>
-                           </div>
-                           —
-                           <div class="col-4">
-                              <div class="input-group input-group-sm mb-3">
-                                 <input type="text" aria-label="from" class="form-control" name="from" placeholder="До">
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-6">
-                        <div class="row">
-                           <div class="col-3">
-                              <p class="text-left">Объем, м3</p>
-                           </div>
-                           <div class="col-4">
-                              <div class="input-group input-group-sm mb-3">
-                                 <input type="text" aria-label="from" class="form-control" name="from" placeholder="От">
-                              </div>
-                           </div>
-                           —
-                           <div class="col-4">
-                              <div class="input-group input-group-sm mb-3">
-                                 <input type="text" aria-label="from" class="form-control" name="from" placeholder="До">
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <br>
-
-            <div class="row">
-               <div class="col-6 text-right">
-                  <input name="search_loads" id="search_loads" type="submit" class="btn btn-success" value="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspНайти грузы&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp">
-               </div>
-               <div class="col-6 text-left">
-                  <button type="button" id="clear_form" class="btn btn-outline-dark">Очистить форму</button>
-               </div>
-            </div>
-
-            <div class="row mt-3">
-               <div class="col-12 set_loads">
-               </div>
-            </div>
-
-         </div>
-      </div>
-   </form> -->
-
-   <!-- Cooperation Section -->
-   <!-- <div class="card my-4">
-      <div class="card-body">
-         <div class="row">
-            <div class="col-lg-6">
-               <h2>Приглашаем к сотрудничеству</h2>
-               <p>Глобал Транс 33 приглашает к сотрудничеству:</p>
-               <ul>
-                  <li>Грузовладельцев.</li>
-                  <li>Перевозчиков.</li>
-               </ul>
-               <p></p>
-            </div>
-            <div class="col-lg-6">
-               <img class="img-fluid rounded" src="/web/img/slide-mini.jpg" alt="" />
-            </div>
-         </div>
-      </div>
+   <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+      </li>
+      <li class="nav-item">
+         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+      </li>
+      <li class="nav-item">
+         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+      </li>
+   </ul>
+   <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">.1..</div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">..2.</div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">.3..</div>
    </div> -->
-
    <hr />
 
    <!-- Call to Action Section -->
@@ -261,7 +229,7 @@ $this->title = 'Главная | Грузоперевозки по РФ';
          <p>Есть предложение? Напишите нам и мы ответим на все интересующие Вас вопросы.</p>
       </div>
       <div class="col-md-4">
-         <a class="btn btn-outline-primary btn-block" href="/site/contact">Написать нам</a>
+         <a class="btn btn-outline-primary btn-block" href="/web/site/contact">Написать нам</a>
       </div>
    </div>
 
