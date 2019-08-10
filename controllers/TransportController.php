@@ -8,6 +8,7 @@ use app\models\TransportSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
  * TransportController implements the CRUD actions for Transport model.
@@ -39,7 +40,7 @@ class TransportController extends Controller
 
             $searchModel = new TransportSearch();
             //отображение всех записей под логистом
-            if (!Yii::$app->user->isGuest && (!Yii::$app->user->getIdentity()->isCarrierC() || !Yii::$app->user->getIdentity()->isCarrierP())) {
+            if (!Yii::$app->user->isGuest && (!Yii::$app->user->getIdentity()->isCarrierC() && !Yii::$app->user->getIdentity()->isCarrierP())) {
                 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
             } else {
                 $dataProvider = new ActiveDataProvider([
@@ -83,6 +84,7 @@ class TransportController extends Controller
             if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
 
                 $model->id_user = Yii::$app->user->getId();
+                $model->name = $model->info . ", об.: " . $model->volume . ", Д/Ш/В: " . $model->body_dimensions . ", грузопод.: " . $model->capacity . ", " . $model->name_city_departure . "->" . $model->name_city_arrival;
 
                 if ($model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);
@@ -110,8 +112,14 @@ class TransportController extends Controller
 
             $model = $this->findModel($id);
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post())) {
+                
+                $model->name = $model->info . ", об.: " . $model->volume . ", Д/Ш/В: " . $model->body_dimensions . ", грузопод.: " . $model->capacity . ", " . $model->name_city_departure . "->" . $model->name_city_arrival;
+
+                if ($model->save()) {
+
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
 
             return $this->render('update', [

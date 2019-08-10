@@ -21,7 +21,7 @@ AppAsset::register($this);
    <meta name="google-site-verification" content="I6qgv8AUa4eHEM6CKlBQYRdYnxmvB2gbqV390wb5jIw" />
    <title><?= Html::encode($this->title) ?></title>
    <?php $this->registerCsrfMetaTags() ?>
-   <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+   <link rel='shortcut icon' type='image/x-icon' href='/web/favicon.ico' />
    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap&subset=cyrillic" rel="stylesheet">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
    <!-- ReCaptcha JavaScript-->
@@ -93,11 +93,14 @@ AppAsset::register($this);
                   <?= Html::a('Контакты', ['site/contact'], ['class' => 'nav-link', 'style' => 'font-size: 15px']); ?>
                </li>
             </ul>
+
             <ul class="navbar-nav ml-auto">
                <li class="nav-item">
                   <?php
                   if (Yii::$app->user->isGuest) {
                      echo Html::a('Вход', ['site/login'], ['class' => 'btn btn-outline-primary mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
+                  } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP() || Yii::$app->user->getIdentity()->isUser())) {
+                     echo Html::a('Ваши заказы', ['order/index'], ['class' => 'btn btn-outline-danger mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
                   } ?>
                </li>
                <li class="nav-item">

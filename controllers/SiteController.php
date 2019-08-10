@@ -249,7 +249,7 @@ class SiteController extends Controller
      */
     public function actionLogist()
     {
-        if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
             return $this->render('logist');
         } else {
             return $this->goHome();

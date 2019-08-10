@@ -23,7 +23,7 @@ class LoadInformationSearch extends LoadInformation
         return [
             [['id'], 'integer'],
             [['weight_from', 'volume_from'], 'number'],
-            [['transport', 'load_info', 'rate', 'date_create', 'date_departure', 'date_arrival', 'name_city_departure', 'name_city_arrival'], 'safe'],
+            [['transport', 'load_info', 'rate', 'date_create', 'date_departure', 'date_arrival', 'name_city_departure', 'name_city_arrival', 'userName'], 'safe'],
         ];
     }
 

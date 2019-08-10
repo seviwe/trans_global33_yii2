@@ -5,12 +5,16 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Transport;
+use app\models\Users;
 
 /**
  * TransportSearch represents the model behind the search form of `app\models\Transport`.
  */
 class TransportSearch extends Transport
 {
+
+    public $userName;
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +22,7 @@ class TransportSearch extends Transport
     {
         return [
             [['id', 'id_user', 'volume'], 'integer'],
-            [['body_dimensions', 'id_city_departure', 'name_city_departure', 'id_city_arrival', 'name_city_arrival', 'date_departure', 'date_arrival', 'rate', 'info'], 'safe'],
+            [['body_dimensions', 'id_city_departure', 'name_city_departure', 'id_city_arrival', 'name_city_arrival', 'date_departure', 'date_arrival', 'rate', 'info', 'userName'], 'safe'],
             [['capacity'], 'number'],
         ];
     }
@@ -42,12 +46,17 @@ class TransportSearch extends Transport
     public function search($params)
     {
         $query = Transport::find();
+        $query->joinWith(['user']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $dataProvider->sort->attributes['userName'] = [
+            'asc' => [Users::tableName() . '.name' => SORT_ASC],
+            'desc' => [Users::tableName() . '.name' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -60,7 +69,7 @@ class TransportSearch extends Transport
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_user' => $this->id_user,
+            //'id_user' => $this->id_user,
             'volume' => $this->volume,
             'capacity' => $this->capacity,
         ]);
@@ -73,7 +82,8 @@ class TransportSearch extends Transport
             ->andFilterWhere(['like', 'date_departure', $this->date_departure])
             ->andFilterWhere(['like', 'date_arrival', $this->date_arrival])
             ->andFilterWhere(['like', 'rate', $this->rate])
-            ->andFilterWhere(['like', 'info', $this->info]);
+            ->andFilterWhere(['like', 'info', $this->info])
+            ->andFilterWhere(['like', Users::tableName().'.name', $this->userName]);
 
         return $dataProvider;
     }

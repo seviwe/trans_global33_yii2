@@ -51,7 +51,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 //'id_route',
                 ['attribute' => 'userName', 'label' => 'Пользователь', 'value' => 'user.name'],
-                //['attribute' => 'routeName', 'label' => 'Маршрут', 'value' => 'route.name'],
                 'name_city_departure',
                 'name_city_arrival',
                 'weight_from',
@@ -70,24 +69,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'header' => 'Действия',
                     'headerOptions' => ['width' => '70'],
                     'template' => '{view} {update} {delete} {view_user}',
-                    'urlCreator' => function ($action, $model, $key, $index) {
-                        if ($action === 'view') {
-                            $url = 'index.php?r=load-information/view&id=' . $model->id;
-                            return $url;
-                        }
-                        if ($action === 'update') {
-                            $url = 'index.php?r=load-information/update&id=' . $model->id;
-                            return $url;
-                        }
-                        if ($action === 'delete') {
-                            $url = 'index.php?r=load-information/delete&id=' . $model->id;
-                            return $url;
-                        }
-                        if ($action === 'view_user') {
-                            $url = 'index.php?r=users/view&id=' . $model->id_user;
-                            return $url;
-                        }
-                    },
                     'buttons' => [
                         'view' => function ($url, $model) {
                             return Html::a('<span class="fas fa-eye"></span>', $url, [
@@ -109,8 +90,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]);
                         },
                         'view_user' => function ($url, $model) {
+                            $url = '/web/users/view?id='.$model->id_user;
                             return Html::a('<span class="fas fa-user-circle"></span>', $url, [
-                                'title' => 'Просмотр информации о пользователе',
+                                'title' => 'Просмотр информации о грузовладельце',
                             ]);
                         },
                     ],
@@ -125,7 +107,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 //'id_route',
-                //['attribute' => 'routeName', 'label' => 'Маршрут', 'value' => 'route.name'],
                 'name_city_departure',
                 'name_city_arrival',
                 'weight_from',
@@ -144,20 +125,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'header' => 'Действия',
                     'headerOptions' => ['width' => '50'],
                     'template' => '{view} {update} {delete}',
-                    'urlCreator' => function ($action, $model, $key, $index) {
-                        if ($action === 'view') {
-                            $url = 'index.php?r=load-information/view&id=' . $model->id;
-                            return $url;
-                        }
-                        if ($action === 'update') {
-                            $url = 'index.php?r=load-information/update&id=' . $model->id;
-                            return $url;
-                        }
-                        if ($action === 'delete') {
-                            $url = 'index.php?r=load-information/delete&id=' . $model->id;
-                            return $url;
-                        }
-                    },
                     'buttons' => [
                         'view' => function ($url, $model) {
                             return Html::a('<span class="fas fa-eye"></span>', $url, [

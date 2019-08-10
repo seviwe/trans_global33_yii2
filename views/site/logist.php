@@ -30,6 +30,12 @@ $this->title = 'Панель логиста | Глобал Транс 33';
          </div>
          <p class="mb-1">Здесь будет происходить работа с транспортом.</p>
       </a>
+      <a href="/web/order/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-info">
+         <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Добавление, просмотр и редактирование заказов</h5>
+         </div>
+         <p class="mb-1">Здесь будет происходить работа с заказами.</p>
+      </a>
       <!-- <a href="index.php?r=route/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-danger">
          <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">Добавление, просмотр и редактирование маршрутов</h5>

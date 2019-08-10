@@ -37,20 +37,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => 'Действия',
                 'headerOptions' => ['width' => '80'],
                 'template' => '{view} {update} {delete}',
-                'urlCreator' => function ($action, $model, $key, $index) {
-                    if ($action === 'view') {
-                        $url = 'index.php?r=role/view&id=' . $model->id;
-                        return $url;
-                    }
-                    if ($action === 'update') {
-                        $url = 'index.php?r=role/update&id=' . $model->id;
-                        return $url;
-                    }
-                    if ($action === 'delete') {
-                        $url = 'index.php?r=role/delete&id=' . $model->id;
-                        return $url;
-                    }
-                },
+                // 'urlCreator' => function ($action, $model, $key, $index) {
+                //     if ($action === 'view') {
+                //         $url = 'index.php?r=role/view&id=' . $model->id;
+                //         return $url;
+                //     }
+                //     if ($action === 'update') {
+                //         $url = 'index.php?r=role/update&id=' . $model->id;
+                //         return $url;
+                //     }
+                //     if ($action === 'delete') {
+                //         $url = 'index.php?r=role/delete&id=' . $model->id;
+                //         return $url;
+                //     }
+                // },
                 'buttons' => [
                     'view' => function ($url, $model) {
                         return Html::a('<span class="fas fa-eye"></span>', $url, [

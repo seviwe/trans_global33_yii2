@@ -38,7 +38,7 @@ class Transport extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_user', 'volume', 'body_dimensions', 'capacity', 'id_city_departure', 'name_city_departure', 'id_city_arrival', 'name_city_arrival', 'date_departure', 'date_arrival', 'rate'], 'required'],
+            [['id_user', 'volume', 'body_dimensions', 'capacity', 'id_city_departure', 'name_city_departure', 'id_city_arrival', 'name_city_arrival', 'date_departure', 'date_arrival', 'rate', 'info'], 'required'],
             [['id_user', 'volume'], 'integer'],
             [['capacity'], 'number'],
             [['body_dimensions', 'id_city_departure', 'name_city_departure', 'id_city_arrival', 'name_city_arrival', 'date_departure', 'date_arrival', 'rate'], 'string', 'max' => 255],
@@ -56,7 +56,7 @@ class Transport extends \yii\db\ActiveRecord
             'id_user' => 'Пользователь',
             'volume' => 'Объем, м3',
             'body_dimensions' => 'Внутренние габариты кузова (Д/Ш/В), м',
-            'capacity' => 'Грузоподъемность, т',
+            'capacity' => 'Грузо- подъемность, т',
             'id_city_departure' => 'Id City Departure',
             'name_city_departure' => 'Н/п отбытия',
             'id_city_arrival' => 'Id City Arrival',
@@ -64,12 +64,17 @@ class Transport extends \yii\db\ActiveRecord
             'date_departure' => 'Дата отбытия',
             'date_arrival' => 'Дата прибытия',
             'rate' => 'Мин. ставка, руб.',
-            'info' => 'Доп.комментарий',
+            'info' => 'Доп. коммент.',
         ];
     }
 
     public function getUser()
     {
         return $this->hasOne(Users::className(), ['id' => 'id_user']);
+    }
+
+    public function getFullName()
+    {
+        return $this->name;
     }
 }

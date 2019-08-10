@@ -5,7 +5,6 @@ namespace app\controllers;
 use Yii;
 use app\models\LoadInformation;
 use app\models\LoadInformationSearch;
-use app\models\Route;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -122,13 +121,12 @@ class LoadInformationController extends Controller
         if (!Yii::$app->user->isGuest) {
 
             $model = new LoadInformation();
-            $routs = Route::find()->all();
 
             if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
 
                 $model->date_create = date('d.m.Y H:i');
                 $model->id_user = Yii::$app->user->getId();
-                $model->id_route = 0;
+                $model->name = $model->load_info . ", вес: ". $model->weight_from. ", об.: ". $model->volume_from . ", " . $model->name_city_departure . "->".$model->name_city_arrival;
 
                 if ($model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);
@@ -136,7 +134,7 @@ class LoadInformationController extends Controller
             }
 
             return $this->render('create', [
-                'model' => $model, 'routs' => $routs,
+                'model' => $model
             ]);
         } else {
             return $this->goHome();
@@ -155,11 +153,11 @@ class LoadInformationController extends Controller
         if (!Yii::$app->user->isGuest) {
 
             $model = $this->findModel($id);
-            $routs = Route::find()->all();
 
             if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
 
                 $model->date_create = date('d.m.Y H:i');
+                $model->name = $model->load_info . ", вес: ". $model->weight_from. ", об.: ". $model->volume_from . ", " . $model->name_city_departure . "->".$model->name_city_arrival;
 
                 if ($model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);
@@ -167,7 +165,7 @@ class LoadInformationController extends Controller
             }
 
             return $this->render('update', [
-                'model' => $model, 'routs' => $routs,
+                'model' => $model
             ]);
         } else {
             return $this->goHome();

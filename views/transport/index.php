@@ -34,8 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
     </p>
 
-    <?php //Pjax::begin(); 
-    ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); 
     ?>
 
@@ -65,21 +63,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'yii\grid\ActionColumn',
                     'header' => 'Действия',
                     'headerOptions' => ['width' => '50'],
-                    'template' => '{view} {update} {delete}',
-                    'urlCreator' => function ($action, $model, $key, $index) {
-                        if ($action === 'view') {
-                            $url = 'index.php?r=transport/view&id=' . $model->id;
-                            return $url;
-                        }
-                        if ($action === 'update') {
-                            $url = 'index.php?r=transport/update&id=' . $model->id;
-                            return $url;
-                        }
-                        if ($action === 'delete') {
-                            $url = 'index.php?r=transport/delete&id=' . $model->id;
-                            return $url;
-                        }
-                    },
+                    'template' => '{view} {update} {delete} {view_user}',
+                    // 'urlCreator' => function ($action, $model, $key, $index) {
+                    //     if ($action === 'view') {
+                    //         $url = 'index.php?r=transport/view&id=' . $model->id;
+                    //         return $url;
+                    //     }
+                    //     if ($action === 'update') {
+                    //         $url = 'index.php?r=transport/update&id=' . $model->id;
+                    //         return $url;
+                    //     }
+                    //     if ($action === 'delete') {
+                    //         $url = 'index.php?r=transport/delete&id=' . $model->id;
+                    //         return $url;
+                    //     }
+                    // },
                     'buttons' => [
                         'view' => function ($url, $model) {
                             return Html::a('<span class="fas fa-eye"></span>', $url, [
@@ -98,6 +96,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'method' => 'post',
                                     'confirm' => 'Вы уверены что хотите удалить данную машину?',
                                 ]
+                            ]);
+                        },
+                        'view_user' => function ($url, $model) {
+                            $url = '/web/users/view?id='.$model->id_user;
+                            return Html::a('<span class="fas fa-user-tie"></span>', $url, [
+                                'title' => 'Просмотр информации о грузоперевозчике',
                             ]);
                         },
                     ],
@@ -128,20 +132,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'header' => 'Действия',
                     'headerOptions' => ['width' => '50'],
                     'template' => '{view} {update} {delete}',
-                    'urlCreator' => function ($action, $model, $key, $index) {
-                        if ($action === 'view') {
-                            $url = 'index.php?r=transport/view&id=' . $model->id;
-                            return $url;
-                        }
-                        if ($action === 'update') {
-                            $url = 'index.php?r=transport/update&id=' . $model->id;
-                            return $url;
-                        }
-                        if ($action === 'delete') {
-                            $url = 'index.php?r=transport/delete&id=' . $model->id;
-                            return $url;
-                        }
-                    },
                     'buttons' => [
                         'view' => function ($url, $model) {
                             return Html::a('<span class="fas fa-eye"></span>', $url, [
@@ -168,9 +158,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ]);
     }
 
-    ?>
-
-    <?php //Pjax::end(); 
     ?>
 
 </div>

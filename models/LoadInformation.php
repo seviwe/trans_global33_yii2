@@ -39,8 +39,8 @@ class LoadInformation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[/*'id_route',*/ 'weight_from', 'volume_from', 'transport', 'load_info', 'rate', 'date_departure', 'date_arrival', 'name_city_departure', 'name_city_arrival', 'id_city_departure', 'id_city_arrival'], 'required'],
-            [[/*'id_route',*/ 'weight_from', 'volume_from', 'transport', 'load_info', 'rate', 'date_departure', 'date_arrival'], 'trim'],
+            [[/*'id_route',*/'weight_from', 'volume_from', 'transport', 'load_info', 'rate', 'date_departure', 'date_arrival', 'name_city_departure', 'name_city_arrival', 'id_city_departure', 'id_city_arrival'], 'required'],
+            [[/*'id_route',*/'weight_from', 'volume_from', 'transport', 'load_info', 'rate', 'date_departure', 'date_arrival'], 'trim'],
             //[['id_route'], 'integer'],
             [['weight_from', 'volume_from'], 'number'],
             [['transport', 'load_info', 'rate', 'date_create', 'date_departure', 'date_arrival', 'name_city_departure', 'name_city_arrival'], 'string', 'max' => 255],
@@ -81,9 +81,14 @@ class LoadInformation extends \yii\db\ActiveRecord
     // {
     //     return $this->hasOne(Route::className(), ['id' => 'id_route']);
     // }
-    
+
     public function getUser()
     {
         return $this->hasOne(Users::className(), ['id' => 'id_user']);
+    }
+
+    public function getFullName()
+    {
+        return $this->name;
     }
 }

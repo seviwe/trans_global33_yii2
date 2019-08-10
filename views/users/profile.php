@@ -6,32 +6,20 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
 
-// $this->title = 'Личный кабинет';
+ $this->title = 'Личный кабинет';
 // $this->params['breadcrumbs'][] = 'Обновление данных пользователя';
 
 ?>
 <!-- Page Content -->
 <div class="container">
 
-    <?php if (Yii::$app->session->hasFlash('success')) : ?>
-        <div class="alert alert-success alert-dismissible mt-3" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <?php echo Yii::$app->session->getFlash('success'); ?>
-        </div>
-    <?php endif; ?>
-
     <h1 class="text-center">Личный кабинет</h1>
 
     <p class="text-center">Здесь Вы можете посмотреть информацию о Вашей учетной записи, а также, при необходимости, изменить контактные данные.</p>
 
 
-    <div class="row">
-        <div class="col-3">
-        </div>
-
-        <div class="col-6">
-            <?php //echo $this->render('_form', ['model' => $model,]) 
-            ?>
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-sm-6 col-md-6">
 
             <?php $form = ActiveForm::begin(); ?>
 
@@ -65,9 +53,6 @@ use yii\widgets\ActiveForm;
             </div>
 
             <?php ActiveForm::end(); ?>
-        </div>
-
-        <div class="col-3">
         </div>
     </div>
 </div>

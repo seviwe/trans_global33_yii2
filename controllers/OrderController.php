@@ -3,20 +3,19 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\City;
-use app\models\CitySearch;
-use app\models\Region;
+use app\models\Order;
+use app\models\OrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\User;
-use yii\filters\AccessControl;
-use yii\helpers\Url;
+use app\models\LoadInformation;
+use app\models\Transport;
+use yii\data\ActiveDataProvider;
 
 /**
- * CityController implements the CRUD actions for City model.
+ * OrderController implements the CRUD actions for Order model.
  */
-class CityController extends Controller
+class OrderController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -24,28 +23,6 @@ class CityController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::class,
-                'rules' => [
-                    [
-                        'allow' => false,
-                        'roles' => ['?'],
-                        'denyCallback' => function ($rule, $action) {
-                            return $this->redirect(Url::toRoute(['/site/login']));
-                        }
-                    ],
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            /** @var User $user */
-                            $user = Yii::$app->user->getIdentity();
-                            return $user->isAdmin() || $user->isLogist();
-                        }
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -56,13 +33,28 @@ class CityController extends Controller
     }
 
     /**
-     * Lists all City models.
+     * Lists all Order models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CitySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new OrderSearch();
+
+        //отображение всех записей под логистом или админом
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        } else {
+            //если грузовладелец
+            if (Yii::$app->user->getIdentity()->isUser()) {
+                $dataProvider = new ActiveDataProvider([
+                    'query' => LoadInformation::find()->where(['id_user' => Yii::$app->user->getId()]),
+                ]);
+            } else { //если грузоперевозчики
+                $dataProvider = new ActiveDataProvider([
+                    'query' => Transport::find()->where(['id_user' => Yii::$app->user->getId()]),
+                ]);
+            }
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -71,7 +63,7 @@ class CityController extends Controller
     }
 
     /**
-     * Displays a single City model.
+     * Displays a single Order model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -79,31 +71,30 @@ class CityController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id)
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new City model.
+     * Creates a new Order model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new City();
-        $regions = Region::find()->all();
+        $model = new Order();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model' => $model, 'regions' => $regions,
+            'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing City model.
+     * Updates an existing Order model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -112,19 +103,18 @@ class CityController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $regions = Region::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model, 'regions' => $regions,
+            'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing City model.
+     * Deletes an existing Order model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -138,15 +128,15 @@ class CityController extends Controller
     }
 
     /**
-     * Finds the City model based on its primary key value.
+     * Finds the Order model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return City the loaded model
+     * @return Order the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = City::findOne($id)) !== null) {
+        if (($model = Order::findOne($id)) !== null) {
             return $model;
         }
 
