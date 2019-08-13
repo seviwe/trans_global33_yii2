@@ -12,7 +12,12 @@ $this->title = $model->name;
 if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
     $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
 }
-$this->params['breadcrumbs'][] = ['label' => 'Информация о грузах', 'url' => ['index']];
+if (!Yii::$app->user->isGuest) {
+    $this->params['breadcrumbs'][] = ['label' => 'Информация о грузах', 'url' => ['index']];
+}
+if(Yii::$app->user->isGuest){
+    $this->params['breadcrumbs'][] = ['label' => 'Расширенный поиск', 'url' => ['search']];
+}
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -21,29 +26,29 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Обновить информацию', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Вы уверены что хотите удалить данный груз?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
+            echo Html::a('Обновить информацию', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+            echo Html::a('Удалить', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger ml-2',
+                'data' => [
+                    'confirm' => 'Вы уверены что хотите удалить данный груз?',
+                    'method' => 'post',
+                ],
+            ]);
+        }
+        ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'id',
-            //'id_route',
             'user.name',
             //'route.name',
             'name_city_departure',
             'name_city_arrival',
             'weight_from',
-            //'weight_to',
             'volume_from',
-            //'volume_to',
             'transport',
             'load_info',
             'rate',

@@ -5,11 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Transport */
 
-$this->title = 'Добавление машины';
+$this->title = 'Добавление транспорта';
 //для логиста отображаем навигацию по разделам
 if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
     $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
-    $this->params['breadcrumbs'][] = ['label' => 'Информация о машинах', 'url' => ['index']];
+    $this->params['breadcrumbs'][] = ['label' => 'Информация о транспорте', 'url' => ['index']];
 }
 
 $this->params['breadcrumbs'][] = $this->title;

@@ -43,9 +43,15 @@ class TransportController extends Controller
             if (!Yii::$app->user->isGuest && (!Yii::$app->user->getIdentity()->isCarrierC() && !Yii::$app->user->getIdentity()->isCarrierP())) {
                 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
             } else {
-                $dataProvider = new ActiveDataProvider([
-                    'query' => Transport::find()->where(['id_user' => Yii::$app->user->getId()]),
-                ]);
+                $query = "select * from transport where id_user = " . Yii::$app->user->getId();
+                $trans = Yii::$app->db->createCommand($query)->queryAll();
+                if($trans){
+                    $dataProvider = new ActiveDataProvider([
+                        'query' => Transport::find()->where(['id_user' => Yii::$app->user->getId()]),
+                    ]);
+                }else{
+                    return $this->render('empty_transport');
+                }
             }
 
             return $this->render('index', [

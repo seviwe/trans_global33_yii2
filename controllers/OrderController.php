@@ -46,16 +46,45 @@ class OrderController extends Controller
         } else {
             //если грузовладелец
             if (Yii::$app->user->getIdentity()->isUser()) {
-                $dataProvider = new ActiveDataProvider([
-                    'query' => LoadInformation::find()->where(['id_user' => Yii::$app->user->getId()]),
-                ]);
+                //выбираем все грузы
+                $query = "select * from load_information where id_user = " . Yii::$app->user->getId();
+                $loads = Yii::$app->db->createCommand($query)->queryAll();
+                if ($loads) {
+                    foreach ($loads as $load) {
+                        $query = "select * from orders where id_transport = " . $load['id'];
+                        $orders_loads = Yii::$app->db->createCommand($query)->queryAll();
+                        if ($orders_loads) {
+                            $dataProvider = new ActiveDataProvider([
+                                'query' => Order::find()->where(['id_load' => $load['id']]),
+                            ]);
+                        } else {
+                            return $this->render('empty_order');
+                        }
+                    }
+                } else {
+                    return $this->render('empty_order');
+                }
             } else { //если грузоперевозчики
-                $dataProvider = new ActiveDataProvider([
-                    'query' => Transport::find()->where(['id_user' => Yii::$app->user->getId()]),
-                ]);
+                //выбираем все машины
+                $query = "select * from transport where id_user = " . Yii::$app->user->getId();
+                $trans = Yii::$app->db->createCommand($query)->queryAll();
+                if ($trans) {
+                    foreach ($trans as $tran) {
+                        $query = "select * from orders where id_transport = " . $tran['id'];
+                        $orders_trans = Yii::$app->db->createCommand($query)->queryAll();
+                        if ($orders_trans) {
+                            $dataProvider = new ActiveDataProvider([
+                                'query' => Order::find()->where(['id_transport' => $tran['id']]),
+                            ]);
+                        } else {
+                            return $this->render('empty_order');
+                        }
+                    }
+                } else {
+                    return $this->render('empty_order');
+                }
             }
         }
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

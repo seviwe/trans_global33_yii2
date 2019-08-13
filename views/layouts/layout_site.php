@@ -73,11 +73,17 @@ AppAsset::register($this);
    <?php $this->beginBody() ?>
 
    <!-- Navigation -->
-   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white shadow p-1">
+   <?php
+   if (Yii::$app->user->isGuest) {
+      echo '<nav class="navbar navbar-expand-lg navbar-light bg-white shadow p-1">';
+   }else{
+      echo '<nav class="navbar navbar-expand-lg navbar-light bg-white">';
+   }
+   ?>
       <div class="container">
 
          <a class="navbar-brand" href="/web/site/index">
-            <img class="img-fluid" style="height: 60px;" src="/web/img/logo-gt.png" />
+            <img class="img-fluid" style="height: 55px;" src="/web/img/logo-gt.png" />
          </a>
 
          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,10 +93,10 @@ AppAsset::register($this);
          <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mr-auto">
                <li class="nav-item">
-                  <?= Html::a('О нас', ['site/about'], ['class' => 'nav-link', 'style' => 'font-size: 15px']); ?>
+                  <?= Html::a('О НАС', ['site/about'], ['class' => 'nav-link', 'style' => 'font-size: 15px']); ?>
                </li>
                <li class="nav-item">
-                  <?= Html::a('Контакты', ['site/contact'], ['class' => 'nav-link', 'style' => 'font-size: 15px']); ?>
+                  <?= Html::a('КОНТАКТЫ', ['site/contact'], ['class' => 'nav-link', 'style' => 'font-size: 15px']); ?>
                </li>
             </ul>
 
@@ -99,59 +105,32 @@ AppAsset::register($this);
                   <?php
                   if (Yii::$app->user->isGuest) {
                      echo Html::a('Вход', ['site/login'], ['class' => 'btn btn-outline-primary mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP() || Yii::$app->user->getIdentity()->isUser())) {
-                     echo Html::a('Ваши заказы', ['order/index'], ['class' => 'btn btn-outline-danger mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
                   } ?>
                </li>
                <li class="nav-item">
                   <?php
                   if (Yii::$app->user->isGuest) {
                      echo Html::a('Регистрация', ['site/change-user'], ['class' => 'btn btn-primary', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
-                     echo Html::a('Ваши грузы', ['load-information/index'], ['class' => 'btn btn-outline-warning mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
-                     echo Html::a('Ваши машины', ['transport/index'], ['class' => 'btn btn-outline-danger mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  }
-                  ?>
+                  } ?>
                </li>
-               <li class="nav-item active">
-                  <?php
-                  if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
-                     echo Html::a('Добавить груз', ['load-information/create'], ['class' => 'btn btn-outline-info mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
-                     echo Html::a('Панель администратора', ['site/admin'], ['class' => 'btn btn-outline-dark mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
-                     echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-outline-info mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
-                     echo Html::a('Добавить машину', ['transport/create'], ['class' => 'btn btn-outline-info mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  }
-                  ?>
-               </li>
-               <li class="nav-item active">
-                  <?php
-                  if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
-                     echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-outline-info mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  }
-                  ?>
-               </li>
-               <li class="nav-item active">
+               <li class="nav-item">
                   <?php
                   if (!Yii::$app->user->isGuest) {
                      if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
-                        echo Html::a('Личный кабинет (Админ)', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
+                        echo Html::a('ЛИЧНЫЙ КАБИНЕТ (Администратор)', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
                      } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
-                        echo Html::a('Личный кабинет (Логист)', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
+                        echo Html::a('ЛИЧНЫЙ КАБИНЕТ (Логист)', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
                      } else {
                         $user = new User();
                         $login = $user->getLogin(); //логин текущего пользователя
-                        echo Html::a('Личный кабинет (' . $login . ')', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
+                        echo Html::a('ЛИЧНЫЙ КАБИНЕТ (' . $login . ')', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
                      }
                   } ?>
                </li>
-               <li class="nav-item active">
+               <li class="nav-item">
                   <?php
                   if (!Yii::$app->user->isGuest) {
-                     echo Html::a('Выйти', ['site/logout'], [
+                     echo Html::a('ВЫЙТИ', ['site/logout'], [
                         'class' => 'nav-link', 'style' => 'font-size: 15px',
                         'data' => [
                            'confirm' => 'Вы уверены что хотите выйти?',
@@ -166,7 +145,62 @@ AppAsset::register($this);
       </div>
    </nav>
 
-   <br>
+   <?php
+   if (!Yii::$app->user->isGuest) {
+      ?>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light shadow p-1" style="background-color: #343a40; /*box-shadow: 0 0.5rem 1rem rgba(69,90,100,.3);*/">
+
+         <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsiveWorkZone" aria-controls="navbarResponsiveWorkZone" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsiveWorkZone">
+               <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                     <?php
+                     if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP() || Yii::$app->user->getIdentity()->isUser())) {
+                        echo Html::a('Ваши заказы', ['order/index'], ['class' => 'btn btn-danger mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                     } ?>
+                  </li>
+                  <li class="nav-item">
+                     <?php
+                     if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
+                        echo Html::a('Ваши грузы', ['load-information/index'], ['class' => 'btn btn-warning mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                     } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
+                        echo Html::a('Ваш транспорт', ['transport/index'], ['class' => 'btn btn-success mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                     }
+                     ?>
+                  </li>
+                  <li class="nav-item active">
+                     <?php
+                     if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
+                        echo Html::a('Добавить груз', ['load-information/create'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                     } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
+                        echo Html::a('Панель администратора', ['site/admin'], ['class' => 'btn btn-success mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                     } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
+                        echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                     } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
+                        echo Html::a('Добавить транспорт', ['transport/create'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                     }
+                     ?>
+                  </li>
+                  <li class="nav-item active">
+                     <?php
+                     if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
+                        echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                     }
+                     ?>
+                  </li>
+               </ul>
+
+            </div>
+         </div>
+
+      </nav>
+   <?
+   } ?>
 
    <div class="container">
       <br>

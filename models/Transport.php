@@ -56,7 +56,7 @@ class Transport extends \yii\db\ActiveRecord
             'id_user' => 'Пользователь',
             'volume' => 'Объем, м3',
             'body_dimensions' => 'Внутренние габариты кузова (Д/Ш/В), м',
-            'capacity' => 'Грузо- подъемность, т',
+            'capacity' => 'Грузоподъемность, т',
             'id_city_departure' => 'Id City Departure',
             'name_city_departure' => 'Н/п отбытия',
             'id_city_arrival' => 'Id City Arrival',

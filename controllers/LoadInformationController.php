@@ -69,9 +69,15 @@ class LoadInformationController extends Controller
             if (!Yii::$app->user->isGuest && !Yii::$app->user->getIdentity()->isUser()) {
                 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
             } else { //отображение только записей пользователя
-                $dataProvider = new ActiveDataProvider([
-                    'query' => LoadInformation::find()->where(['id_user' => Yii::$app->user->getId()]),
-                ]);
+                $query = "select * from load_information where id_user = " . Yii::$app->user->getId();
+                $loads = Yii::$app->db->createCommand($query)->queryAll();
+                if ($loads) {
+                    $dataProvider = new ActiveDataProvider([
+                        'query' => LoadInformation::find()->where(['id_user' => Yii::$app->user->getId()]),
+                    ]);
+                } else {
+                    return $this->render('empty_load');
+                }
             }
 
             return $this->render('index', [
@@ -126,7 +132,7 @@ class LoadInformationController extends Controller
 
                 $model->date_create = date('d.m.Y H:i');
                 $model->id_user = Yii::$app->user->getId();
-                $model->name = $model->load_info . ", вес: ". $model->weight_from. ", об.: ". $model->volume_from . ", " . $model->name_city_departure . "->".$model->name_city_arrival;
+                $model->name = $model->load_info . ", вес: " . $model->weight_from . ", об.: " . $model->volume_from . ", " . $model->name_city_departure . "->" . $model->name_city_arrival;
 
                 if ($model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);
@@ -157,7 +163,7 @@ class LoadInformationController extends Controller
             if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
 
                 $model->date_create = date('d.m.Y H:i');
-                $model->name = $model->load_info . ", вес: ". $model->weight_from. ", об.: ". $model->volume_from . ", " . $model->name_city_departure . "->".$model->name_city_arrival;
+                $model->name = $model->load_info . ", вес: " . $model->weight_from . ", об.: " . $model->volume_from . ", " . $model->name_city_departure . "->" . $model->name_city_arrival;
 
                 if ($model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);

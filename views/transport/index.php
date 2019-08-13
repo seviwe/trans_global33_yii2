@@ -9,11 +9,11 @@ use yii\widgets\Pjax;
 
 //для логиста отображаем навигацию по разделам
 if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
-    $this->title = 'Информация о машинах';
+    $this->title = 'Информация о транспорте';
     $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
 } else {
     if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
-        $this->title = 'Информация о ваших машинах';
+        $this->title = 'Информация о вашем транспорте';
     } else {
         $this->title = 'Поиск машины';
     }
@@ -81,20 +81,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' => [
                         'view' => function ($url, $model) {
                             return Html::a('<span class="fas fa-eye"></span>', $url, [
-                                'title' => 'Просмотр информации о машине',
+                                'title' => 'Просмотр информации о транспорте',
                             ]);
                         },
                         'update' => function ($url, $model) {
                             return Html::a('<span class="fas fa-edit"></span>', $url, [
-                                'title' => 'Обновить информацию о машине',
+                                'title' => 'Обновить информацию о транспорте',
                             ]);
                         },
                         'delete' => function ($url, $model) {
                             return Html::a('<span class="fas fa-trash"></span>', $url, [
-                                'title' => 'Удалить машину',
+                                'title' => 'Удалить транспорт',
                                 'data' => [
                                     'method' => 'post',
-                                    'confirm' => 'Вы уверены что хотите удалить данную машину?',
+                                    'confirm' => 'Вы уверены что хотите удалить данный транспорт?',
                                 ]
                             ]);
                         },
@@ -135,20 +135,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' => [
                         'view' => function ($url, $model) {
                             return Html::a('<span class="fas fa-eye"></span>', $url, [
-                                'title' => 'Просмотр информации о машине',
+                                'title' => 'Просмотр информации о транспорте',
                             ]);
                         },
                         'update' => function ($url, $model) {
                             return Html::a('<span class="fas fa-edit"></span>', $url, [
-                                'title' => 'Обновить информацию о машине',
+                                'title' => 'Обновить информацию о транспорте',
                             ]);
                         },
                         'delete' => function ($url, $model) {
                             return Html::a('<span class="fas fa-trash"></span>', $url, [
-                                'title' => 'Удалить машину',
+                                'title' => 'Удалить транспорт',
                                 'data' => [
                                     'method' => 'post',
-                                    'confirm' => 'Вы уверены что хотите удалить данную машину?',
+                                    'confirm' => 'Вы уверены что хотите удалить данный транспорт?',
                                 ]
                             ]);
                         },

@@ -190,7 +190,8 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                <?= Html::submitButton('Найти грузы', ['class' => 'btn btn-success', 'name' => 'cargo_search', 'id' => 'cargo_search']) ?>
             </div>
             <div class="col-4 text-left">
-               <button type="button" id="clear_form" class="btn btn-outline-dark">Очистить форму</button>
+               <?= Html::resetButton('Очистить форму', ['class' => 'btn btn-outline-dark', 'name' => 'clear_form', 'id' => 'clear_form']) ?>
+               <!-- <button type="button" id="clear_form" class="btn btn-outline-dark">Очистить форму</button> -->
             </div>
          </div>
          <?= Html::endForm() ?>
@@ -293,9 +294,9 @@ $js = <<<JS
    $(document).on("pjax:end", initb);
 
 	//очистка формы поиска
-	$('#clear_form').click(function() {
+	// $('#clear_form').click(function() {
 
-	});
+	// });
 JS;
 
 $this->registerJs($js);
