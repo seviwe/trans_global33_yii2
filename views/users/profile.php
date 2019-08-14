@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 <!-- Page Content -->
 <div class="container">
 
-    <h1 class="text-center">Личный кабинет</h1>
+    <h2 class="text-center">Личный кабинет</h2>
 
     <p class="text-center">Здесь Вы можете посмотреть информацию о Вашей учетной записи, а также, при необходимости, изменить контактные данные.</p>
 

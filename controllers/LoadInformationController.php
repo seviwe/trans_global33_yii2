@@ -135,6 +135,8 @@ class LoadInformationController extends Controller
                 $model->name = $model->load_info . ", вес: " . $model->weight_from . ", об.: " . $model->volume_from . ", " . $model->name_city_departure . "->" . $model->name_city_arrival;
 
                 if ($model->save()) {
+                    Yii::$app->session->setFlash('success', 'Груз "' . $model->name . '" успешно добавлен.');
+
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
@@ -166,6 +168,8 @@ class LoadInformationController extends Controller
                 $model->name = $model->load_info . ", вес: " . $model->weight_from . ", об.: " . $model->volume_from . ", " . $model->name_city_departure . "->" . $model->name_city_arrival;
 
                 if ($model->save()) {
+                    Yii::$app->session->setFlash('success', 'Груз "' . $model->name . '" успешно обновлен.');
+
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
@@ -188,8 +192,11 @@ class LoadInformationController extends Controller
     public function actionDelete($id)
     {
         if (!Yii::$app->user->isGuest) {
+            $model = $this->findModel($id);
 
             $this->findModel($id)->delete();
+
+            Yii::$app->session->setFlash('success', 'Груз "' . $model->name . '" успешно удален.');
 
             return $this->redirect(['index']);
         } else {

@@ -15,7 +15,7 @@ if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
 if (!Yii::$app->user->isGuest) {
     $this->params['breadcrumbs'][] = ['label' => 'Информация о грузах', 'url' => ['index']];
 }
-if(Yii::$app->user->isGuest){
+if (Yii::$app->user->isGuest) {
     $this->params['breadcrumbs'][] = ['label' => 'Расширенный поиск', 'url' => ['search']];
 }
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
 
-    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+    <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
 
     <p>
         <?

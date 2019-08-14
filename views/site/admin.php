@@ -14,7 +14,7 @@ $this->title = 'Панель администратора | Глобал Тра�
 
 <!-- Page Content -->
 <div class="container">
-   <h1 class="text-center mb-3">Панель администратора</h1>
+   <h2 class="text-center mb-3">Панель администратора</h2>
 
    <div class="list-group mb-4">
       <a href="/web/users/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-primary">

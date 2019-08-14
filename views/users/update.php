@@ -15,20 +15,14 @@ $this->params['breadcrumbs'][] = 'Обновление данных пользо
 ?>
 <!-- Page Content -->
 <div class="container">
-   
-   <h1 class="text-center">Редактировать данные пользователя</h1>
 
-   <!-- <div class="row">
-      <div class="col-2">
-      </div>
-
-      <div class="col-8"> -->
+   <div class="card mb-3">
+      <div class="card-body">
+         <h2 class="card-title text-center"><?= Html::encode($this->title) ?></h2>
+         <hr>
          <?php
-            echo $this->render('_form', ['model' => $model, 'roles' => $roles])
+         echo $this->render('_form', ['model' => $model, 'roles' => $roles])
          ?>
-      <!-- </div>
-
-      <div class="col-2">
       </div>
-   </div> -->
+   </div>
 </div>

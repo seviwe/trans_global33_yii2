@@ -21,7 +21,7 @@ $this->title = 'Авторизация | Глобал Транс 33';
         <div class="col-6">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="card-title text-center">Авторизация</h1>
+                    <h2 class="card-title text-center">Авторизация</h2>
                     <?php $form = ActiveForm::begin() ?>
 
                     <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>

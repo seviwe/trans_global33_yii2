@@ -9,8 +9,8 @@ $this->title = 'Добавление груза';
 
 //для логиста отображаем навигацию по разделам
 if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
-    $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
-    $this->params['breadcrumbs'][] = ['label' => 'Информация о грузах', 'url' => ['index']];
+   $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
+   $this->params['breadcrumbs'][] = ['label' => 'Информация о грузах', 'url' => ['index']];
 }
 
 $this->params['breadcrumbs'][] = $this->title;
@@ -18,17 +18,20 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="container">
-    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
-
-    <?php
-    echo $this->render('_form', ['model' => $model])
-    ?>
+   <div class="card mb-3">
+      <div class="card-body">
+         <h2 class="card-title text-center"><?= Html::encode($this->title) ?></h2>
+         <hr>
+         <?php
+         echo $this->render('_form', ['model' => $model])
+         ?>
+      </div>
+   </div>
 </div>
 
 <?php
 $js = <<<JS
 
-	//var region = "";
 	var kladr_city = "";
 
     var initb = function() {
@@ -39,10 +42,7 @@ $js = <<<JS
             hint: false,
             bounds: "city",
             onSelect: function(suggestion) {
-               //console.log(suggestion.data);
                city_departure = suggestion.data.city_kladr_id; //город id 
-
-               //$('#region').attr('data-kladr-id', suggestion.data.region_kladr_id.charAt(0) == 0 ? suggestion.data.region_kladr_id.substring(1) /*+ '000000000000'*/ : suggestion.data.region_kladr_id /*+ '000000000000'*/);
             }
          });
 
@@ -53,10 +53,7 @@ $js = <<<JS
             hint: false,
             bounds: "city",
             onSelect: function(suggestion) {
-               //console.log(suggestion.data);
                city_arrival = suggestion.data.city_kladr_id; //город id 
-
-               //$('#region').attr('data-kladr-id', suggestion.data.region_kladr_id.charAt(0) == 0 ? suggestion.data.region_kladr_id.substring(1) /*+ '000000000000'*/ : suggestion.data.region_kladr_id /*+ '000000000000'*/);
             }
          });
 

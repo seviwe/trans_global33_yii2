@@ -31,7 +31,9 @@ use app\models\LoadInformation;
     );
     ?>
 
-    <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'comment')->textarea(['rows' => 4]) ?>
+
+    <hr>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

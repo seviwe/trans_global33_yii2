@@ -22,7 +22,7 @@ $this->title = 'Регистрация | Глобал Транс 33';
       <div class="col-6">
          <div class="card">
             <div class="card-body">
-               <h1 class="card-title text-center">Регистрация</h1>
+               <h2 class="card-title text-center">Регистрация</h2>
                <?php $form = ActiveForm::begin() ?>
 
                <?= $form->field($model, 'first_name')->textInput() ?>

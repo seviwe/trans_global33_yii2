@@ -15,7 +15,7 @@ $this->title = 'Панель логиста | Глобал Транс 33';
 <!-- Page Content -->
 <div class="container">
 
-   <h1 class="text-center mb-3">Панель логиста</h1>
+   <h2 class="text-center mb-3">Панель логиста</h2>
 
    <div class="list-group mb-4">
       <a href="/web/load-information/index" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-success">

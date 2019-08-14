@@ -12,10 +12,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+    <div class="card mb-3">
+        <div class="card-body">
+            <h2 class="card-title text-center"><?= Html::encode($this->title) ?></h2>
+            <hr>
+            <?= $this->render('_form', [
+                'model' => $model,
+            ]) ?>
+        </div>
+    </div>
 </div>

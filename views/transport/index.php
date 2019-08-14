@@ -15,7 +15,7 @@ if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
     if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
         $this->title = 'Информация о вашем транспорте';
     } else {
-        $this->title = 'Поиск машины';
+        $this->title = 'Поиск транспорта';
     }
 }
 
@@ -24,12 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
 
-    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+    <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
 
     <p>
         <?
         if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
-            echo Html::a('Добавить машину', ['create'], ['class' => 'btn btn-success']);
+            echo Html::a('Добавить транспорт', ['create'], ['class' => 'btn btn-success']);
         }
         ?>
     </p>

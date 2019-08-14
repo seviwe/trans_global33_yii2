@@ -46,8 +46,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function isLogist()
     {
         return ($this->role == self::ROLE_LOGIST);
-    }    
-    
+    }
+
     public function isCarrierP()
     {
         return ($this->role == self::ROLE_CARRIER_PRIVATE);

@@ -93,6 +93,8 @@ class TransportController extends Controller
                 $model->name = $model->info . ", об.: " . $model->volume . ", Д/Ш/В: " . $model->body_dimensions . ", грузопод.: " . $model->capacity . ", " . $model->name_city_departure . "->" . $model->name_city_arrival;
 
                 if ($model->save()) {
+                    Yii::$app->session->setFlash('success', 'Транспорт "' . $model->name . '" успешно добавлен.');
+
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
@@ -123,6 +125,7 @@ class TransportController extends Controller
                 $model->name = $model->info . ", об.: " . $model->volume . ", Д/Ш/В: " . $model->body_dimensions . ", грузопод.: " . $model->capacity . ", " . $model->name_city_departure . "->" . $model->name_city_arrival;
 
                 if ($model->save()) {
+                    Yii::$app->session->setFlash('success', 'Транспорт "' . $model->name . '" успешно обновлен.');
 
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
@@ -146,7 +149,10 @@ class TransportController extends Controller
     public function actionDelete($id)
     {
         if (!Yii::$app->user->isGuest) {
+            $model = $this->findModel($id);
+
             $this->findModel($id)->delete();
+            Yii::$app->session->setFlash('success', 'Транспорт "' . $model->name . '" успешно удален.');
 
             return $this->redirect(['index']);
         } else {

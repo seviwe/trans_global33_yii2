@@ -8,8 +8,8 @@ use yii\helpers\Html;
 $this->title = 'Добавление транспорта';
 //для логиста отображаем навигацию по разделам
 if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
-    $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
-    $this->params['breadcrumbs'][] = ['label' => 'Информация о транспорте', 'url' => ['index']];
+   $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
+   $this->params['breadcrumbs'][] = ['label' => 'Информация о транспорте', 'url' => ['index']];
 }
 
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,12 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
 
-    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+   <div class="card mb-3">
+      <div class="card-body">
+         <h2 class="card-title text-center"><?= Html::encode($this->title) ?></h2>
+         <hr>
+         <?= $this->render('_form', [
+            'model' => $model,
+         ]) ?>
+      </div>
+   </div>
 </div>
 
 <?php

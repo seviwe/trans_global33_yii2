@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
 
     <p>
         <?= Html::a('Создать роль', ['create'], ['class' => 'btn btn-success']) ?>

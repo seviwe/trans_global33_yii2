@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = 'Контакты';
 
 <!-- Page Content -->
 <div class="container">
-   <h1 class="text-center mb-3">Контакты</h1>
+   <h2 class="text-center mb-3">Контакты</h2>
 
    <!-- Content Row -->
    <div class="row">

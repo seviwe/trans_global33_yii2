@@ -332,7 +332,24 @@ class SiteController extends Controller
             $result_cargo_search .= "</tbody>
             </table>";
         } else {
-            $result_cargo_search = "<hr><b>Ничего не найдено</b>";
+            $result_cargo_search = '<hr><br><div class="container">
+            <div class="row justify-content-center mb-4">
+               <div class="col-6">
+                  <div class="card">
+                     <div class="card-body">
+                        <h3 class="text-center">Грузы отсутствуют</h3>
+                        <hr>
+                        <div class="row justify-content-center mb-2">
+                           <i class="fas fa-boxes fa-7x"></i>
+                        </div>
+                        <p class="text-center">
+                           Грузы, по указанным параметрам не найдены.<br>Воспользуйтесь <a href="/web/load-information/search">расширенным поиском</a> либо укажите другие данные для поиска.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>';
         }
 
         return $this->render('index', [

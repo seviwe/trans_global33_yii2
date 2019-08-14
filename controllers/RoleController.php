@@ -91,6 +91,8 @@ class RoleController extends Controller
         $model = new Role();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Роль "' . $model->name . '" успешно добавлена.');
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -111,6 +113,8 @@ class RoleController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Роль "' . $model->name . '" успешно обновлена.');
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -128,7 +132,11 @@ class RoleController extends Controller
      */
     public function actionDelete($id)
     {
+        $model = $this->findModel($id);
+
         $this->findModel($id)->delete();
+
+        Yii::$app->session->setFlash('success', 'Роль "' . $model->name . '" успешно удалена.');
 
         return $this->redirect(['index']);
     }

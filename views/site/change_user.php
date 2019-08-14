@@ -16,7 +16,7 @@ $this->title = 'Регистрация | Глобал Транс 33';
 <!-- Page Content -->
 <div class="container">
 
-   <h1 class="text-center mb-3">Кем Вы являетесь?</h1>
+   <h2 class="text-center mb-3">Кем Вы являетесь?</h2>
 
    <div class="row mb-4">
       <div class="col-4">

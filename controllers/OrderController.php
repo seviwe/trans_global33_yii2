@@ -45,7 +45,7 @@ class OrderController extends Controller
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         } else {
             //если грузовладелец
-            if (Yii::$app->user->getIdentity()->isUser()) {
+            if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
                 //выбираем все грузы
                 $query = "select * from load_information where id_user = " . Yii::$app->user->getId();
                 $loads = Yii::$app->db->createCommand($query)->queryAll();
@@ -65,23 +65,27 @@ class OrderController extends Controller
                     return $this->render('empty_order');
                 }
             } else { //если грузоперевозчики
-                //выбираем все машины
-                $query = "select * from transport where id_user = " . Yii::$app->user->getId();
-                $trans = Yii::$app->db->createCommand($query)->queryAll();
-                if ($trans) {
-                    foreach ($trans as $tran) {
-                        $query = "select * from orders where id_transport = " . $tran['id'];
-                        $orders_trans = Yii::$app->db->createCommand($query)->queryAll();
-                        if ($orders_trans) {
-                            $dataProvider = new ActiveDataProvider([
-                                'query' => Order::find()->where(['id_transport' => $tran['id']]),
-                            ]);
-                        } else {
-                            return $this->render('empty_order');
+                if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierP() || Yii::$app->user->getIdentity()->isCarrierC())) {
+                    //выбираем все машины
+                    $query = "select * from transport where id_user = " . Yii::$app->user->getId();
+                    $trans = Yii::$app->db->createCommand($query)->queryAll();
+                    if ($trans) {
+                        foreach ($trans as $tran) {
+                            $query = "select * from orders where id_transport = " . $tran['id'];
+                            $orders_trans = Yii::$app->db->createCommand($query)->queryAll();
+                            if ($orders_trans) {
+                                $dataProvider = new ActiveDataProvider([
+                                    'query' => Order::find()->where(['id_transport' => $tran['id']]),
+                                ]);
+                            } else {
+                                return $this->render('empty_order');
+                            }
                         }
+                    } else {
+                        return $this->render('empty_order');
                     }
                 } else {
-                    return $this->render('empty_order');
+                    return $this->goHome();
                 }
             }
         }
@@ -99,9 +103,13 @@ class OrderController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            return $this->goHome();
+        }
     }
 
     /**
@@ -111,15 +119,21 @@ class OrderController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Order();
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
+            $model = new Order();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success', 'Заказ №' . $model->id . ' успешно добавлен.');
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            return $this->goHome();
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -131,15 +145,21 @@ class OrderController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
+            $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success', 'Заказ №' . $model->id . ' успешно обновлен.');
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            return $this->goHome();
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -151,9 +171,17 @@ class OrderController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
+            $model = $this->findModel($id);
 
-        return $this->redirect(['index']);
+            Yii::$app->session->setFlash('success', 'Заказ №' . $model->id . ' успешно удален.');
+
+            $this->findModel($id)->delete();
+
+            return $this->redirect(['index']);
+        } else {
+            return $this->goHome();
+        }
     }
 
     /**

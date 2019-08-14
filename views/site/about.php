@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = 'О Нас';
 
 <!-- Page Content -->
 <div class="container">
-   <h1 class="text-center">О Нас</h1>
+   <h2 class="text-center">О Нас</h2>
 
    <!-- Intro Content -->
    <div class="row">
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = 'О Нас';
          </div>
       </div>
       <div class="col-lg-6">
-         <h2>Глобал Транс 33</h2>
+         <h3>Глобал Транс 33</h3>
          <p>
             Транспортная компания Глобал Транс 33 это подразделение, входящее в состав группы компаний <a href="https://global33.ru/">Глобал 33</a>.
             Мы занимаемся доставкой и перевозкой грузов от 1 килограмма до 20 тонн по всей России собственным и сторонним транспортом.

@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
 
-    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+    <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
 
     <p>
         <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

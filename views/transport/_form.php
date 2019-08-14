@@ -13,63 +13,68 @@ use kartik\datetime\DateTimePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php //echo $form->field($model, 'id_user')->textInput() ?>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <?= $form->field($model, 'id_city_departure')->textInput(['maxlength' => true, 'type' => 'hidden', 'id' => 'id_city_departure'])->label(false) ?>
 
-    <?= $form->field($model, 'volume')->textInput() ?>
+            <?= $form->field($model, 'name_city_departure')->textInput(['maxlength' => true, 'id' => 'name_city_departure']) ?>
 
-    <?= $form->field($model, 'body_dimensions')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'id_city_arrival')->textInput(['maxlength' => true, 'type' => 'hidden', 'id' => 'id_city_arrival'])->label(false) ?>
 
-    <?= $form->field($model, 'capacity')->textInput() ?>
+            <?= $form->field($model, 'name_city_arrival')->textInput(['maxlength' => true, 'id' => 'name_city_arrival']) ?>
 
-    <?= $form->field($model, 'id_city_departure')->textInput(['maxlength' => true, 'type' => 'hidden', 'id' => 'id_city_departure'])->label(false) ?>
+            <?php
+            echo $form->field($model, 'date_departure')->widget(
+                DateTimePicker::className(),
+                [
+                    'name' => 'date_departure',
+                    'type' => DateTimePicker::TYPE_INPUT,
+                    'options' => ['placeholder' => 'Введите дату и время отбытия...'],
+                    'value' => date("dd.mm.Y H:i", (int) $model->date_departure),
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd.mm.yyyy HH:ii',
+                        'weekStart' => 1, //неделя начинается с понедельника
+                        'startDate' => '01.07.2019 00:00', //самая ранняя возможная дата
+                        'todayBtn' => true, //снизу кнопка "сегодня"
+                    ]
+                ]
+            );
+            ?>
 
-    <?= $form->field($model, 'name_city_departure')->textInput(['maxlength' => true, 'id' => 'name_city_departure']) ?>
+            <?php
+            echo $form->field($model, 'date_arrival')->widget(
+                DateTimePicker::className(),
+                [
+                    'name' => 'date_arrival',
+                    'type' => DateTimePicker::TYPE_INPUT,
+                    'options' => ['placeholder' => 'Введите дату и время прибытия...'],
+                    'value' => date("dd.mm.Y H:i", (int) $model->date_departure),
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd.mm.yyyy HH:ii',
+                        'weekStart' => 1, //неделя начинается с понедельника
+                        'startDate' => '01.07.2019 00:00', //самая ранняя возможная дата
+                        'todayBtn' => true, //снизу кнопка "сегодня"
+                    ]
+                ]
+            );
+            ?>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <?= $form->field($model, 'volume')->textInput() ?>
 
-    <?= $form->field($model, 'id_city_arrival')->textInput(['maxlength' => true, 'type' => 'hidden', 'id' => 'id_city_arrival'])->label(false) ?>
+            <?= $form->field($model, 'body_dimensions')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'name_city_arrival')->textInput(['maxlength' => true, 'id' => 'name_city_arrival']) ?>
+            <?= $form->field($model, 'capacity')->textInput() ?>
 
-    <?php
-    echo $form->field($model, 'date_departure')->widget(
-        DateTimePicker::className(),
-        [
-            'name' => 'date_departure',
-            'type' => DateTimePicker::TYPE_INPUT,
-            'options' => ['placeholder' => 'Введите дату и время отбытия...'],
-            'value' => date("dd.mm.Y H:i", (int) $model->date_departure),
-            'pluginOptions' => [
-                'autoclose' => true,
-                'format' => 'dd.mm.yyyy HH:ii',
-                'weekStart' => 1, //неделя начинается с понедельника
-                'startDate' => '01.07.2019 00:00', //самая ранняя возможная дата
-                'todayBtn' => true, //снизу кнопка "сегодня"
-            ]
-        ]
-    );
-    ?>
+            <?= $form->field($model, 'rate')->textInput(['maxlength' => true]) ?>
 
-    <?php
-    echo $form->field($model, 'date_arrival')->widget(
-        DateTimePicker::className(),
-        [
-            'name' => 'date_arrival',
-            'type' => DateTimePicker::TYPE_INPUT,
-            'options' => ['placeholder' => 'Введите дату и время прибытия...'],
-            'value' => date("dd.mm.Y H:i", (int) $model->date_departure),
-            'pluginOptions' => [
-                'autoclose' => true,
-                'format' => 'dd.mm.yyyy HH:ii',
-                'weekStart' => 1, //неделя начинается с понедельника
-                'startDate' => '01.07.2019 00:00', //самая ранняя возможная дата
-                'todayBtn' => true, //снизу кнопка "сегодня"
-            ]
-        ]
-    );
-    ?>
+            <?= $form->field($model, 'info')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
 
-    <?= $form->field($model, 'rate')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'info')->textInput(['maxlength' => true]) ?>
+    <hr>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
