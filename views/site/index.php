@@ -76,14 +76,14 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                <div class="row">
                   <div class="col-6">
                      <div class="input-group mb-3">
-                        <?= Html::input('text', 'cityDerival', Yii::$app->request->post('cityDerival'), ['class' => 'form-control', 'id' => 'cityDerival', 'placeholder' => 'Откуда']) ?>
-                        <?= Html::input('hidden', 'cityDerival_id', Yii::$app->request->post('cityDerival_id'), ['id' => 'cityDerival_id', 'placeholder' => 'Откуда']) ?>
+                        <?= Html::input('text', 'name_city_departure', Yii::$app->request->post('name_city_departure'), ['class' => 'form-control', 'id' => 'name_city_departure', 'placeholder' => 'Откуда']) ?>
+                        <?= Html::input('hidden', 'id_city_departure', Yii::$app->request->post('id_city_departure'), ['id' => 'id_city_departure', 'placeholder' => 'Откуда']) ?>
                      </div>
                   </div>
                   <div class="col-6">
                      <div class="input-group mb-3">
-                        <?= Html::input('text', 'cityArrival', Yii::$app->request->post('cityArrival'), ['class' => 'form-control', 'id' => 'cityArrival', 'placeholder' => 'Куда']) ?>
-                        <?= Html::input('hidden', 'cityArrival_id', Yii::$app->request->post('cityDerival_id'), ['id' => 'cityArrival_id', 'placeholder' => 'Откуда']) ?>
+                        <?= Html::input('text', 'name_city_arrival', Yii::$app->request->post('name_city_arrival'), ['class' => 'form-control', 'id' => 'name_city_arrival', 'placeholder' => 'Куда']) ?>
+                        <?= Html::input('hidden', 'id_city_arrival', Yii::$app->request->post('id_city_departure'), ['id' => 'id_city_arrival', 'placeholder' => 'Откуда']) ?>
                      </div>
                   </div>
                </div>
@@ -238,66 +238,5 @@ $this->title = 'Главная | Грузоперевозки по РФ';
 <!-- /.container -->
 
 <?php
-$js = <<<JS
-
-	var city_derival = "";
-	var city_arrival = "";
-
-   var initb = function() {
-         //город отправки
-         $('#cityDerival').suggestions({
-            token: '70d1e189675ccb53b5e90e229faa665215bf265f',
-            type: 'ADDRESS',
-            hint: false,
-            bounds: "city",
-            constraints: {
-               label: "",
-               locations: {
-                  city_type_full: "город"
-               }
-            },
-            onSelect: function(suggestion) {
-               //console.log(suggestion.data);
-               city_derival = suggestion.data.city; //город
-               $('#cityDerival').attr('data-kladr-id', suggestion.data.city_kladr_id.charAt(0) == 0 ? suggestion.data.city_kladr_id.substring(1) /*+ '000000000000'*/ : suggestion.data.city_kladr_id /*+ '000000000000'*/);
-            }
-         });
-
-         //город пребытия
-         $('#cityArrival').suggestions({
-            token: '70d1e189675ccb53b5e90e229faa665215bf265f',
-            type: 'ADDRESS',
-            hint: false,
-            bounds: "city",
-            constraints: {
-               label: "",
-               locations: {
-                  city_type_full: "город"
-               }
-            },
-            onSelect: function(suggestion) {
-               city_arrival = suggestion.data.city; //город
-               $('#cityArrival').attr('data-kladr-id', suggestion.data.city_kladr_id.charAt(0) == 0 ? suggestion.data.city_kladr_id.substring(1) /*+ '000000000000'*/ : suggestion.data.city_kladr_id /*+ '000000000000'*/);
-            }
-         });
-
-         $('#cityDerival').change(function() {
-            $('#cityDerival_id').val(($('#cityDerival').attr('data-kladr-id')));
-         });
-
-         $('#cityArrival').change(function() {
-            $('#cityArrival_id').val(($('#cityArrival').attr('data-kladr-id')));
-         });
-      };
-
-   initb();
-   $(document).on("pjax:end", initb);
-
-	//очистка формы поиска
-	// $('#clear_form').click(function() {
-
-	// });
-JS;
-
-$this->registerJs($js);
-?>
+Yii::$app->view->registerJsFile('/web/js/select_city.js');
+?>​

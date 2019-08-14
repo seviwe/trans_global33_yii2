@@ -39,9 +39,8 @@ class LoadInformation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[/*'id_route',*/'weight_from', 'volume_from', 'transport', 'load_info', 'rate', 'date_departure', 'date_arrival', 'name_city_departure', 'name_city_arrival', 'id_city_departure', 'id_city_arrival'], 'required'],
-            [[/*'id_route',*/'weight_from', 'volume_from', 'transport', 'load_info', 'rate', 'date_departure', 'date_arrival'], 'trim'],
-            //[['id_route'], 'integer'],
+            [['weight_from', 'volume_from', 'transport', 'load_info', 'rate', 'date_departure', 'date_arrival', 'name_city_departure', 'name_city_arrival', 'id_city_departure', 'id_city_arrival'], 'required'],
+            [['weight_from', 'volume_from', 'transport', 'load_info', 'rate', 'date_departure', 'date_arrival'], 'trim'],
             [['weight_from', 'volume_from'], 'number'],
             [['transport', 'load_info', 'rate', 'date_create', 'date_departure', 'date_arrival', 'name_city_departure', 'name_city_arrival'], 'string', 'max' => 255],
             ['date_departure', 'compare', 'compareValue' => date('d.m.Y H:i'), 'operator' => '>', 'message' => 'Дата отбытия должна быть больше, чем текущая дата'],
@@ -57,17 +56,13 @@ class LoadInformation extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_user' => 'Пользователь',
-            //'id_route' => 'Маршрут',
-
             'id_city_departure' => 'ID',
             'name_city_departure' => 'Н/п отбытия',
             'id_city_arrival' => 'ID',
             'name_city_arrival' => 'Н/п прибытия',
 
             'weight_from' => 'Вес, кг',
-            //'weight_to' => 'Вес, до',
             'volume_from' => 'Объем, м3',
-            //'volume_to' => 'Объем, до',
             'transport' => 'Транспорт',
             'load_info' => 'Информация о грузе',
             'rate' => 'Ставка, руб.',

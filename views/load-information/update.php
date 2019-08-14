@@ -12,59 +12,17 @@ $this->params['breadcrumbs'][] = 'Обновление информации о �
 ?>
 
 <div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h2 class="card-title text-center"><?= Html::encode($this->title) ?></h2>
-            <hr>
-            <?php
-            echo $this->render('_form', ['model' => $model])
-            ?>
-        </div>
-    </div>
+   <div class="card">
+      <div class="card-body">
+         <h2 class="card-title text-center"><?= Html::encode($this->title) ?></h2>
+         <hr>
+         <?php
+         echo $this->render('_form', ['model' => $model])
+         ?>
+      </div>
+   </div>
 </div>
 
 <?php
-$js = <<<JS
-
-	var kladr_city = "";
-
-    var initb = function() {
-         //город отправки
-         $('#name_city_departure').suggestions({
-            token: '70d1e189675ccb53b5e90e229faa665215bf265f',
-            type: 'ADDRESS',
-            hint: false,
-            bounds: "city",
-            onSelect: function(suggestion) {
-               city_departure = suggestion.data.city_kladr_id; //город id 
-            }
-         });
-
-        //город прибытия
-        $('#name_city_arrival').suggestions({
-            token: '70d1e189675ccb53b5e90e229faa665215bf265f',
-            type: 'ADDRESS',
-            hint: false,
-            bounds: "city",
-            onSelect: function(suggestion) {
-               city_arrival = suggestion.data.city_kladr_id; //город id 
-            }
-         });
-
-         $('#name_city_arrival').change(function() {
-            $('#id_city_arrival').val(city_arrival);
-         });
-         
-         $('#name_city_departure').change(function() {
-            $('#id_city_departure').val(city_departure);
-         });
-
-      };
-
-   initb();
-   $(document).on("pjax:end", initb);
-
-JS;
-
-$this->registerJs($js);
-?>
+Yii::$app->view->registerJsFile('/web/js/select_city.js');
+?>​

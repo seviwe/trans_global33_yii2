@@ -26,14 +26,11 @@ class AppAsset extends AssetBundle
         'css/bootstrap.css'
     ];
     public $js = [
-        'js/jquery.min.js',
-        'js/jquery-3.3.1.min.js',
+        'js/jquery.js',
         'js/popper.min.js',
-        'js/bootstrap.min.js',
-        'js/bootstrap.bundle.min.js',
+        'js/bootstrap.js',
+        'js/bootstrap.bundle.js',
         'js/jquery.suggestions.min.js',
-        //'js/validator.js',
-        //'contact.js',
         'https://kit.fontawesome.com/66546926a5.js',
     ];
     //подключение скриптов в head 

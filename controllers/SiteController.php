@@ -267,11 +267,11 @@ class SiteController extends Controller
 
         $query = "select * from load_information where id != 0";
         //откуда->куда
-        if (!empty(Yii::$app->request->post('cityDerival_id'))) {
-            $query .= " and id_city_departure = " . Yii::$app->request->post('cityDerival_id');
+        if (!empty(Yii::$app->request->post('id_city_departure'))) {
+            $query .= " and id_city_departure = " . Yii::$app->request->post('id_city_departure');
         }
-        if (!empty(Yii::$app->request->post('cityArrival_id'))) {
-            $query .= " and id_city_arrival = " . Yii::$app->request->post('cityArrival_id');
+        if (!empty(Yii::$app->request->post('id_city_arrival'))) {
+            $query .= " and id_city_arrival = " . Yii::$app->request->post('id_city_arrival');
         }
         //вес
         if (!empty(Yii::$app->request->post('weight_from'))) {
