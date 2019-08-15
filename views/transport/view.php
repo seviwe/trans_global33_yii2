@@ -12,7 +12,12 @@ $this->title = $model->name;
 if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
     $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
 }
-$this->params['breadcrumbs'][] = ['label' => 'Информация о машинах', 'url' => ['index']];
+if (!Yii::$app->user->isGuest) {
+    $this->params['breadcrumbs'][] = ['label' => 'Информация о транспорте', 'url' => ['index']];
+}
+if (Yii::$app->user->isGuest) {
+    $this->params['breadcrumbs'][] = ['label' => 'Расширенный поиск транспорта', 'url' => ['search']];
+}
 $this->params['breadcrumbs'][] = $this->title;
 
 \yii\web\YiiAsset::register($this);
@@ -23,14 +28,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
 
     <p>
-        <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Вы уверены что хотите удалить данную машину?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
+            echo Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+            echo Html::a('Удалить', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Вы уверены что хотите удалить данную машину?',
+                    'method' => 'post',
+                ],
+            ]);
+        }
+        ?>
     </p>
 
     <?= DetailView::widget([

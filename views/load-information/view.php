@@ -16,7 +16,7 @@ if (!Yii::$app->user->isGuest) {
     $this->params['breadcrumbs'][] = ['label' => 'Информация о грузах', 'url' => ['index']];
 }
 if (Yii::$app->user->isGuest) {
-    $this->params['breadcrumbs'][] = ['label' => 'Расширенный поиск', 'url' => ['search']];
+    $this->params['breadcrumbs'][] = ['label' => 'Расширенный поиск грузов', 'url' => ['search']];
 }
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
