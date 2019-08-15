@@ -67,9 +67,10 @@ $this->title = 'Главная | Грузоперевозки по РФ';
 
    <!--Section Search Goods-->
    <?php Pjax::begin(['enablePushState' => false]) ?>
-   <div class="card">
+   <div class="card mb-3">
       <div class="card-body">
-         <h2 class="card-title text-center mb-3">Поиск грузов</h2>
+         <h2 class="card-title text-center mb-1"><i class="fas fa-box-open mr-2"></i>Поиск грузов</h2>
+         <hr>
          <?= Html::beginForm(['site/cargo-search'], 'post', ['data-pjax' => ''/*, 'class' => 'form-inline'*/]); ?>
          <div class="row">
             <div class="col-12">
@@ -184,14 +185,13 @@ $this->title = 'Главная | Грузоперевозки по РФ';
 
          <div class="row">
             <div class="col-4 text-right">
-               <?= Html::a('Расширенный поиск', ['load-information/search'], ['class' => 'btn btn-info', 'role' => 'button']) ?>
+               <?= Html::a('Расширенный поиск грузов', ['load-information/search'], ['class' => 'btn btn-info', 'role' => 'button']) ?>
             </div>
             <div class="col-4 text-center">
                <?= Html::submitButton('Найти грузы', ['class' => 'btn btn-success', 'name' => 'cargo_search', 'id' => 'cargo_search']) ?>
             </div>
             <div class="col-4 text-left">
                <?= Html::resetButton('Очистить форму', ['class' => 'btn btn-outline-dark', 'name' => 'clear_form', 'id' => 'clear_form']) ?>
-               <!-- <button type="button" id="clear_form" class="btn btn-outline-dark">Очистить форму</button> -->
             </div>
          </div>
          <?= Html::endForm() ?>
@@ -206,23 +206,148 @@ $this->title = 'Главная | Грузоперевозки по РФ';
    </div>
    <?php Pjax::end(); ?>
    <!-- /.row -->
-   <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item">
-         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-      </li>
-   </ul>
-   <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">.1..</div>
-      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">..2.</div>
-      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">.3..</div>
-   </div> -->
-   <hr />
+
+   <!--Section Search Transports-->
+   <?php Pjax::begin(['enablePushState' => false]) ?>
+   <div class="card mb-3">
+      <div class="card-body">
+         <h2 class="card-title text-center mb-1"><i class="fas fa-truck mr-2"></i>Поиск транспорта</h2>
+         <hr>
+         <?= Html::beginForm(['site/transport-search'], 'post', ['data-pjax' => ''/*, 'class' => 'form-inline'*/]); ?>
+         <div class="row">
+            <div class="col-12">
+               <div class="row">
+                  <div class="col-6">
+                     <div class="input-group mb-3">
+                        <?= Html::input('text', 'name_city_departure_t', Yii::$app->request->post('name_city_departure_t'), ['class' => 'form-control', 'id' => 'name_city_departure_t', 'placeholder' => 'Откуда']) ?>
+                        <?= Html::input('hidden', 'id_city_departure_t', Yii::$app->request->post('id_city_departure_t'), ['id' => 'id_city_departure_t', 'placeholder' => 'Откуда']) ?>
+                     </div>
+                  </div>
+                  <div class="col-6">
+                     <div class="input-group mb-3">
+                        <?= Html::input('text', 'name_city_arrival_t', Yii::$app->request->post('name_city_arrival_t'), ['class' => 'form-control', 'id' => 'name_city_arrival_t', 'placeholder' => 'Куда']) ?>
+                        <?= Html::input('hidden', 'id_city_arrival_t', Yii::$app->request->post('id_city_departure_t'), ['id' => 'id_city_arrival_t', 'placeholder' => 'Откуда']) ?>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="row">
+                  <div class="col-6">
+                     <div class="row">
+                        <div class="col-4">
+                           <p class="text-left">Грузоподъем., т</p>
+                        </div>
+                        <div class="col-3">
+                           <div class="input-group input-group-sm mb-3">
+                              <?= Html::input('text', 'capacity_from', Yii::$app->request->post('capacity_from'), ['id' => 'capacity_from', 'class' => 'form-control', 'placeholder' => 'От', 'aria-label' => 'from']) ?>
+                           </div>
+                        </div>
+                        —
+                        <div class="col-3">
+                           <div class="input-group input-group-sm mb-3">
+                              <?= Html::input('text', 'capacity_to', Yii::$app->request->post('capacity_to'), ['id' => 'capacity_to', 'class' => 'form-control', 'placeholder' => 'До', 'aria-label' => 'to']) ?>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-6">
+                     <div class="row">
+                        <div class="col-3">
+                           <p class="text-left">Объем, м3</p>
+                        </div>
+                        <div class="col-4">
+                           <div class="input-group input-group-sm mb-3">
+                              <?= Html::input('text', 'volume_from', Yii::$app->request->post('volume_from'), ['id' => 'volume_from', 'class' => 'form-control', 'placeholder' => 'От', 'aria-label' => 'from']) ?>
+                           </div>
+                        </div>
+                        —
+                        <div class="col-4">
+                           <div class="input-group input-group-sm mb-3">
+                              <?= Html::input('text', 'volume_to', Yii::$app->request->post('volume_to'), ['id' => 'volume_to', 'class' => 'form-control', 'placeholder' => 'До', 'aria-label' => 'to']) ?>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="row">
+                  <div class="col-6">
+                     <div class="row">
+                        <div class="col-4">
+                           Дата погрузки
+                        </div>
+                        <div class="col-8">
+                           <?php
+                           echo DatePicker::widget([
+                              'name' => 'date_departure',
+                              'options' => ['placeholder' => 'Введите дату отгрузки...'],
+                              //'convertFormat' => true,
+                              'value' =>  Yii::$app->request->post('date_departure'),
+                              'pluginOptions' => [
+                                 'autoclose' => true,
+                                 'format' => 'dd.mm.yyyy',
+                                 'weekStart' => 1, //неделя начинается с понедельника
+                                 'startDate' => '01.07.2019', //самая ранняя возможная дата
+                                 'todayBtn' => true, //снизу кнопка "сегодня"
+                              ]
+                           ]);
+                           ?>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-6">
+                     <div class="row">
+                        <div class="col-4">
+                           Дата разгрузки
+                        </div>
+                        <div class="col-8">
+                           <?php
+                           echo DatePicker::widget([
+                              'name' => 'date_arrival',
+                              'options' => ['placeholder' => 'Введите дату погрузки...'],
+                              //'convertFormat' => true,
+                              'value' =>  Yii::$app->request->post('date_arrival'),
+                              'pluginOptions' => [
+                                 'autoclose' => true,
+                                 'format' => 'dd.mm.yyyy',
+                                 'weekStart' => 1, //неделя начинается с понедельника
+                                 'startDate' => '01.07.2019', //самая ранняя возможная дата
+                                 'todayBtn' => true, //снизу кнопка "сегодня"
+                              ]
+                           ]);
+                           ?>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <hr>
+
+         <div class="row">
+            <div class="col-4 text-right">
+               <?= Html::a('Расширенный поиск транспорта', ['transport/search'], ['class' => 'btn btn-info', 'role' => 'button']) ?>
+            </div>
+            <div class="col-4 text-center">
+               <?= Html::submitButton('Найти транспорт', ['class' => 'btn btn-success', 'name' => 'cargo_search', 'id' => 'cargo_search']) ?>
+            </div>
+            <div class="col-4 text-left">
+               <?= Html::resetButton('Очистить форму', ['class' => 'btn btn-outline-dark', 'name' => 'clear_form', 'id' => 'clear_form']) ?>
+            </div>
+         </div>
+         <?= Html::endForm() ?>
+
+         <div class="row mt-2">
+            <div class="col-12">
+               <?= $result_cargo_search ?>
+            </div>
+         </div>
+
+      </div>
+   </div>
+   <?php Pjax::end(); ?>
+   <!-- /.row -->
 
    <!-- Call to Action Section -->
    <div class="row mb-4">
@@ -238,5 +363,50 @@ $this->title = 'Главная | Грузоперевозки по РФ';
 <!-- /.container -->
 
 <?php
+
+$js = <<<JS
+
+	var kladr_city = "";
+
+    var initb = function() {
+         //город отправки
+         $('#name_city_departure_t').suggestions({
+            token: '70d1e189675ccb53b5e90e229faa665215bf265f',
+            type: 'ADDRESS',
+            hint: false,
+            bounds: "city",
+            onSelect: function(suggestion) {
+               city_departure = suggestion.data.city_kladr_id; //город id 
+            }
+         });
+
+        //город прибытия
+        $('#name_city_arrival_t').suggestions({
+            token: '70d1e189675ccb53b5e90e229faa665215bf265f',
+            type: 'ADDRESS',
+            hint: false,
+            bounds: "city",
+            onSelect: function(suggestion) {
+               city_arrival = suggestion.data.city_kladr_id; //город id 
+            }
+         });
+
+         $('#name_city_arrival_t').change(function() {
+            $('#id_city_arrival_t').val(city_arrival);
+         });
+         
+         $('#name_city_departure_t').change(function() {
+            $('#id_city_departure_t').val(city_departure);
+         });
+
+      };
+
+   initb();
+   $(document).on("pjax:end", initb);
+
+JS;
+
+$this->registerJs($js);
+
 Yii::$app->view->registerJsFile('/web/js/select_city.js');
 ?>​

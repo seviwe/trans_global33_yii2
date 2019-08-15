@@ -63,6 +63,17 @@ class TransportController extends Controller
         }
     }
 
+    public function actionSearch()
+    {
+        $searchModel = new TransportSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('search', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);    
+    }
+
     /**
      * Displays a single Transport model.
      * @param integer $id

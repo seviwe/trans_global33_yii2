@@ -309,7 +309,7 @@ class SiteController extends Controller
                 <tr>
                     <th>Направление</th>
                     <th>Транспорт</th>
-                    <th>Вес,т / Объем,м3</th>
+                    <th>Вес, т / Объем, м3</th>
                     <th>Груз</th>
                     <th>Загрузка</th>
                     <th>Разгрузка</th>
@@ -344,6 +344,102 @@ class SiteController extends Controller
                         </div>
                         <p class="text-center">
                            Грузы, по указанным параметрам не найдены.<br>Воспользуйтесь <a href="/web/load-information/search">расширенным поиском</a> либо укажите другие данные для поиска.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>';
+        }
+
+        return $this->render('index', [
+            'result_cargo_search' => $result_cargo_search,
+        ]);
+    }
+
+    public function actionTransportSearch()
+    {
+        //echo "<pre>"; print_r(Yii::$app->request->post());
+
+        $query = "select * from transport where id != 0";
+        //откуда->куда
+        if (!empty(Yii::$app->request->post('id_city_departure_t'))) {
+            $query .= " and id_city_departure = " . Yii::$app->request->post('id_city_departure_t');
+        }
+        if (!empty(Yii::$app->request->post('id_city_arrival_t'))) {
+            $query .= " and id_city_arrival = " . Yii::$app->request->post('id_city_arrival_t');
+        }
+        //вес
+        if (!empty(Yii::$app->request->post('capacity_from'))) {
+            $query .= " and capacity >= " . Yii::$app->request->post('capacity_from');
+        }
+        if (!empty(Yii::$app->request->post('capacity_to'))) {
+            $query .= " and capacity <= " . Yii::$app->request->post('capacity_to');
+        }
+        //объем
+        if (!empty(Yii::$app->request->post('volume_from'))) {
+            $query .= " and volume >= " . Yii::$app->request->post('volume_from');
+        }
+        if (!empty(Yii::$app->request->post('volume_to'))) {
+            $query .= " and volume <= " . Yii::$app->request->post('volume_to');
+        }
+        //дата
+        if (!empty(Yii::$app->request->post('date_departure'))) {
+            $query .= " and date_departure like '" . Yii::$app->request->post('date_departure') . "%'";
+        }
+        if (!empty(Yii::$app->request->post('date_arrival'))) {
+            $query .= " and date_arrival like '" . Yii::$app->request->post('date_arrival') . "%'";
+        }
+
+        $query .= " ORDER BY date_departure";
+
+        $rows = Yii::$app->db->createCommand($query)->queryAll();
+
+        //echo "<pre>"; print_r($rows);
+
+        if ($rows) {
+            $result_cargo_search = "<hr>
+            <h3 class='mb-3 text-left'>Найдено <b>" . count($rows) . "</b> транспорта</h4>
+            <table class='table table-striped table-bordered'>
+            <thead>
+                <tr>
+                    <th>Направление</th>
+                    <th>Внутр. габ. кузова</th>
+                    <th>Грузоподъем., т / Объем, м3</th>
+                    <th>Информация</th>
+                    <th>Загрузка</th>
+                    <th>Разгрузка</th>
+                    <th>Ставка</th>
+                </tr>
+            </thead>
+            <tbody>";
+            foreach ($rows as $row) {
+                //echo "<pre>"; print_r($row);
+                $result_cargo_search .= "<tr>
+                <td>" . $row['name_city_departure'] . " -> " . $row['name_city_arrival'] . "</td>
+                <td>" . $row['body_dimensions'] . "</td>
+                <td>" . $row['capacity'] . "/" . $row['volume'] . "</td>
+                <td>" . $row['info'] . "</td>
+                <td>" . $row['name_city_departure'] . "</td>
+                <td>" . $row['name_city_arrival'] . "</td>
+                <td>" . $row['rate'] . "</td>
+            </tr>";
+            }
+            $result_cargo_search .= "</tbody>
+            </table>";
+        } else {
+            $result_cargo_search = '<hr><br><div class="container">
+            <div class="row justify-content-center mb-4">
+               <div class="col-6">
+                  <div class="card">
+                     <div class="card-body">
+                        <h3 class="text-center">Транспорт отсутствует</h3>
+                        <hr>
+                        <div class="row justify-content-center mb-2">
+                           <i class="fas fa-shuttle-van fa-7x"></i>
+                        </div>
+                        <p class="text-center">
+                        Транспорт, по указанным параметрам не найден.<br>Воспользуйтесь <a href="/web/transport/search">расширенным поиском</a> либо укажите другие данные для поиска.
                         </p>
                      </div>
                   </div>

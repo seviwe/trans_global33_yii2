@@ -6,7 +6,7 @@
                <h3 class="text-center">Транспорт отсутствует</h3>
                <hr>
                <div class="row justify-content-center">
-                  <i class="fas fa-shuttle-van fa-7x"></i>
+                  <i class="fas fa-truck fa-7x"></i>
                </div>
                <p class="text-center">
                   Здесь будут отображаться Ваш транспорт.<br>Транспорт можно добавить <a href="/web/transport/create">здесь</a>.
