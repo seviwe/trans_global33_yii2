@@ -20,14 +20,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
 
     <p>
-        <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Вы уверены что хотите удалить данный заказ?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
+            echo Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+            echo Html::a('Удалить', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Вы уверены что хотите удалить данный заказ?',
+                    'method' => 'post',
+                ],
+            ]);
+        }
+        ?>
+
     </p>
 
     <?= DetailView::widget([
@@ -44,14 +49,14 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Статус',
                 'format' => 'raw',
-                'value' => function($model){
-                    if($model->status == 1){
+                'value' => function ($model) {
+                    if ($model->status == 1) {
                         return '<span class="text-danger">Согласование</span>';
                     }
-                    if($model->status == 2){
+                    if ($model->status == 2) {
                         return '<span class="text-info">В исполнении</span>';
                     }
-                    if($model->status == 3){
+                    if ($model->status == 3) {
                         return '<span class="text-success">Завершено</span>';
                     }
                 }

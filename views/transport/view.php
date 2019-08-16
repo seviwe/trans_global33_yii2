@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?
-        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin()) && $model->order->status != 2 && $model->order->status != 3) {
             echo Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
             echo Html::a('Удалить', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
@@ -45,14 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'id',
             'user.name',
             'volume',
             'body_dimensions',
             'capacity',
-            //'id_city_departure',
             'name_city_departure',
-            //'id_city_arrival',
             'name_city_arrival',
             'date_departure',
             'date_arrival',

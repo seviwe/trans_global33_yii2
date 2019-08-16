@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\models\Users;
+use app\models\Order;
 
 /**
  * This is the model class for table "transport".
@@ -66,6 +67,11 @@ class Transport extends \yii\db\ActiveRecord
             'rate' => 'Мин. ставка, руб.',
             'info' => 'Доп. коммент.',
         ];
+    }
+
+    public function getOrder()
+    {
+        return $this->hasOne(Order::className(), ['id_transport' => 'id']);
     }
 
     public function getUser()

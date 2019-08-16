@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-//use app\models\Route;
+use app\models\Order;
 use app\models\Users;
 
 /**
@@ -60,7 +60,6 @@ class LoadInformation extends \yii\db\ActiveRecord
             'name_city_departure' => 'Н/п отбытия',
             'id_city_arrival' => 'ID',
             'name_city_arrival' => 'Н/п прибытия',
-
             'weight_from' => 'Вес, кг',
             'volume_from' => 'Объем, м3',
             'transport' => 'Транспорт',
@@ -72,10 +71,10 @@ class LoadInformation extends \yii\db\ActiveRecord
         ];
     }
 
-    // public function getRoute()
-    // {
-    //     return $this->hasOne(Route::className(), ['id' => 'id_route']);
-    // }
+    public function getOrder()
+    {
+        return $this->hasOne(Order::className(), ['id_load' => 'id']);
+    }
 
     public function getUser()
     {

@@ -127,7 +127,7 @@ $this->params['breadcrumbs'][] = $this->title;
     } else {
         echo GridView::widget([
             'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
+            //'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
@@ -169,28 +169,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'header' => 'Действия',
-                    'headerOptions' => ['width' => '70'],
-                    'template' => '{view} {update} {delete}',
+                    'headerOptions' => ['width' => '20'],
+                    'template' => '{view}',
                     'buttons' => [
                         'view' => function ($url, $model) {
                             return Html::a('<span class="fas fa-eye"></span>', $url, [
                                 'title' => 'Просмотр информации о заказе',
                             ]);
-                        },
-                        'update' => function ($url, $model) {
-                            return Html::a('<span class="fas fa-edit"></span>', $url, [
-                                'title' => 'Обновить информацию о заказе',
-                            ]);
-                        },
-                        'delete' => function ($url, $model) {
-                            return Html::a('<span class="fas fa-trash"></span>', $url, [
-                                'title' => 'Удалить груз',
-                                'data' => [
-                                    'method' => 'post',
-                                    'confirm' => 'Вы уверены что хотите удалить данный заказ?',
-                                ]
-                            ]);
-                        },
+                        }
                     ],
                 ],
             ],

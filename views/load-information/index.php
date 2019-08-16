@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php
-    if (Yii::$app->user->isGuest){
+    if (Yii::$app->user->isGuest) {
         echo $this->render('_search', ['model' => $searchModel]);
     }
     ?>
@@ -54,9 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'name_city_departure',
                 'name_city_arrival',
                 'weight_from',
-                //'weight_to',
                 'volume_from',
-                //'volume_to',
                 'transport',
                 'load_info',
                 'rate',
@@ -76,21 +74,25 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]);
                         },
                         'update' => function ($url, $model) {
-                            return Html::a('<span class="fas fa-edit"></span>', $url, [
-                                'title' => 'Обновить информацию о грузе',
-                            ]);
+                            if ($model->order->status != 2 && $model->order->status != 3) {
+                                return Html::a('<span class="fas fa-edit"></span>', $url, [
+                                    'title' => 'Обновить информацию о грузе',
+                                ]);
+                            }
                         },
                         'delete' => function ($url, $model) {
-                            return Html::a('<span class="fas fa-trash"></span>', $url, [
-                                'title' => 'Удалить груз',
-                                'data' => [
-                                    'method' => 'post',
-                                    'confirm' => 'Вы уверены что хотите удалить данный груз?',
-                                ]
-                            ]);
+                            if ($model->order->status != 2 && $model->order->status != 3) {
+                                return Html::a('<span class="fas fa-trash"></span>', $url, [
+                                    'title' => 'Удалить груз',
+                                    'data' => [
+                                        'method' => 'post',
+                                        'confirm' => 'Вы уверены что хотите удалить данный груз?',
+                                    ]
+                                ]);
+                            }
                         },
                         'view_user' => function ($url, $model) {
-                            $url = '/web/users/view?id='.$model->id_user;
+                            $url = '/web/users/view?id=' . $model->id_user;
                             return Html::a('<span class="fas fa-user-circle"></span>', $url, [
                                 'title' => 'Просмотр информации о грузовладельце',
                             ]);
@@ -106,13 +108,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                //'id_route',
                 'name_city_departure',
                 'name_city_arrival',
                 'weight_from',
-                //'weight_to',
                 'volume_from',
-                //'volume_to',
                 'transport',
                 'load_info',
                 'rate',
@@ -132,18 +131,22 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]);
                         },
                         'update' => function ($url, $model) {
-                            return Html::a('<span class="fas fa-edit"></span>', $url, [
-                                'title' => 'Обновить информацию о грузе',
-                            ]);
+                            if ($model->order->status != 2 && $model->order->status != 3) {
+                                return Html::a('<span class="fas fa-edit"></span>', $url, [
+                                    'title' => 'Обновить информацию о грузе',
+                                ]);
+                            }
                         },
                         'delete' => function ($url, $model) {
-                            return Html::a('<span class="fas fa-trash"></span>', $url, [
-                                'title' => 'Удалить груз',
-                                'data' => [
-                                    'method' => 'post',
-                                    'confirm' => 'Вы уверены что хотите удалить данный груз?',
-                                ]
-                            ]);
+                            if ($model->order->status != 2 && $model->order->status != 3) {
+                                return Html::a('<span class="fas fa-trash"></span>', $url, [
+                                    'title' => 'Удалить груз',
+                                    'data' => [
+                                        'method' => 'post',
+                                        'confirm' => 'Вы уверены что хотите удалить данный груз?',
+                                    ]
+                                ]);
+                            }
                         },
                     ],
                 ],

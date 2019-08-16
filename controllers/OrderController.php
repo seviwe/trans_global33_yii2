@@ -51,7 +51,7 @@ class OrderController extends Controller
                 $loads = Yii::$app->db->createCommand($query)->queryAll();
                 if ($loads) {
                     foreach ($loads as $load) {
-                        $query = "select * from orders where id_transport = " . $load['id'];
+                        $query = "select * from orders where id_load = " . $load['id'];
                         $orders_loads = Yii::$app->db->createCommand($query)->queryAll();
                         if ($orders_loads) {
                             $dataProvider = new ActiveDataProvider([
@@ -71,8 +71,8 @@ class OrderController extends Controller
                     $trans = Yii::$app->db->createCommand($query)->queryAll();
                     if ($trans) {
                         foreach ($trans as $tran) {
-                            $query = "select * from orders where id_transport = " . $tran['id'];
-                            $orders_trans = Yii::$app->db->createCommand($query)->queryAll();
+                            $query1 = "select * from orders where id_transport = " . $tran['id'];
+                            $orders_trans = Yii::$app->db->createCommand($query1)->queryAll();
                             if ($orders_trans) {
                                 $dataProvider = new ActiveDataProvider([
                                     'query' => Order::find()->where(['id_transport' => $tran['id']]),
@@ -103,7 +103,7 @@ class OrderController extends Controller
      */
     public function actionView($id)
     {
-        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
+        if (!Yii::$app->user->isGuest) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);

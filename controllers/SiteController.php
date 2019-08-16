@@ -261,6 +261,67 @@ class SiteController extends Controller
         return $this->render('change_user');
     }
 
+    private function getFoundStr($rows, $type)
+    {
+        if (count(count($rows)) == 1) { //1, 2,..., 9
+            if (count($rows) == 1) { //только 1
+                $found[0] = "Найден";
+                if ($type == "груз") {
+                    if (count($rows) == 1) {
+                        $found[1] = "груз";
+                    } elseif (count($rows) > 1 && count($rows) < 5) {
+                        $found[1] = "груза";
+                    } else {
+                        $found[1] = "грузов";
+                    }
+                } else {
+                    if (count($rows) == 1) {
+                        $found[1] = "транспорт";
+                    } else {
+                        $found[1] = "транспорта";
+                    }
+                }
+            } else {
+                $found[0] = "Найдено";
+                if ($type == "груз") {
+                    if (count($rows) > 1 && count($rows) < 5) {
+                        $found[1] = "груза";
+                    } else {
+                        $found[1] = "грузов";
+                    }
+                } else {
+                    $found[1] = "транспорта";
+                }
+            }
+        }
+        if (count(count($rows)) > 1 || count(count($rows)) == 0) { // > 10
+
+            $founds = explode("", count($rows));
+
+            if ($founds[1] == 1) {
+                $found[0] = "Найден";
+                if ($type == "груз") {
+                    $found[1] = "груз";
+                } else {
+                    $found[1] = "транспорт";
+                }
+            } else {
+                $found[0] = "Найдено";
+                if ($type == "груз") {
+                    if (count($rows) > 1 && count($rows) < 5) {
+                        $found[1] = "груза";
+                    } else {
+                        $found[1] = "грузов";
+                    }
+                } else {
+                    $found[1] = "транспорта";
+                }
+            }
+        }
+
+        return $found;
+    }
+
     public function actionCargoSearch()
     {
         //echo "<pre>"; print_r(Yii::$app->request->post());
@@ -302,9 +363,12 @@ class SiteController extends Controller
         //echo "<pre>"; print_r($rows);
 
         if ($rows) {
+
+            $found = $this->getFoundStr($rows, "груз");
+
             $result_cargo_search = "<hr>
-            <h3 class='mb-3 text-left'>Найдено <b>" . count($rows) . "</b> груза</h4>
-            <table class='table table-striped table-bordered'>
+            <h3 class='mb-3 text-left'>" . $found[0] . " <b>" . count($rows) . "</b> " . $found[1] . " </h4>
+            <table class='table table-striped table-bordered table-hover'>
             <thead>
                 <tr>
                     <th>Направление</th>
@@ -313,7 +377,7 @@ class SiteController extends Controller
                     <th>Груз</th>
                     <th>Загрузка</th>
                     <th>Разгрузка</th>
-                    <th>Ставка</th>
+                    <th>Ставка, р</th>
                 </tr>
             </thead>
             <tbody>";
@@ -398,9 +462,12 @@ class SiteController extends Controller
         //echo "<pre>"; print_r($rows);
 
         if ($rows) {
+
+            $found = $this->getFoundStr($rows, "транспорт");
+
             $result_cargo_search = "<hr>
-            <h3 class='mb-3 text-left'>Найдено <b>" . count($rows) . "</b> транспорта</h4>
-            <table class='table table-striped table-bordered'>
+            <h3 class='mb-3 text-left'>" .  $found[0] . " <b>" . count($rows) . "</b>  " . $found[1] . " </h4>
+            <table class='table table-striped table-bordered table-hover'>
             <thead>
                 <tr>
                     <th>Направление</th>
@@ -409,7 +476,7 @@ class SiteController extends Controller
                     <th>Информация</th>
                     <th>Загрузка</th>
                     <th>Разгрузка</th>
-                    <th>Ставка</th>
+                    <th>Ставка, р</th>
                 </tr>
             </thead>
             <tbody>";

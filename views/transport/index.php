@@ -45,14 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                //'id',
                 ['attribute' => 'userName', 'label' => 'Пользователь', 'value' => 'user.name'],
                 'volume',
                 'body_dimensions',
                 'capacity',
-                //'id_city_departure',
                 'name_city_departure',
-                //'id_city_arrival',
                 'name_city_arrival',
                 'date_departure',
                 'date_arrival',
@@ -64,20 +61,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'header' => 'Действия',
                     'headerOptions' => ['width' => '50'],
                     'template' => '{view} {update} {delete} {view_user}',
-                    // 'urlCreator' => function ($action, $model, $key, $index) {
-                    //     if ($action === 'view') {
-                    //         $url = 'index.php?r=transport/view&id=' . $model->id;
-                    //         return $url;
-                    //     }
-                    //     if ($action === 'update') {
-                    //         $url = 'index.php?r=transport/update&id=' . $model->id;
-                    //         return $url;
-                    //     }
-                    //     if ($action === 'delete') {
-                    //         $url = 'index.php?r=transport/delete&id=' . $model->id;
-                    //         return $url;
-                    //     }
-                    // },
                     'buttons' => [
                         'view' => function ($url, $model) {
                             return Html::a('<span class="fas fa-eye"></span>', $url, [
@@ -85,21 +68,25 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]);
                         },
                         'update' => function ($url, $model) {
-                            return Html::a('<span class="fas fa-edit"></span>', $url, [
-                                'title' => 'Обновить информацию о транспорте',
-                            ]);
+                            if ($model->order->status != 2 && $model->order->status != 3) {
+                                return Html::a('<span class="fas fa-edit"></span>', $url, [
+                                    'title' => 'Обновить информацию о транспорте',
+                                ]);
+                            }
                         },
                         'delete' => function ($url, $model) {
-                            return Html::a('<span class="fas fa-trash"></span>', $url, [
-                                'title' => 'Удалить транспорт',
-                                'data' => [
-                                    'method' => 'post',
-                                    'confirm' => 'Вы уверены что хотите удалить данный транспорт?',
-                                ]
-                            ]);
+                            if ($model->order->status != 2 && $model->order->status != 3) {
+                                return Html::a('<span class="fas fa-trash"></span>', $url, [
+                                    'title' => 'Удалить транспорт',
+                                    'data' => [
+                                        'method' => 'post',
+                                        'confirm' => 'Вы уверены что хотите удалить данный транспорт?',
+                                    ]
+                                ]);
+                            }
                         },
                         'view_user' => function ($url, $model) {
-                            $url = '/web/users/view?id='.$model->id_user;
+                            $url = '/web/users/view?id=' . $model->id_user;
                             return Html::a('<span class="fas fa-user-tie"></span>', $url, [
                                 'title' => 'Просмотр информации о грузоперевозчике',
                             ]);
@@ -118,9 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'volume',
                 'body_dimensions',
                 'capacity',
-                //'id_city_departure',
                 'name_city_departure',
-                //'id_city_arrival',
                 'name_city_arrival',
                 'date_departure',
                 'date_arrival',
@@ -139,18 +124,22 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]);
                         },
                         'update' => function ($url, $model) {
-                            return Html::a('<span class="fas fa-edit"></span>', $url, [
-                                'title' => 'Обновить информацию о транспорте',
-                            ]);
+                            if ($model->order->status != 2 && $model->order->status != 3) {
+                                return Html::a('<span class="fas fa-edit"></span>', $url, [
+                                    'title' => 'Обновить информацию о транспорте',
+                                ]);
+                            }
                         },
                         'delete' => function ($url, $model) {
-                            return Html::a('<span class="fas fa-trash"></span>', $url, [
-                                'title' => 'Удалить транспорт',
-                                'data' => [
-                                    'method' => 'post',
-                                    'confirm' => 'Вы уверены что хотите удалить данный транспорт?',
-                                ]
-                            ]);
+                            if ($model->order->status != 2 && $model->order->status != 3) {
+                                return Html::a('<span class="fas fa-trash"></span>', $url, [
+                                    'title' => 'Удалить транспорт',
+                                    'data' => [
+                                        'method' => 'post',
+                                        'confirm' => 'Вы уверены что хотите удалить данный транспорт?',
+                                    ]
+                                ]);
+                            }
                         },
                     ],
                 ],

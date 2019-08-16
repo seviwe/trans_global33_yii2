@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?
-        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
+        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin()) && $model->order->status != 2 && $model->order->status != 3) {
             echo Html::a('Обновить информацию', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
             echo Html::a('Удалить', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger ml-2',
@@ -44,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'user.name',
-            //'route.name',
             'name_city_departure',
             'name_city_arrival',
             'weight_from',
