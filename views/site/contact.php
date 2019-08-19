@@ -53,43 +53,40 @@ $this->params['breadcrumbs'][] = 'Контакты';
 
    <!-- Contact Form -->
    <hr>
-   <?php if (Yii::$app->session->hasFlash('success')) : ?>
-
-      <div class="alert alert-success alert-dismissible" role="alert">
-         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-         <?php echo Yii::$app->session->getFlash('success'); ?>
-      </div>
-
-   <?php else : ?>
-      <div class="row">
-         <div class="col-lg-7 mb-4">
-            <h3>Отправить сообщение</h3>
-            <?php $form = ActiveForm::begin(['id' => 'contact_form']) ?>
-            <div class="row">
-               <div class="col-lg-12 mb-2">
-                  <?= $form->field($model, 'name')->textInput() ?>
+   <?php if (!Yii::$app->session->hasFlash('success')) : ?>
+   <div class="row">
+      <div class="col-lg-7 mb-4">
+         <div class="card">
+            <div class="card-body">
+               <h3 class="card-title text-left">Отправить сообщение</h3>
+               <?php $form = ActiveForm::begin(['id' => 'contact_form']) ?>
+               <div class="row">
+                  <div class="col-lg-12 mb-2">
+                     <?= $form->field($model, 'name')->textInput() ?>
+                  </div>
                </div>
-            </div>
-            <div class="row">
-               <div class="col-lg-6 mb-2">
-                  <?= $form->field($model, 'phone_number')->input('tel') ?>
+               <div class="row">
+                  <div class="col-lg-6 mb-2">
+                     <?= $form->field($model, 'phone_number')->input('tel') ?>
+                  </div>
+                  <div class="col-lg-6 mb-2">
+                     <?= $form->field($model, 'email')->input('email') ?>
+                  </div>
                </div>
-               <div class="col-lg-6 mb-2">
-                  <?= $form->field($model, 'email')->input('email') ?>
+               <div class="control-group form-group">
+                  <?= $form->field($model, 'body')->textArea(['rows' => 10, 'cols' => 100, 'maxLength' => 999, 'style' => 'resize: none']) ?>
                </div>
-            </div>
-            <div class="control-group form-group">
-               <?= $form->field($model, 'body')->textArea(['rows' => 10, 'cols' => 100, 'maxLength' => 999, 'style' => 'resize: none']) ?>
-            </div>
-            <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-               'captchaAction' => '/site/captcha',
-               'template' => '<div class="row"><div class="col-lg-4">{image}</div><div class="col-lg-8">{input}</div></div>',
-            ]) ?>
+               <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                     'captchaAction' => '/site/captcha',
+                     'template' => '<div class="row"><div class="col-lg-4">{image}</div><div class="col-lg-8">{input}</div></div>',
+                  ]) ?>
 
-            <?= Html::submitButton('Отправить сообщение', ['class' => 'btn btn-outline-primary', 'name' => 'contact-button']) ?>
+               <?= Html::submitButton('Отправить сообщение', ['class' => 'btn btn-outline-primary', 'name' => 'contact-button']) ?>
 
-            <?php ActiveForm::end() ?>
-         <?php endif; ?>
+               <?php ActiveForm::end() ?>
+               <?php endif; ?>
+            </div>
+         </div>
       </div>
    </div>
    <!-- /.row -->

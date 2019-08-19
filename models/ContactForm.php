@@ -17,7 +17,6 @@ class ContactForm extends Model
     public $body;
     public $verifyCode;
 
-
     /**
      * @return array the validation rules.
      */
@@ -29,7 +28,7 @@ class ContactForm extends Model
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly
-            ['verifyCode', 'captcha', 'captchaAction'=>'site/captcha'],
+            ['verifyCode', 'captcha', 'captchaAction' => 'site/captcha'],
         ];
     }
 
@@ -48,25 +47,42 @@ class ContactForm extends Model
         ];
     }
 
-    /**
-     * Sends an email to the specified email address using the information collected by this model.
-     * @param string $email the target email address
-     * @return bool whether the model passes validation
-     */
-    public function contact($emailto)
+    // public function contact($emailto)
+    // {
+    //     if ($this->validate()) {
+
+    //         $subject = "Message from Trans Global33";
+
+    //         Yii::$app->mailer->compose()
+    //             ->setFrom([$this->email => $this->name]) /* от кого */
+    //             ->setTo($emailto) /* куда */
+    //             ->setSubject($subject) /* имя отправителя */
+    //             ->setTextBody($this->body) /* текст сообщения */
+    //             ->send(); /* функция отправки письма */
+
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    public function sendMailFromContactForm($view, $subject, $params = [])
     {
         if ($this->validate()) {
-            
-            $subject = "Message from Trans Global33";
+            // Set layout params
+            //\Yii::$app->mailer->getView()->params['userName'] = "123 test";
 
-            Yii::$app->mailer->compose()
-                ->setFrom([$this->email => $this->name]) /* от кого */
-                ->setTo($emailto) /* куда */
-                ->setSubject($subject) /* имя отправителя */
-                ->setTextBody($this->body) /* текст сообщения */
-                ->send(); /* функция отправки письма */
+            $result = \Yii::$app->mailer->compose([
+                'html' => 'views/' . $view . '-html',
+                'text' => 'views/' . $view . '-text',
+            ], $params)->setFrom([$this->email => $this->name])
+                ->setTo(["global33@mail.test" => "Global Trans 33"])
+                ->setSubject($subject)
+                ->send();
 
-            return true;
+            // Reset layout params
+            //\Yii::$app->mailer->getView()->params['userName'] = null;
+
+            return $result;
         }
         return false;
     }

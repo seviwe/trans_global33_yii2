@@ -210,12 +210,24 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['emailto'])) {
-            Yii::$app->session->setFlash('success', 'Спасибо за обращение к нам. Мы постараемся ответить Вам как можно скорее.');
+        if ($model->load(Yii::$app->request->post()) /*&& $model->contact(Yii::$app->params['emailto'])*/) {
 
-            return $this->refresh();
+            $message = $model->body."<br> Номер телефона: ". $model->phone_number;
+
+            if ($model->sendMailFromContactForm("contact", "Сообщение с Global Trans 33", ['bodyMessage' => $message])) {
+
+                Yii::$app->session->setFlash('success', 'Спасибо за обращение к нам. Мы постараемся ответить Вам как можно скорее.');
+
+                return $this->refresh();
+            }
         }
-        return $this->render('contact', ['model' => $model,]);
+
+        // if ($model->load(Yii::$app->request->post()) && $model->sendMailFromContactForm("contact", "Пример письма", ['paramExample' => 'пример_параметров'])) {
+        //     Yii::$app->session->setFlash('success', 'Спасибо за обращение к нам. Мы постараемся ответить Вам как можно скорее.');
+
+        //     return $this->refresh();
+        // }
+        return $this->render('contact', ['model' => $model]);
     }
 
     /**
