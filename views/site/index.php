@@ -75,13 +75,13 @@ $this->title = 'Главная | Грузоперевозки по РФ';
          <div class="row">
             <div class="col-12">
                <div class="row">
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="input-group mb-3">
                         <?= Html::input('text', 'name_city_departure', Yii::$app->request->post('name_city_departure'), ['class' => 'form-control', 'id' => 'name_city_departure', 'placeholder' => 'Откуда']) ?>
                         <?= Html::input('hidden', 'id_city_departure', Yii::$app->request->post('id_city_departure'), ['id' => 'id_city_departure', 'placeholder' => 'Откуда']) ?>
                      </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="input-group mb-3">
                         <?= Html::input('text', 'name_city_arrival', Yii::$app->request->post('name_city_arrival'), ['class' => 'form-control', 'id' => 'name_city_arrival', 'placeholder' => 'Куда']) ?>
                         <?= Html::input('hidden', 'id_city_arrival', Yii::$app->request->post('id_city_departure'), ['id' => 'id_city_arrival', 'placeholder' => 'Откуда']) ?>
@@ -90,7 +90,7 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                </div>
 
                <div class="row">
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="row">
                         <div class="col-3">
                            <p class="text-left">Вес, т</p>
@@ -108,7 +108,7 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                         </div>
                      </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="row">
                         <div class="col-3">
                            <p class="text-left">Объем, м3</p>
@@ -129,12 +129,12 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                </div>
 
                <div class="row">
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="row">
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4 col-sm-8">
                            Дата погрузки
                         </div>
-                        <div class="col-8">
+                        <div class="col-lg-8 col-md-8 col-sm-12">
                            <?php
                            echo DatePicker::widget([
                               'name' => 'date_departure',
@@ -153,12 +153,12 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                         </div>
                      </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="row">
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4 col-sm-8">
                            Дата разгрузки
                         </div>
-                        <div class="col-8">
+                        <div class="col-lg-8 col-md-8 col-sm-12">
                            <?php
                            echo DatePicker::widget([
                               'name' => 'date_arrival',
@@ -184,14 +184,14 @@ $this->title = 'Главная | Грузоперевозки по РФ';
          <hr>
 
          <div class="row">
-            <div class="col-4 text-right">
-               <?= Html::a('Расширенный поиск грузов', ['load-information/search'], ['class' => 'btn btn-info', 'role' => 'button']) ?>
+            <div class="col-md-4 col-lg-4 col-sm-12 mb-2">
+               <?= Html::a('Расширенный поиск грузов', ['load-information/search'], ['class' => 'btn btn-info btn-block', 'role' => 'button']) ?>
             </div>
-            <div class="col-4 text-center">
-               <?= Html::submitButton('Найти грузы', ['class' => 'btn btn-success', 'name' => 'cargo_search', 'id' => 'cargo_search']) ?>
+            <div class="col-md-4 col-lg-4 col-sm-12 mb-2">
+               <?= Html::submitButton('Найти грузы', ['class' => 'btn btn-success btn-block', 'name' => 'cargo_search', 'id' => 'cargo_search']) ?>
             </div>
-            <div class="col-4 text-left">
-               <?= Html::resetButton('Очистить форму', ['class' => 'btn btn-outline-dark', 'name' => 'clear_form', 'id' => 'clear_form']) ?>
+            <div class="col-md-4 col-lg-4 col-sm-12 mb-2">
+               <?= Html::resetButton('Очистить форму', ['class' => 'btn btn-outline-dark btn-block', 'name' => 'clear_form', 'id' => 'clear_form']) ?>
             </div>
          </div>
          <?= Html::endForm() ?>
@@ -217,13 +217,13 @@ $this->title = 'Главная | Грузоперевозки по РФ';
          <div class="row">
             <div class="col-12">
                <div class="row">
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="input-group mb-3">
                         <?= Html::input('text', 'name_city_departure_t', Yii::$app->request->post('name_city_departure_t'), ['class' => 'form-control', 'id' => 'name_city_departure_t', 'placeholder' => 'Откуда']) ?>
                         <?= Html::input('hidden', 'id_city_departure_t', Yii::$app->request->post('id_city_departure_t'), ['id' => 'id_city_departure_t', 'placeholder' => 'Откуда']) ?>
                      </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="input-group mb-3">
                         <?= Html::input('text', 'name_city_arrival_t', Yii::$app->request->post('name_city_arrival_t'), ['class' => 'form-control', 'id' => 'name_city_arrival_t', 'placeholder' => 'Куда']) ?>
                         <?= Html::input('hidden', 'id_city_arrival_t', Yii::$app->request->post('id_city_departure_t'), ['id' => 'id_city_arrival_t', 'placeholder' => 'Откуда']) ?>
@@ -232,7 +232,7 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                </div>
 
                <div class="row">
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="row">
                         <div class="col-4">
                            <p class="text-left">Грузоподъем., т</p>
@@ -250,7 +250,7 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                         </div>
                      </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="row">
                         <div class="col-3">
                            <p class="text-left">Объем, м3</p>
@@ -271,12 +271,12 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                </div>
 
                <div class="row">
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="row">
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4 col-sm-8">
                            Дата погрузки
                         </div>
-                        <div class="col-8">
+                        <div class="col-lg-8 col-md-8 col-sm-12">
                            <?php
                            echo DatePicker::widget([
                               'name' => 'date_departure',
@@ -295,12 +295,12 @@ $this->title = 'Главная | Грузоперевозки по РФ';
                         </div>
                      </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                      <div class="row">
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4 col-sm-8">
                            Дата разгрузки
                         </div>
-                        <div class="col-8">
+                        <div class="col-lg-8 col-md-8 col-sm-12">
                            <?php
                            echo DatePicker::widget([
                               'name' => 'date_arrival',
@@ -326,14 +326,14 @@ $this->title = 'Главная | Грузоперевозки по РФ';
          <hr>
 
          <div class="row">
-            <div class="col-4 text-right">
-               <?= Html::a('Расширенный поиск транспорта', ['transport/search'], ['class' => 'btn btn-info', 'role' => 'button']) ?>
+            <div class="col-md-4 col-lg-4 col-sm-12 mb-2">
+               <?= Html::a('Расширенный поиск транспорта', ['transport/search'], ['class' => 'btn btn-info btn-block', 'role' => 'button']) ?>
             </div>
-            <div class="col-4 text-center">
-               <?= Html::submitButton('Найти транспорт', ['class' => 'btn btn-success', 'name' => 'cargo_search', 'id' => 'cargo_search']) ?>
+            <div class="col-md-4 col-lg-4 col-sm-12 mb-2">
+               <?= Html::submitButton('Найти транспорт', ['class' => 'btn btn-success btn-block', 'name' => 'cargo_search', 'id' => 'cargo_search']) ?>
             </div>
-            <div class="col-4 text-left">
-               <?= Html::resetButton('Очистить форму', ['class' => 'btn btn-outline-dark', 'name' => 'clear_form', 'id' => 'clear_form']) ?>
+            <div class="col-md-4 col-lg-4 col-sm-12 mb-2">
+               <?= Html::resetButton('Очистить форму', ['class' => 'btn btn-outline-dark btn-block', 'name' => 'clear_form', 'id' => 'clear_form']) ?>
             </div>
          </div>
          <?= Html::endForm() ?>

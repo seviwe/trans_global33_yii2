@@ -1,9 +1,6 @@
 <?php
 
-use app\widgets\Alert;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\bootstrap\ActiveForm;
@@ -19,14 +16,14 @@ $this->title = 'Регистрация | Глобал Транс 33';
    <h2 class="text-center mb-3">Кем Вы являетесь?</h2>
 
    <div class="row mb-4">
-      <div class="col-4">
-         <?= Html::a('Я грузовладелец', ['site/signup'], ['class' => 'btn btn-success btn-block btn-lg', 'role' => 'button']) ?>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+         <?= Html::a('Я грузовладелец', ['site/signup'], ['class' => 'btn btn-success btn-block btn-lg mb-3', 'role' => 'button']) ?>
       </div>
-      <div class="col-4">
-         <?= Html::a('Я грузоперевозчик (компания)', ['signup-company'], ['class' => 'btn btn-primary btn-block btn-lg', 'role' => 'button']) ?>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+         <?= Html::a('Я грузоперевозчик (компания)', ['signup-company'], ['class' => 'btn btn-primary btn-block btn-lg mb-3', 'role' => 'button']) ?>
       </div>
-      <div class="col-4">
-         <?= Html::a('Я грузоперевозчик (частное лицо)', ['signup-private'], ['class' => 'btn btn-warning btn-block btn-lg', 'style' => 'font-size: 19px', 'role' => 'button']) ?>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+         <?= Html::a('Я грузоперевозчик (частное лицо)', ['signup-private'], ['class' => 'btn btn-warning btn-block btn-lg mb-3', 'style' => 'font-size: 19px', 'role' => 'button']) ?>
       </div>
    </div>
 

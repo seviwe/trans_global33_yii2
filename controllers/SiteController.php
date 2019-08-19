@@ -380,7 +380,7 @@ class SiteController extends Controller
 
             $result_cargo_search = "<hr>
             <h3 class='mb-3 text-left'>" . $found[0] . " <b>" . count($rows) . "</b> " . $found[1] . " </h4>
-            <table class='table table-striped table-bordered table-hover'>
+            <table class='table table-striped table-bordered table-hover table-responsive-sm'>
             <thead>
                 <tr>
                     <th>Направление</th>
@@ -410,7 +410,7 @@ class SiteController extends Controller
         } else {
             $result_cargo_search = '<hr><br><div class="container">
             <div class="row justify-content-center mb-4">
-               <div class="col-6">
+               <div class="col-md-6 col-lg-6 col-sm-12">
                   <div class="card">
                      <div class="card-body">
                         <h3 class="text-center">Грузы отсутствуют</h3>
@@ -479,7 +479,7 @@ class SiteController extends Controller
 
             $result_cargo_search = "<hr>
             <h3 class='mb-3 text-left'>" .  $found[0] . " <b>" . count($rows) . "</b>  " . $found[1] . " </h4>
-            <table class='table table-striped table-bordered table-hover'>
+            <table class='table table-striped table-bordered table-hover table-responsive-sm'>
             <thead>
                 <tr>
                     <th>Направление</th>
@@ -509,7 +509,7 @@ class SiteController extends Controller
         } else {
             $result_cargo_search = '<hr><br><div class="container">
             <div class="row justify-content-center mb-4">
-               <div class="col-6">
+               <div class="col-md-6 col-lg-6 col-sm-12">
                   <div class="card">
                      <div class="card-body">
                         <h3 class="text-center">Транспорт отсутствует</h3>

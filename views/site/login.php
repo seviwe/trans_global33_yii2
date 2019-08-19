@@ -18,7 +18,7 @@ $this->title = 'Авторизация | Глобал Транс 33';
 <div class="container mb-4">
 
     <div class="row justify-content-center">
-        <div class="col-6">
+        <div class="col-md-6 col-lg-6 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title text-center">Авторизация</h2>

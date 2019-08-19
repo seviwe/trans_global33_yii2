@@ -23,7 +23,6 @@ AppAsset::register($this);
    <?php $this->registerCsrfMetaTags() ?>
    <link rel='shortcut icon' type='image/x-icon' href='/web/favicon.ico' />
    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap&subset=cyrillic" rel="stylesheet">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
    <!-- ReCaptcha JavaScript-->
    <script src='https://www.google.com/recaptcha/api.js'></script>
    <!-- Yandex.Metrika counter -->
@@ -76,129 +75,164 @@ AppAsset::register($this);
    <?php
    if (Yii::$app->user->isGuest) {
       echo '<nav class="navbar navbar-expand-lg navbar-light bg-white shadow p-1">';
-   }else{
+   } else {
       echo '<nav class="navbar navbar-expand-lg navbar-light bg-white">';
    }
    ?>
-      <div class="container">
+   <div class="container">
 
-         <a class="navbar-brand" href="/web/site/index">
-            <img class="img-fluid" style="height: 55px;" src="/web/img/logo-gt.png" />
-         </a>
+      <a class="navbar-brand" href="/web/site/index">
+         <img class="img-fluid" style="height: 55px;" src="/web/img/logo-gt.png" />
+      </a>
 
-         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-         </button>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+      </button>
 
-         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav mr-auto">
-               <li class="nav-item">
-                  <?= Html::a('О НАС', ['site/about'], ['class' => 'nav-link', 'style' => 'font-size: 15px']); ?>
-               </li>
-               <li class="nav-item">
-                  <?= Html::a('КОНТАКТЫ', ['site/contact'], ['class' => 'nav-link', 'style' => 'font-size: 15px']); ?>
-               </li>
-            </ul>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+         <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+               <?= Html::a('О НАС', ['site/about'], ['class' => 'nav-link', 'style' => 'font-size: 15px']); ?>
+            </li>
+            <li class="nav-item">
+               <?= Html::a('КОНТАКТЫ', ['site/contact'], ['class' => 'nav-link', 'style' => 'font-size: 15px']); ?>
+            </li>
+         </ul>
 
-            <ul class="navbar-nav ml-auto">
-               <li class="nav-item">
-                  <?php
-                  if (Yii::$app->user->isGuest) {
-                     echo Html::a('Вход', ['site/login'], ['class' => 'btn btn-outline-primary mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  } ?>
-               </li>
-               <li class="nav-item">
-                  <?php
-                  if (Yii::$app->user->isGuest) {
-                     echo Html::a('Регистрация', ['site/change-user'], ['class' => 'btn btn-primary', 'style' => 'font-size: 15px', 'role' => 'button']);
-                  } ?>
-               </li>
-               <li class="nav-item">
-                  <?php
-                  if (!Yii::$app->user->isGuest) {
-                     if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
-                        echo Html::a('ЛИЧНЫЙ КАБИНЕТ (Администратор)', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
-                     } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
-                        echo Html::a('ЛИЧНЫЙ КАБИНЕТ (Логист)', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
-                     } else {
-                        $user = new User();
-                        $login = $user->getLogin(); //логин текущего пользователя
-                        echo Html::a('ЛИЧНЫЙ КАБИНЕТ (' . $login . ')', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
-                     }
-                  } ?>
-               </li>
-               <li class="nav-item">
-                  <?php
-                  if (!Yii::$app->user->isGuest) {
-                     echo Html::a('ВЫЙТИ', ['site/logout'], [
-                        'class' => 'nav-link', 'style' => 'font-size: 15px',
-                        'data' => [
-                           'confirm' => 'Вы уверены что хотите выйти?',
-                           'method' => 'post',
-                        ],
-                     ]);
-                  } ?>
-               </li>
-            </ul>
-         </div>
-
+         <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+               <?php
+               if (Yii::$app->user->isGuest) {
+                  echo Html::a('Вход', ['site/login'], ['class' => 'btn btn-outline-primary mr-3', 'style' => 'font-size: 15px', 'role' => 'button']);
+               } ?>
+            </li>
+            <li class="nav-item">
+               <?php
+               if (Yii::$app->user->isGuest) {
+                  echo Html::a('Регистрация', ['site/change-user'], ['class' => 'btn btn-primary', 'style' => 'font-size: 15px', 'role' => 'button']);
+               } ?>
+            </li>
+            <li class="nav-item">
+               <?php
+               if (!Yii::$app->user->isGuest) {
+                  if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
+                     echo Html::a('ЛИЧНЫЙ КАБИНЕТ (Администратор)', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
+                  } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
+                     echo Html::a('ЛИЧНЫЙ КАБИНЕТ (Логист)', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
+                  } else {
+                     $user = new User();
+                     $login = $user->getLogin(); //логин текущего пользователя
+                     echo Html::a('ЛИЧНЫЙ КАБИНЕТ (' . $login . ')', ['users/profile'], ['class' => 'nav-link', 'style' => 'font-size: 15px']);
+                  }
+               } ?>
+            </li>
+            <li class="nav-item">
+               <?php
+               if (!Yii::$app->user->isGuest) {
+                  echo Html::a('ВЫЙТИ', ['site/logout'], [
+                     'class' => 'nav-link', 'style' => 'font-size: 15px',
+                     'data' => [
+                        'confirm' => 'Вы уверены что хотите выйти?',
+                        'method' => 'post',
+                     ],
+                  ]);
+               } ?>
+            </li>
+         </ul>
       </div>
+
+   </div>
    </nav>
 
    <?php
    if (!Yii::$app->user->isGuest) {
       ?>
-      <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-light shadow p-1" style="background-color: #343a40; /*box-shadow: 0 0.5rem 1rem rgba(69,90,100,.3);*/">
+   <!-- Navigation -->
+   <nav class="navbar navbar-expand-lg navbar-light shadow p-1" style="background-color: #343a40; /*box-shadow: 0 0.5rem 1rem rgba(69,90,100,.3);*/">
 
-         <div class="container">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsiveWorkZone" aria-controls="navbarResponsiveWorkZone" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="container">
+         <!-- <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsiveWorkZone" aria-controls="navbarResponsiveWorkZone" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> -->
 
-            <div class="collapse navbar-collapse" id="navbarResponsiveWorkZone">
+         <!-- <div class="" id="navbarResponsiveWorkZone">
                <ul class="navbar-nav mr-auto">
                   <li class="nav-item">
                      <?php
-                     if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP() || Yii::$app->user->getIdentity()->isUser())) {
-                        echo Html::a('Ваши заказы', ['order/index'], ['class' => 'btn btn-danger mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
-                     } ?>
+                        if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP() || Yii::$app->user->getIdentity()->isUser())) {
+                           echo Html::a('Ваши заказы', ['order/index'], ['class' => 'btn btn-danger mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                        } ?>
                   </li>
                   <li class="nav-item">
                      <?php
-                     if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
-                        echo Html::a('Ваши грузы', ['load-information/index'], ['class' => 'btn btn-warning mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
-                     } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
-                        echo Html::a('Ваш транспорт', ['transport/index'], ['class' => 'btn btn-success mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
-                     }
-                     ?>
+                        if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
+                           echo Html::a('Ваши грузы', ['load-information/index'], ['class' => 'btn btn-warning mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                        } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
+                           echo Html::a('Ваш транспорт', ['transport/index'], ['class' => 'btn btn-success mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                        }
+                        ?>
                   </li>
                   <li class="nav-item active">
                      <?php
-                     if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
-                        echo Html::a('Добавить груз', ['load-information/create'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
-                     } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
-                        echo Html::a('Панель администратора', ['site/admin'], ['class' => 'btn btn-success mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
-                     } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
-                        echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
-                     } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
-                        echo Html::a('Добавить транспорт', ['transport/create'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
-                     }
-                     ?>
+                        if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
+                           echo Html::a('Добавить груз', ['load-information/create'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                        } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
+                           echo Html::a('Панель администратора', ['site/admin'], ['class' => 'btn btn-success mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                        } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
+                           echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                        } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
+                           echo Html::a('Добавить транспорт', ['transport/create'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                        }
+                        ?>
                   </li>
                   <li class="nav-item active">
                      <?php
-                     if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
-                        echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
-                     }
-                     ?>
+                        if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
+                           echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                        }
+                        ?>
                   </li>
                </ul>
+         </div> -->
 
+         <div class="navbar-nav">
+            <div class="row ml-3">
+               <?php
+                  if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP() || Yii::$app->user->getIdentity()->isUser())) {
+                     echo Html::a('Ваши заказы', ['order/index'], ['class' => 'btn btn-danger mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                  } ?>
+               <?php
+                  if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
+                     echo Html::a('Ваши грузы', ['load-information/index'], ['class' => 'btn btn-warning mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                  } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
+                     echo Html::a('Ваш транспорт', ['transport/index'], ['class' => 'btn btn-success mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                  }
+                  ?>
+               <?php
+                  if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isUser()) {
+                     echo Html::a('Добавить груз', ['load-information/create'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                  } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
+                     echo Html::a('Панель администратора', ['site/admin'], ['class' => 'btn btn-success mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                  } elseif (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
+                     echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                  } elseif (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isCarrierC() || Yii::$app->user->getIdentity()->isCarrierP())) {
+                     echo Html::a('Добавить транспорт', ['transport/create'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                  }
+                  ?>
+               <?php
+                  if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isAdmin()) {
+                     echo Html::a('Панель логиста', ['site/logist'], ['class' => 'btn btn-info mr-3 btn-sm', 'style' => 'font-size: 13px', 'role' => 'button']);
+                  }
+                  ?>
+               <!-- <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+               <a class="nav-item nav-link" href="#">Features</a>
+               <a class="nav-item nav-link" href="#">Pricing</a>
+               <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
             </div>
          </div>
+      </div>
 
-      </nav>
+   </nav>
    <?
    } ?>
 
@@ -207,24 +241,24 @@ AppAsset::register($this);
 
       <?php
       if (Yii::$app->session->hasFlash('success')) : ?>
-         <div class="alert alert-success alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <?php echo Yii::$app->session->getFlash('success'); ?>
-         </div>
+      <div class="alert alert-success alert-dismissible" role="alert">
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <?php echo Yii::$app->session->getFlash('success'); ?>
+      </div>
       <?php endif; ?>
       <?php
       if (Yii::$app->session->hasFlash('warning')) : ?>
-         <div class="alert alert-warning alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <?php echo Yii::$app->session->getFlash('warning'); ?>
-         </div>
+      <div class="alert alert-warning alert-dismissible" role="alert">
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <?php echo Yii::$app->session->getFlash('warning'); ?>
+      </div>
       <?php endif; ?>
       <?php
       if (Yii::$app->session->hasFlash('error')) : ?>
-         <div class="alert alert-error alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <?php echo Yii::$app->session->getFlash('error'); ?>
-         </div>
+      <div class="alert alert-error alert-dismissible" role="alert">
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <?php echo Yii::$app->session->getFlash('error'); ?>
+      </div>
       <?php endif; ?>
 
       <?= Breadcrumbs::widget([
@@ -285,7 +319,9 @@ AppAsset::register($this);
          </div>
          <div class="col-md-4 col-sm-6 col-xs-12">
             <ul class="social-icons">
-               <li><a class="vk" href="https://vk.com/public152682308"><i class="fa fa-vk"></i></a></li>
+               <li>
+                  <a class="vk" href="https://vk.com/public152682308"><img src="https://img.icons8.com/color/40/000000/vk-circled.png"></a>
+               </li>
             </ul>
          </div>
       </div>

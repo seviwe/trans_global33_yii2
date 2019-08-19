@@ -85,7 +85,7 @@ body {
   text-align: right
 }
 
-.site-footer .social-icons a {
+/* .site-footer .social-icons a {
   width: 40px;
   height: 40px;
   line-height: 40px;
@@ -93,7 +93,7 @@ body {
   margin-right: 0;
   border-radius: 100%;
   background-color: #33353d
-}
+} */
 
 .copyright-text {
   margin: 0
@@ -134,7 +134,7 @@ body {
   font-size: 13px
 }
 
-.social-icons a {
+/* .social-icons a {
   background-color: #eceeef;
   color: #818a91;
   font-size: 16px;
@@ -148,12 +148,12 @@ body {
   -webkit-transition: all .2s linear;
   -o-transition: all .2s linear;
   transition: all .2s linear
-}
+} */
 
-.social-icons a:active, .social-icons a:focus, .social-icons a:hover {
+/* .social-icons a:active, .social-icons a:focus, .social-icons a:hover {
   color: #fff;
   background-color: #29aafe
-}
+} */
 
 .footer-icons.size-sm a, .social-icons.size-sm a {
   line-height: 34px;
@@ -162,9 +162,9 @@ body {
   font-size: 14px
 }
 
-.social-icons a.vk:hover {
+/* .social-icons a.vk:hover {
   background-color: #3b5998
-}
+} */
 /*
 .social-icons a.twitter:hover {
   background-color: #00aced

@@ -20,7 +20,7 @@ use kartik\date\DatePicker;
     ]); ?>
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 col-sm-12">
             <?= $form->field($model, 'name_city_departure')->textInput(['maxlength' => true, 'id' => 'name_city_departure']) ?>
 
             <?= $form->field($model, 'id_city_departure')->textInput(['maxlength' => true, 'type' => 'hidden', 'id' => 'id_city_departure'])->label(false) ?>
@@ -67,7 +67,7 @@ use kartik\date\DatePicker;
             );
             ?>
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 col-sm-12">
             <?= $form->field($model, 'volume') ?>
 
             <?= $form->field($model, 'body_dimensions') ?>

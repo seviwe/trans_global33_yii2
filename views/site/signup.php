@@ -1,9 +1,6 @@
 <?php
 
-use app\widgets\Alert;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\bootstrap\ActiveForm;
@@ -19,7 +16,7 @@ $this->title = 'Регистрация | Глобал Транс 33';
 
    <div class="row justify-content-center">
       <!-- Forms -->
-      <div class="col-6">
+      <div class="col-md-6 col-lg-6 col-sm-12">
          <div class="card">
             <div class="card-body">
                <h2 class="card-title text-center">Регистрация</h2>

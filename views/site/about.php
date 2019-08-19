@@ -1,9 +1,6 @@
 <?php
 
-use app\widgets\Alert;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\helpers\Url;
@@ -21,7 +18,7 @@ $this->params['breadcrumbs'][] = 'О Нас';
 
    <!-- Intro Content -->
    <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-6 col-sm-12">
          <div id="carouselSlides" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                <div class="carousel-item active">
@@ -36,7 +33,7 @@ $this->params['breadcrumbs'][] = 'О Нас';
             </div>
          </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6 col-sm-12">
          <h3>Глобал Транс 33</h3>
          <p>
             Транспортная компания Глобал Транс 33 это подразделение, входящее в состав группы компаний <a href="https://global33.ru/">Глобал 33</a>.
@@ -45,7 +42,7 @@ $this->params['breadcrumbs'][] = 'О Нас';
          </p>
          <p>
             Также Глобал Транс 33 предлагает работу грузоперевозчикам и помощь в поисках транспорта грузовладельцам.
-            Если Вы работаете в сфере перевозок и готовы к сотрудничеству, или у Вас есть предложение, Вы можете написать нам через <a href="https://trans.global33.ru/contact">форму обратной связи</a> или оставить соответствующий комментарий в группе <a href="https://vk.com/public152682308">ВКонтакте</a>.
+            Если Вы работаете в сфере перевозок и готовы к сотрудничеству, или у Вас есть предложение, Вы можете написать нам через <?= Html::a('форму обратной связи', ['site/contact']); ?> или оставить соответствующий комментарий в группе <a href="https://vk.com/public152682308">ВКонтакте</a>.
          </p>
       </div>
    </div>
