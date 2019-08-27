@@ -61,6 +61,15 @@ class LoadInformationController extends Controller
      */
     public function actionIndex()
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Глобал Транс 33 - Грузоперевозки по РФ - Информация о грузах',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'транспортная компания город муром, грузоперевозка область, доставка муром, грузоперевозка владимирская область',
+        ]);
+
         if (!Yii::$app->user->isGuest) {
 
             $searchModel = new LoadInformationSearch();
@@ -95,6 +104,15 @@ class LoadInformationController extends Controller
      */
     public function actionSearch()
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Глобал Транс 33 - Грузоперевозки по РФ - Поиск грузов',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'транспортная компания город муром, грузоперевозка область, доставка муром, грузоперевозка владимирская область',
+        ]);
+
         $searchModel = new LoadInformationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -112,6 +130,15 @@ class LoadInformationController extends Controller
      */
     public function actionView($id)
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Глобал Транс 33 - Грузоперевозки по РФ - Просмотр полной информации о грузе',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'транспортная компания город муром, грузоперевозка область, доставка муром, грузоперевозка владимирская область',
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -124,6 +151,15 @@ class LoadInformationController extends Controller
      */
     public function actionCreate()
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Глобал Транс 33 - Грузоперевозки по РФ - Добавление груза',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'транспортная компания город муром, грузоперевозка область, доставка муром, грузоперевозка владимирская область',
+        ]);
+
         if (!Yii::$app->user->isGuest) {
 
             $model = new LoadInformation();
@@ -158,6 +194,15 @@ class LoadInformationController extends Controller
      */
     public function actionUpdate($id)
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Глобал Транс 33 - Грузоперевозки по РФ - Обновление информации о грузе',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'транспортная компания город муром, грузоперевозка область, доставка муром, грузоперевозка владимирская область',
+        ]);
+
         if (!Yii::$app->user->isGuest) {
 
             $model = $this->findModel($id);

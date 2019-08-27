@@ -17,8 +17,16 @@ AppAsset::register($this);
 <head>
    <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-   <meta name="keywords" content="<?php echo $keywords; ?>" />
    <meta name="google-site-verification" content="I6qgv8AUa4eHEM6CKlBQYRdYnxmvB2gbqV390wb5jIw" />
+   <!-- Open Graph -->
+   <meta name="og:title" content="Грузоперевозки по РФ">
+   <meta name="og:description" content="Транспортная компания Глобал Транс 33 это подразделение, входящее в состав группы компаний Глобал 33. Мы занимаемся доставкой и перевозкой грузов от 1 килограмма до 20 тонн по всей России собственным и сторонним транспортом. Благодаря большому опыту работы в данной сфере, мы с уверенностью может заявлять о надежности нашей компании.">
+   <meta name="og:url" content="https://trans.global33.ru/">
+   <meta name="og:site_name" content="Глобал Транс 33">
+   <meta name="og:type" content="business.business">
+   <meta property="og:locale" content="ru_RU" />
+   <meta property="og:image" content="https://trans.global33.ru/web/img/slide-full.jpg">
+   <!-- /Open Graph -->
    <title><?= Html::encode($this->title) ?></title>
    <?php $this->registerCsrfMetaTags() ?>
    <link rel='shortcut icon' type='image/x-icon' href='/web/favicon.ico' />
@@ -58,13 +66,13 @@ AppAsset::register($this);
    <noscript>
       <div><img src="https://mc.yandex.ru/watch/47237025" style="position:absolute; left:-9999px;" alt="" /></div>
    </noscript>
+   <!-- /Yandex.Metrika counter -->
    <style>
       .breadcrumb>li+li:before {
          padding: 0 5px;
          content: "/";
       }
    </style>
-   <!-- /Yandex.Metrika counter -->
    <?php $this->head() ?>
 </head>
 

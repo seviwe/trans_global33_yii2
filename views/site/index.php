@@ -2,8 +2,6 @@
 
 use app\widgets\Alert;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\widgets\Pjax;
@@ -16,17 +14,18 @@ $this->title = 'Главная | Грузоперевозки по РФ';
 ?>
 
 <!-- Page Content -->
-<div class="container">
-   <header>
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-         <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active img-fluid" style="background-image: url('/web/img/slide-full.jpg')"></div>
-         </div>
+<header>
+   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+         <div class="carousel-item active img-fluid" style="background-image: url('/web/img/slide-full.jpg')"></div>
       </div>
-   </header>
+   </div>
+</header>
+
+<div class="container">
 
    <!-- Section Features -->
-   <h2 class="my-4 text-center">Выбирая Глобал Транс 33, Вы получаете</h2>
+   <h1 class="my-4 text-center">Выбирая Глобал Транс 33, Вы получаете</h1>
 
    <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">

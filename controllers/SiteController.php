@@ -66,6 +66,15 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Глобал Транс 33 - Грузоперевозки по РФ',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'транспортная компания город муром, грузоперевозка область, доставка муром, грузоперевозка владимирская область',
+        ]);
+
         return $this->render('index');
     }
 
@@ -73,6 +82,15 @@ class SiteController extends Controller
     //регистрация грузовладельца
     public function actionSignup()
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Регистрация грузовладельца на веб-сайте транспортной компании Глобал Транс 33',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'транспортная компания город муром, грузоперевозка область, доставка муром, грузоперевозка владимирская область',
+        ]);
+
         //если пользователь не гость, тогда редирект на главную страницу
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -105,6 +123,15 @@ class SiteController extends Controller
     //регистрация грузоперевозчика (частное лицо)
     public function actionSignupPrivate()
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Регистрация грузоперевозчика (частное лицо) на веб-сайте транспортной компании Глобал Транс 33',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'транспортная компания город муром, грузоперевозка область, доставка муром, грузоперевозка владимирская область',
+        ]);
+
         //если пользователь не гость, тогда редирект на главную страницу
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -136,6 +163,15 @@ class SiteController extends Controller
     //регистрация грузоперевозчика (компания)
     public function actionSignupCompany()
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Регистрация грузоперевозчика (компания) на веб-сайте транспортной компании Глобал Транс 33',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'транспортная компания город муром, грузоперевозка область, доставка муром, грузоперевозка владимирская область',
+        ]);
+
         //если пользователь не гость, тогда редирект на главную страницу
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -172,6 +208,15 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Авторизация пользователя на веб-сайте транспортной компании Глобал Транс 33',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'авторизация транспортная компания, вход транспортная компания',
+        ]);
+
         //если пользователь залогинен, то редикрект на главную страницу
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -208,11 +253,20 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Адрес транспортной компании в городе Муром - г. Муром, ул. Московская, д. 4 (Магазин "Маяк")',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'адрес транспортной компании муром',
+        ]);
+
         $model = new ContactForm();
 
         if ($model->load(Yii::$app->request->post()) /*&& $model->contact(Yii::$app->params['emailto'])*/) {
 
-            $message = $model->body."<br> Номер телефона: ". $model->phone_number;
+            $message = $model->body . "<br> Номер телефона: " . $model->phone_number;
 
             if ($model->sendMailFromContactForm("contact", "Сообщение с Global Trans 33", ['bodyMessage' => $message])) {
 
@@ -237,6 +291,15 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Транспортная компания Глобал Транс 33 - Подразделение, входящее в состав Глобал 33. Мы осуществляем доставку и перевозку грузов от 1 килограмма до 20 тонн по всей России',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'транспортная компания город муром, грузоперевозка область, доставка муром, грузоперевозка владимирская область',
+        ]);
+
         return $this->render('about');
     }
 
@@ -270,6 +333,15 @@ class SiteController extends Controller
 
     public function actionChangeUser()
     {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Выбор типа регистрации пользователя на веб-сайте транспортной компании Глобал Транс 33',
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => 'транспортная компания город муром, грузоперевозка область, доставка муром, грузоперевозка владимирская область',
+        ]);
+
         return $this->render('change_user');
     }
 
