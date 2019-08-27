@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 //для логиста отображаем навигацию по разделам
-if (!Yii::$app->user->isGuest && Yii::$app->user->getIdentity()->isLogist()) {
+if (!Yii::$app->user->isGuest && (Yii::$app->user->getIdentity()->isLogist() || Yii::$app->user->getIdentity()->isAdmin())) {
     $this->title = 'Информация о транспорте';
     $this->params['breadcrumbs'][] = ['label' => 'Панель логиста', 'url' => ['/site/logist']];
 } else {
